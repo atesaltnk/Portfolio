@@ -3,7 +3,7 @@
 // portfolio stays in sync with GitHub without a rebuild.
 
 export const GITHUB_USERNAME =
-  process.env.NEXT_PUBLIC_GITHUB_USERNAME?.trim() || "atoomdev"
+  process.env.NEXT_PUBLIC_GITHUB_USERNAME?.trim() || "atesaltnk"
 
 export const GITHUB_PROFILE_URL = `https://github.com/${GITHUB_USERNAME}`
 

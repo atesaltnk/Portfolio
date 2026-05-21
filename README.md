@@ -24,12 +24,12 @@ A fast, animated personal portfolio for a software developer. The **Projects** s
 All repository logic lives in [`lib/github.ts`](lib/github.ts):
 
 - `getRepos()` fetches public repos for the configured user, drops archived ones, and sorts by stars then recency.
-- The username defaults to `atoomdev` and can be overridden with `NEXT_PUBLIC_GITHUB_USERNAME`.
+- The username defaults to `atesaltnk` and can be overridden with `NEXT_PUBLIC_GITHUB_USERNAME`.
 - An optional `GITHUB_TOKEN` raises the API rate limit (the unauthenticated limit is fine for normal traffic thanks to caching).
 
 ```bash
 # .env.local (both optional)
-NEXT_PUBLIC_GITHUB_USERNAME=atoomdev
+NEXT_PUBLIC_GITHUB_USERNAME=atesaltnk
 GITHUB_TOKEN=ghp_xxx
 ```
 

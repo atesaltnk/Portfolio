@@ -183,27 +183,8 @@ export const dictionary = {
           },
         ],
       },
-      principles: {
-        title: "Nasıl Düşünüyorum",
-        items: [
-          "İyi kod kendini anlatır — ama yine de belgelenir.",
-          "Önce çalıştır, sonra hızlandır, en son sadeleştir.",
-          "Her proje yeni bir şey öğrenme fırsatıdır.",
-          "Basit çözüm, çoğu zaman doğru çözümdür.",
-        ],
-      },
       stack: {
         title: "Teknolojiler",
-        items: [
-          "TypeScript",
-          "React / Next.js",
-          "Python",
-          "C++",
-          "Node.js",
-          "Tailwind CSS",
-          "Git",
-          "SQL",
-        ],
       },
     },
     processPage: {
@@ -414,27 +395,8 @@ export const dictionary = {
           },
         ],
       },
-      principles: {
-        title: "How I Think",
-        items: [
-          "Good code documents itself — but I document it anyway.",
-          "Make it work, then make it fast, then make it simple.",
-          "Every project is a chance to learn something new.",
-          "The simple solution is usually the right one.",
-        ],
-      },
       stack: {
         title: "Tech Stack",
-        items: [
-          "TypeScript",
-          "React / Next.js",
-          "Python",
-          "C++",
-          "Node.js",
-          "Tailwind CSS",
-          "Git",
-          "SQL",
-        ],
       },
     },
     processPage: {

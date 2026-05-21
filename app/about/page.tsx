@@ -2,11 +2,35 @@
 
 import { motion, useReducedMotion } from "framer-motion"
 import { Check } from "lucide-react"
+import {
+  SiTypescript,
+  SiJavascript,
+  SiReact,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPython,
+  SiCplusplus,
+  SiTailwindcss,
+  SiGit,
+} from "react-icons/si"
+import type { IconType } from "react-icons"
 import Image from "next/image"
 import { Footer } from "@/components/footer"
 
 import { useLanguage } from "@/lib/language-context"
 import { SectionWrapper } from "@/components/section-wrapper"
+
+const techStack: { name: string; Icon: IconType; color: string }[] = [
+  { name: "TypeScript", Icon: SiTypescript, color: "#3178C6" },
+  { name: "JavaScript", Icon: SiJavascript, color: "#F7DF1E" },
+  { name: "React", Icon: SiReact, color: "#61DAFB" },
+  { name: "Next.js", Icon: SiNextdotjs, color: "#FFFFFF" },
+  { name: "Node.js", Icon: SiNodedotjs, color: "#5FA04E" },
+  { name: "Python", Icon: SiPython, color: "#4B8BBE" },
+  { name: "C++", Icon: SiCplusplus, color: "#649AD2" },
+  { name: "Tailwind CSS", Icon: SiTailwindcss, color: "#06B6D4" },
+  { name: "Git", Icon: SiGit, color: "#F05032" },
+]
 
 export default function AboutPage() {
   const { t } = useLanguage()
@@ -111,49 +135,28 @@ export default function AboutPage() {
             </div>
           </SectionWrapper>
 
-          {/* How I Think */}
-          <SectionWrapper className="bg-card/30 -mx-6 px-6 rounded-2xl">
-            <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-8">
-              {t.aboutPage.principles.title}
-            </h2>
-
-            <ul className="space-y-4">
-              {t.aboutPage.principles.items.map((principle, index) => (
-                <motion.li
-                  key={index}
-                  className="flex items-start gap-4 p-4 rounded-lg hover:bg-card/50 transition-colors"
-                  initial={shouldReduceMotion ? {} : { opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                >
-                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-sm text-primary font-medium">
-                    {index + 1}
-                  </span>
-                  <p className="text-muted-foreground leading-relaxed pt-1">{principle}</p>
-                </motion.li>
-              ))}
-            </ul>
-          </SectionWrapper>
-
           {/* Tech Stack */}
           <SectionWrapper>
             <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-8">
               {t.aboutPage.stack.title}
             </h2>
 
-            <div className="flex flex-wrap gap-3">
-              {t.aboutPage.stack.items.map((item, index) => (
-                <motion.span
-                  key={item}
-                  className="px-4 py-2 rounded-lg border border-border/50 bg-card/50 text-sm font-medium text-foreground transition-colors hover:border-primary/30 hover:text-primary"
-                  initial={shouldReduceMotion ? {} : { opacity: 0, y: 10 }}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+              {techStack.map(({ name, Icon, color }, index) => (
+                <motion.div
+                  key={name}
+                  className="group flex items-center gap-3 rounded-xl border border-border/50 bg-card/50 px-4 py-3.5 transition-colors duration-300 hover:border-primary/30 hover:bg-card"
+                  initial={shouldReduceMotion ? {} : { opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.35, delay: index * 0.05, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  whileHover={shouldReduceMotion ? {} : { y: -3 }}
                 >
-                  {item}
-                </motion.span>
+                  <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-border/40 bg-background/60 transition-transform duration-300 group-hover:scale-110">
+                    <Icon size={22} style={{ color }} aria-hidden />
+                  </span>
+                  <span className="text-sm font-medium text-foreground">{name}</span>
+                </motion.div>
               ))}
             </div>
           </SectionWrapper>
