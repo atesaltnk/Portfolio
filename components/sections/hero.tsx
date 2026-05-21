@@ -58,27 +58,23 @@ function CodeWindow({ repoCount, enableMotion }: { repoCount: number; enableMoti
   return (
     <motion.div
       aria-hidden
-      className="relative w-full max-w-md"
+      className="relative w-full max-w-lg"
       initial={false}
-      animate={
-        enableMotion
-          ? { y: [0, -8, 0] }
-          : undefined
-      }
-      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      animate={enableMotion ? { y: [0, -14, 0] } : undefined}
+      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
     >
       <div className="absolute -inset-4 rounded-3xl opacity-40 glow-green-subtle pointer-events-none" />
       <div className="relative rounded-2xl border border-border/60 bg-card/80 backdrop-blur-sm shadow-2xl overflow-hidden">
         {/* Title bar */}
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-background/40">
-          <span className="h-3 w-3 rounded-full bg-destructive/70" />
-          <span className="h-3 w-3 rounded-full bg-amber-400/70" />
-          <span className="h-3 w-3 rounded-full bg-primary/70" />
-          <span className="ml-3 text-xs text-muted-foreground font-mono">ates.ts</span>
+        <div className="flex items-center gap-2 px-5 py-3.5 border-b border-border/50 bg-background/40">
+          <span className="h-3.5 w-3.5 rounded-full bg-destructive/70" />
+          <span className="h-3.5 w-3.5 rounded-full bg-amber-400/70" />
+          <span className="h-3.5 w-3.5 rounded-full bg-primary/70" />
+          <span className="ml-3 text-sm text-muted-foreground font-mono">ates.ts</span>
         </div>
 
         {/* Code body */}
-        <div className="p-5 font-mono text-sm leading-relaxed">
+        <div className="p-6 md:p-7 font-mono text-[15px] md:text-base leading-relaxed">
           <p>
             <span className="text-primary">const</span>{" "}
             <span className="text-foreground">ates</span>

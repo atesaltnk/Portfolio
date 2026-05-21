@@ -62,7 +62,7 @@
 @theme inline {
   --font-sans: 'Inter', 'Inter Fallback', system-ui, sans-serif;
   --font-serif: 'Playfair Display', 'Playfair Display Fallback', Georgia, serif;
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
