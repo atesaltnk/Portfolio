@@ -1,79 +1,69 @@
-# Portfolio Website
+# Ateş Altınkaynak — Developer Portfolio
 
-Welcome to the repository for my portfolio website! This project showcases my skills, services, and featured work as a web designer and developer.
+A fast, animated personal portfolio for a software developer. The **Projects** section is generated **automatically from GitHub** — every public repository shows up as a card, synced on a schedule with no rebuild required.
 
-## Features
+🌐 Live: [atesaltinkaynak.com](https://atesaltinkaynak.com)
 
-- **Modern Design**: Responsive and mobile-friendly layouts.
-- **Dynamic Content**: Interactive components and animations.
-- **Customizable**: Built with modular components for easy updates.
+## Highlights
 
-## Technologies Used
+- **GitHub-powered Projects** — repositories are fetched from the GitHub REST API on the server and cached with ISR (`revalidate: 3600`), so the site stays in sync with your account automatically.
+- **Bilingual** — full Turkish / English support via a lightweight dictionary + context.
+- **Dark, premium UI** — deep-green accent, Playfair Display + Inter, glassmorphism, and tasteful Framer Motion animations that respect `prefers-reduced-motion`.
+- **Server-first data, client-side interactivity** — repos are loaded in Server Components; filtering and animation happen in Client Components.
 
-- **Next.js**: React framework for server-side rendering and static site generation.
-- **TypeScript**: Strongly typed programming language for better code quality.
-- **Tailwind CSS**: Utility-first CSS framework for rapid UI development.
-- **Framer Motion**: Library for animations and transitions.
+## Tech Stack
 
-## Project Structure
+- **Next.js 16** (App Router) + **React 19**
+- **TypeScript**
+- **Tailwind CSS v4**
+- **Framer Motion**
+- **GitHub REST API**
 
-The project is organized as follows:
+## How the GitHub sync works
 
-```
-portfolio/
-├── app/                # Application pages and layouts
-├── components/         # Reusable UI components
-├── hooks/              # Custom React hooks
-├── lib/                # Utility functions and context
-├── public/             # Static assets
-├── styles/             # Global styles
-└── ...
+All repository logic lives in [`lib/github.ts`](lib/github.ts):
+
+- `getRepos()` fetches public repos for the configured user, drops archived ones, and sorts by stars then recency.
+- The username defaults to `atoomdev` and can be overridden with `NEXT_PUBLIC_GITHUB_USERNAME`.
+- An optional `GITHUB_TOKEN` raises the API rate limit (the unauthenticated limit is fine for normal traffic thanks to caching).
+
+```bash
+# .env.local (both optional)
+NEXT_PUBLIC_GITHUB_USERNAME=atoomdev
+GITHUB_TOKEN=ghp_xxx
 ```
 
 ## Getting Started
 
-To run this project locally, follow these steps:
+```bash
+# install dependencies
+npm install
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-username/portfolio-website.git
-   ```
+# run the dev server
+npm run dev
 
-2. **Navigate to the project directory**:
-   ```bash
-   cd portfolio-website
-   ```
+# build for production
+npm run build && npm start
+```
 
-3. **Install dependencies**:
-   ```bash
-   pnpm install
-   ```
+Open [http://localhost:3000](http://localhost:3000).
 
-4. **Run the development server**:
-   ```bash
-   pnpm dev
-   ```
+## Project Structure
 
-5. Open your browser and go to `http://localhost:3000`.
-
-## Deployment
-
-This project can be deployed to platforms like Vercel, Netlify, or any static hosting service that supports Next.js. For example, to deploy on Vercel:
-
-1. Install the Vercel CLI:
-   ```bash
-   npm install -g vercel
-   ```
-
-2. Deploy the project:
-   ```bash
-   vercel
-   ```
+```
+portfolio/
+├── app/              # Routes: home, work, about, process, contact
+├── components/
+│   ├── sections/     # Page sections (hero, featured-work, ...)
+│   ├── ui/           # Reusable primitives
+│   └── repo-card.tsx # GitHub project cards
+├── lib/
+│   ├── github.ts     # GitHub data layer (fetch + cache + mapping)
+│   ├── dictionary.ts # TR / EN content
+│   └── language-context.tsx
+└── public/           # Static assets
+```
 
 ## License
 
-This project is open-source and available under the [MIT License](LICENSE).
-
----
-
-Feel free to explore, contribute, or use this project as inspiration for your own portfolio!
+MIT © Ateş Altınkaynak

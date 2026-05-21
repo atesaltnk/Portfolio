@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useReducedMotion } from "framer-motion"
-import { Check, X } from "lucide-react"
+import { Check } from "lucide-react"
 import Image from "next/image"
 import { Footer } from "@/components/footer"
 
@@ -136,23 +136,25 @@ export default function AboutPage() {
             </ul>
           </SectionWrapper>
 
-          {/* Boundaries */}
+          {/* Tech Stack */}
           <SectionWrapper>
             <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-8">
-              {t.aboutPage.boundaries.title}
+              {t.aboutPage.stack.title}
             </h2>
 
-            <div className="p-6 rounded-xl border border-border/50 bg-card/50">
-              <ul className="space-y-3">
-                {t.aboutPage.boundaries.items.map((item, index) => (
-                  <li key={index} className="flex items-center gap-3 text-muted-foreground">
-                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-destructive/10 flex items-center justify-center">
-                      <X size={12} className="text-destructive" />
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+            <div className="flex flex-wrap gap-3">
+              {t.aboutPage.stack.items.map((item, index) => (
+                <motion.span
+                  key={item}
+                  className="px-4 py-2 rounded-lg border border-border/50 bg-card/50 text-sm font-medium text-foreground transition-colors hover:border-primary/30 hover:text-primary"
+                  initial={shouldReduceMotion ? {} : { opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                >
+                  {item}
+                </motion.span>
+              ))}
             </div>
           </SectionWrapper>
         </div>

@@ -4,564 +4,467 @@ export const dictionary = {
   tr: {
     nav: {
       home: "Ana Sayfa",
-      work: "Çalışmalar",
+      work: "Projeler",
       about: "Hakkımda",
       process: "Süreç",
-      startProject: "Proje Başvurusu",
+      contact: "İletişim",
     },
     hero: {
-      headline: "Web Tasarım & Yapay Zeka Geliştirme.",
+      headline: "Uçtan uca yazılım geliştiriyorum.",
       subheadline:
-        "Üst düzey web tasarım ve yapay zeka geliştirme hizmetleri. Modern, responsive ve mobil uyumlu siteler oluşturuyorum.",
-      primaryCta: "Proje Başvurusu",
-      secondaryCta: "Çalışmalarımı Gör",
-      statusLine: "Şu an sınırlı sayıda proje kabul edebilirim.",
+        "Ben Ateş — web uygulamaları, arka uç sistemleri ve sistem programlama üzerine çalışan bir yazılım geliştiriciyim. Fikirleri temiz ve güvenilir koda dönüştürüyorum.",
+      primaryCta: "İletişime Geç",
+      secondaryCta: "Projelerimi Gör",
+      statusLine: "Staj ve iş birliklerine açığım.",
     },
     about: {
       title: "Merhaba, ben Ateş.",
       paragraph1:
-        "Karmaşık fikirleri net, modern ve dinamik metinlere dönüştürüyorum. İster yeni bir girişim lansmanı, ister kurumsal bir yeniden yapılanma olsun — her projede aynı titizliği gösteriyorum.",
+        "Karmaşık problemleri temiz ve sürdürülebilir koda dönüştürmeyi seven bir yazılım geliştiriciyim — ister full-stack bir web uygulaması, ister bir arka uç servisi, ister düşük seviye bir sistem projesi olsun.",
       paragraph2:
-        "Tasarım tarafında ise modern, hızlı ve mobil uyumlu siteler inşa ediyorum. Amacım sadece güzel değil, aynı zamanda dönüşüm odaklı bir deneyim sunmak.",
-      whatYouGet: "Ne Alırsınız",
+        "Projelerimin çoğunu açık kaynak olarak geliştiriyorum. GitHub'daki her repo, baştan sona tasarlayıp geliştirdiğim ve yayına aldığım bir iş.",
+      whatYouGet: "Ne Üzerine Çalışıyorum",
       bullets: [
-        "Strateji odaklı yapı",
-        "Dönüşüm odaklı metin",
-        "Modern, responsive tasarım",
-        "Temiz teslimat ve kapanış",
+        "Full-stack web geliştirme",
+        "Arka uç & API'ler",
+        "Sistemler & araçlar",
+        "Temiz, test edilmiş, belgelenmiş kod",
       ],
     },
     work: {
-      title: "Öne Çıkan Çalışmalar",
-      viewCase: "Vaka İncelemesi",
-      goal: "Hedef",
-      deliverables: "Teslimatlar",
-      outcome: "Sonuç",
-      filters: {
-        all: "Tümü",
-        landing: "Landing Page",
-        website: "Website",
-        copywriting: "Yapay Zeka Geliştirme",
-        personalBrand: "Kişisel Marka",
-      },
-      nextProject: "Sonraki Proje",
+      title: "Projelerim",
+      featuredTitle: "Öne Çıkan Projeler",
+      subtitle:
+        "Açık kaynak projelerim, doğrudan GitHub'dan otomatik olarak güncelleniyor.",
+      viewOnGitHub: "GitHub'da Gör",
+      liveDemo: "Canlı",
+      updated: "Güncellendi",
+      allFilter: "Tümü",
+      noRepos:
+        "Projeler şu anda yüklenemedi. GitHub profilime göz atabilirsin.",
+      viewProfile: "GitHub profilim",
     },
     capabilities: {
-      title: "Sunduğum Hizmetler",
-      notIncluded:
-        "SEO hizmeti, reklam yönetimi ve aylık optimizasyon sunmuyorum.",
+      title: "Neler Yapıyorum",
+      techNote: "Çoğunlukla TypeScript, Python ve C++ ile çalışıyorum.",
       items: [
         {
-          title: "Satış Sayfaları & Landing Page",
+          title: "Web Uygulamaları",
           description:
-            "Dönüşüm odaklı, dinamik ve etkili satış sayfaları ve landing page tasarımları.",
+            "Next.js ve React ile modern, hızlı ve responsive web uygulamaları.",
         },
         {
-          title: "Kurumsal Web Siteleri",
+          title: "Arka Uç & API'ler",
           description:
-            "Profesyonel, modern ve mobil uyumlu kurumsal web siteleri.",
+            "Ölçeklenebilir arka uç servisleri ve iyi tasarlanmış REST API'ler.",
         },
         {
-          title: "Kişisel Marka Siteleri",
+          title: "Sistem Programlama",
           description:
-            "Bireysel profesyoneller için özgün ve etkileyici portfolio siteleri.",
+            "C++ ile performans odaklı, düşük seviye uygulamalar ve araçlar.",
         },
         {
-          title: "Yapay Zeka Geliştirme",
+          title: "Otomasyon & Araçlar",
           description:
-            "Başlıklar, bölümler, CTA'lar — tüm site metinleri için profesyonel içerik.",
+            "Tekrarlayan işleri otomatikleştiren scriptler ve geliştirici araçları.",
         },
         {
-          title: "Bilgi Mimarisi",
+          title: "Arayüz Mühendisliği",
           description:
-            "Sayfa akışı, kullanıcı yolculuğu ve içerik hiyerarşisi planlaması.",
+            "Erişilebilir, cilalı ve akıcı animasyonlara sahip kullanıcı arayüzleri.",
         },
       ],
     },
     process: {
-      title: "Çalışma Sürecim",
+      title: "Nasıl Çalışıyorum",
       boundary:
-        "Teslim sonrası proje kapanır. Sürekli optimizasyon dahil değildir.",
+        "Her projeyi açık kaynak olarak, belgeleyerek geliştiriyorum.",
       steps: [
         {
-          title: "Brief",
+          title: "Planla",
           description:
-            "Projenin kapsamını, hedeflerini ve beklentilerini netleştiriyoruz.",
+            "Problemi ve gereksinimleri netleştirir, mimariyi tasarlarım.",
         },
         {
-          title: "Yapı & Metin",
+          title: "Geliştir",
           description:
-            "Sayfa yapısını oluşturuyor, dinamik ve etkili metinler yazıyorum.",
+            "Temiz, modüler kodla özellikleri hayata geçiririm.",
         },
         {
-          title: "Tasarım & Geliştirme",
+          title: "Test Et",
           description:
-            "Modern, responsive tasarımı hayata geçiriyorum.",
+            "Kenar durumları test eder, hataları ayıklar ve iyileştiririm.",
         },
         {
-          title: "Teslimat & Kapanış",
+          title: "Yayınla",
           description:
-            "Final dosyaları teslim ediliyor, proje sonlanıyor.",
+            "Yayına alır, belgeler ve projeyi sürdürürüm.",
         },
       ],
-    },
-    testimonials: {
-      title: "Müşteri Yorumları",
     },
     faq: {
       title: "Sıkça Sorulan Sorular",
       items: [
         {
-          question: "SEO yapıyor musun?",
+          question: "Projelerin açık kaynak mı?",
           answer:
-            "Hayır, SEO hizmeti sunmuyorum. Ancak temel SEO uyumlu yapıyı (başlık etiketleri, meta açıklamaları vb.) sağlıyorum.",
+            "Evet, çalışmalarımın çoğu GitHub'da herkese açık. Bu sitedeki Projeler bölümü doğrudan repolarımdan otomatik olarak oluşturuluyor.",
         },
         {
-          question: "Reklam yönetiyor musun?",
+          question: "Hangi teknolojileri kullanıyorsun?",
           answer:
-            "Hayır, Google Ads, Meta Ads veya diğer reklam platformlarının yönetimini yapmıyorum.",
+            "Web tarafında ağırlıklı olarak TypeScript ve React/Next.js, araç ve otomasyonlar için Python, sistem işleri için C++ kullanıyorum.",
         },
         {
-          question: "Aylık optimizasyon var mı?",
+          question: "Çalışmaya müsait misin?",
           answer:
-            "Hayır, projeler tek seferlik teslimat şeklinde çalışır. Teslim sonrası proje kapanır.",
+            "Staj, freelance projeler ve iş birliklerine açığım. Bana ulaşmanın en iyi yolu iletişim sayfası.",
         },
         {
-          question: "Başlamak için ne gerekli?",
+          question: "Bir projenin kodunu görebilir miyim?",
           answer:
-            "Net bir proje hedefi ve iletişime geçme isteği yeterli. Detayları birlikte şekillendiririz.",
+            "Kesinlikle. Her proje kartı doğrudan ilgili GitHub reposuna bağlanıyor.",
         },
         {
-          question: "Teslim süresi ne?",
+          question: "Nerede yaşıyorsun?",
           answer:
-            "Proje kapsamına bağlı olarak genellikle 2-4 hafta arasında değişir.",
+            "Ankara, Türkiye'de yaşıyorum ve uzaktan çalışmaya tamamen açığım.",
         },
       ],
     },
     finalCta: {
-      text: "Ne yapmak istediğini yaz — doğru yapıyı önereyim ve seni arayayım.",
-      button: "Proje Başvurusu",
+      text: "Bir fikrin mi var, ya da birlikte çalışmak mı istiyorsun? Bana yaz.",
+      button: "İletişime Geç",
     },
     form: {
-      title: "Proje Başvurusu",
+      title: "İletişime Geç",
       subtitle:
-        "Projenizi değerlendirmem için aşağıdaki formu doldurun. Uygun bulursam belirttiğiniz zaman aralığında sizi ararım.",
-      contactInfo: "İletişim Bilgileri",
-      projectNeeds: "Proje İhtiyaçları",
-      budgetInfo: "Bütçe & Koşullar",
-      callPreferences: "Aranma Tercihi",
+        "Bir soru, bir fırsat ya da sadece merhaba demek için — formu doldur, en kısa sürede geri döneyim.",
       fullName: "Ad Soyad",
       email: "E-posta",
-      phone: "Telefon",
-      projectGoal: "Proje Hedefi",
-      projectGoalPlaceholder: "Seçiniz...",
-      projectGoalOptions: [
-        "Yeni web sitesi",
-        "Mevcut site yenileme",
-        "Landing page",
-        "Kişisel marka sitesi",
-        "Kurumsal site",
-        "Diğer",
-      ],
-      whatYouNeed: "Neye ihtiyacınız var?",
-      needOptions: [
-        "Web sitesi",
-        "Landing page",
-        "Yapay Zeka Geliştirme",
-        "Danışmanlık",
-      ],
-      budgetRange: "Bütçe Aralığı",
-      budgetPlaceholder: "Seçiniz...",
-      budgetOptions: [
-        "10.000 - 25.000 TL",
-        "25.000 - 50.000 TL",
-        "50.000 - 100.000 TL",
-        "100.000 TL üzeri",
-      ],
-      confirmationCheckbox:
-        "SEO, reklam yönetimi ve aylık optimizasyon hizmeti sunulmadığını anlıyorum.",
-      preferredDay: "Aranmak İstediğiniz Gün",
-      dayOptions: [
-        "Pazartesi",
-        "Salı",
-        "Çarşamba",
-        "Perşembe",
-        "Cuma",
-      ],
-      preferredTime: "Tercih Edilen Saat Aralığı",
-      timeOptions: [
-        "09:00 - 12:00",
-        "12:00 - 15:00",
-        "15:00 - 18:00",
-      ],
-      additionalNotes: "Ek Notlar",
-      additionalNotesPlaceholder:
-        "Projeniz hakkında eklemek istediğiniz detaylar...",
-      submit: "Başvuruyu Gönder",
+      subject: "Konu",
+      subjectPlaceholder: "Ne hakkında?",
+      message: "Mesaj",
+      messagePlaceholder: "Mesajını buraya yaz...",
+      submit: "Mesaj Gönder",
+      sending: "Gönderiliyor...",
       successTitle: "Teşekkürler!",
       successMessage:
-        "Başvurunuzu inceleyeceğim. Uygunsa belirttiğiniz zaman aralığında size ulaşacağım.",
+        "Mesajın için teşekkürler. En kısa sürede sana geri döneceğim.",
+      orReachMe: "Ya da doğrudan ulaş:",
       errors: {
         required: "Bu alan zorunludur",
         email: "Geçerli bir e-posta adresi giriniz",
-        phone: "Geçerli bir telefon numarası giriniz",
-        confirmation: "Devam etmek için onay kutusunu işaretlemelisiniz",
       },
     },
     aboutPage: {
       title: "Hakkımda",
       intro:
-        "Ben Ateş Altınkaynak. Ankara merkezli bir full-stack developer ve web tasarımcısıyım.",
+        "Ben Ateş Altınkaynak. Ankara merkezli bir yazılım geliştiriciyim.",
       story:
-        "Yıllardır markaların dijital varlıklarını güçlendirmeye yardımcı oluyorum. Karmaşık fikirleri anlaşılır ve akılda kalıcı sitelere dönüştürüyorum. Tasarım tarafında ise kullanıcı deneyimini ön planda tutan, hızlı ve modern web siteleri inşa ediyorum.",
+        "Yazılıma problem çözme tutkusuyla başladım ve bu, eksiksiz ürünler geliştirmeye dönüştü. React arayüzlerinden Python araçlarına ve C++ sistem koduna kadar yığının her katmanında çalışıyorum. Temiz, okunabilir ve kalıcı kod yazmaya önem veririm.",
       values: {
         title: "Değerlerim",
         items: [
           {
             title: "Netlik",
             description:
-              "Karmaşık değil, anlaşılır. Her kelime bir amaca hizmet etmeli.",
+              "Zekice değil, anlaşılır kod. İyi isimlendirme ve net yapı.",
           },
           {
             title: "Kalite",
             description:
-              "Detaylara önem veririm. Her proje en iyi halinde teslim edilir.",
+              "Detaylara önem veririm; test edilmiş ve sağlam çözümler.",
           },
           {
-            title: "Dürüstlük",
+            title: "Merak",
             description:
-              "Yapamayacağım şeyi söylemem, söylediğimi yaparım.",
+              "Sürekli yeni teknolojiler öğrenir, kendimi geliştiririm.",
           },
         ],
       },
       principles: {
         title: "Nasıl Düşünüyorum",
         items: [
-          "İyi tasarım görünmez olmalı — kullanıcıyı hedefe yönlendirmeli.",
-          "İyi metin ikna eder ama asla baskıcı olmaz.",
-          "Her proje benzersizdir, şablon çözümler sunmam.",
-          "Süreç şeffaf olmalı, sürprizler hoş değil.",
+          "İyi kod kendini anlatır — ama yine de belgelenir.",
+          "Önce çalıştır, sonra hızlandır, en son sadeleştir.",
+          "Her proje yeni bir şey öğrenme fırsatıdır.",
+          "Basit çözüm, çoğu zaman doğru çözümdür.",
         ],
       },
-      boundaries: {
-        title: "Sunmadığım Hizmetler",
+      stack: {
+        title: "Teknolojiler",
         items: [
-          "SEO optimizasyonu ve danışmanlığı",
-          "Google Ads / Meta Ads yönetimi",
-          "Aylık bakım ve optimizasyon paketleri",
-          "Sosyal medya yönetimi",
+          "TypeScript",
+          "React / Next.js",
+          "Python",
+          "C++",
+          "Node.js",
+          "Tailwind CSS",
+          "Git",
+          "SQL",
         ],
       },
     },
     processPage: {
-      title: "Çalışma Sürecim",
+      title: "Nasıl Çalışıyorum",
       intro:
-        "Her projeyi sistematik ve şeffaf bir süreçle yürütüyorum. İşte adım adım nasıl çalıştığımız:",
-      whatYouNeed: {
-        title: "Sizden Beklentilerim",
+        "Her projeyi sistematik ve şeffaf bir şekilde geliştiriyorum. İşte adım adım süreç:",
+      collaboration: {
+        title: "Birlikte Çalışırken",
         items: [
-          "Net bir proje hedefi ve vizyonu",
-          "Hedef kitleniz hakkında temel bilgiler",
-          "Varsa marka rehberi veya mevcut materyaller",
-          "İletişim için müsait zaman dilimleri",
+          "Net hedefler ve açık iletişim",
+          "Düzenli ilerleme güncellemeleri",
+          "Sürüm kontrolü ve temiz commit geçmişi",
+          "Belgelenmiş, devredilebilir kod",
         ],
       },
-      revisions: {
-        title: "Revizyon Politikası",
+      quality: {
+        title: "Kod Kalitesi",
         description:
-          "Her proje 2 revizyon turunu içerir. Ek revizyonlar için ayrı ücretlendirme yapılır.",
+          "Kodun okunabilir, test edilebilir ve sürdürülebilir olmasına özen gösteririm.",
       },
-      closure: {
-        title: "Proje Kapanışı",
+      openSource: {
+        title: "Açık Kaynak",
         description:
-          "Teslim sonrası proje kapanır. Sürekli optimizasyon, bakım veya aylık hizmetler sunulmaz. İhtiyaç halinde yeni bir proje olarak değerlendirilebilir.",
+          "Projelerimin çoğu GitHub'da herkese açık — kodu incelemekten çekinme.",
       },
     },
     footer: {
       copyright: "Tüm hakları saklıdır.",
-      builtWith: "Built by Light AI",
+      role: "Yazılım Geliştirici",
+      builtWith: "Next.js & Tailwind ile geliştirildi.",
     },
   },
   en: {
     nav: {
       home: "Home",
-      work: "Work",
+      work: "Projects",
       about: "About",
       process: "Process",
-      startProject: "Start a Project",
+      contact: "Contact",
     },
     hero: {
-      headline: "Web Design & AI Development",
+      headline: "I build software, end to end.",
       subheadline:
-        "I design websites and develop AI content.  Clear, persuasive and dynamic.",
-      primaryCta: "Start a Project",
-      secondaryCta: "See My Work",
-      statusLine: "Currently able to accept a limited number of projects.",
+        "I'm Ateş — a software developer working across web apps, backends, and systems programming. I turn ideas into clean, reliable code.",
+      primaryCta: "Get in Contact",
+      secondaryCta: "View My Work",
+      statusLine: "Open to internships and collaboration.",
     },
     about: {
       title: "Hi, I'm Ateş.",
       paragraph1:
-        "I transform complex ideas into clear, dynamic content. Whether it's a new startup launch or a corporate restructuring — I bring the same level of care to every project.",
+        "I'm a software developer who enjoys turning complex problems into clean, maintainable code — whether that's a full-stack web app, a backend service, or a low-level systems project.",
       paragraph2:
-        "On the design side, I build modern, fast, and mobile-responsive sites. My goal is to deliver not just beauty, but a conversion-focused experience.",
-      whatYouGet: "What You Get",
+        "I build most of my projects in the open. Every repository on my GitHub is something I designed, built, and shipped end to end.",
+      whatYouGet: "What I Work On",
       bullets: [
-        "Strategy-led structure",
-        "Conversion-focused content",
-        "Modern, responsive design",
-        "Clean delivery & closure",
+        "Full-stack web development",
+        "Backends & APIs",
+        "Systems & tooling",
+        "Clean, tested, documented code",
       ],
     },
     work: {
-      title: "Featured Work",
-      viewCase: "View Case Study",
-      goal: "Goal",
-      deliverables: "Deliverables",
-      outcome: "Outcome",
-      filters: {
-        all: "All",
-        landing: "Landing Page",
-        website: "Website",
-        copywriting: "AI Development",
-        personalBrand: "Personal Brand",
-      },
-      nextProject: "Next Project",
+      title: "My Projects",
+      featuredTitle: "Featured Projects",
+      subtitle:
+        "My open-source projects, synced automatically straight from GitHub.",
+      viewOnGitHub: "View on GitHub",
+      liveDemo: "Live",
+      updated: "Updated",
+      allFilter: "All",
+      noRepos:
+        "Projects couldn't be loaded right now. You can check out my GitHub profile.",
+      viewProfile: "My GitHub profile",
     },
     capabilities: {
-      title: "What I Offer",
-      notIncluded:
-        "I don't offer SEO services, ad management, or monthly optimization.",
+      title: "What I Do",
+      techNote: "I mostly work with TypeScript, Python, and C++.",
       items: [
         {
-          title: "Sales Pages & Landing Pages",
+          title: "Web Applications",
           description:
-            "Conversion-focused, persuasive sales pages and landing page designs.",
+            "Modern, fast, and responsive web apps built with Next.js and React.",
         },
         {
-          title: "Business Websites",
+          title: "Backends & APIs",
           description:
-            "Professional, modern, and mobile-responsive corporate websites.",
+            "Scalable backend services and well-designed REST APIs.",
         },
         {
-          title: "Personal Brand Sites",
+          title: "Systems Programming",
           description:
-            "Unique and impactful portfolio sites for individual professionals.",
+            "Performance-focused, low-level applications and tools in C++.",
         },
         {
-          title: "AI Development",
+          title: "Automation & Tools",
           description:
-            "Headlines, sections, CTAs — professional content for all site copy.",
+            "Scripts and developer tools that automate the repetitive work.",
         },
         {
-          title: "Information Architecture",
+          title: "UI Engineering",
           description:
-            "Page flow, user journey, and content hierarchy planning.",
+            "Accessible, polished interfaces with smooth, purposeful animation.",
         },
       ],
     },
     process: {
-      title: "My Process",
-      boundary:
-        "The project closes after delivery. Ongoing optimization is not included.",
+      title: "How I Work",
+      boundary: "I build each project in the open, with documentation.",
       steps: [
         {
-          title: "Brief",
+          title: "Plan",
           description:
-            "We clarify the project scope, goals, and expectations.",
+            "Clarify the problem and requirements, then design the architecture.",
         },
         {
-          title: "Structure & Content",
-          description:
-            "I create the page structure and develop AI content.",
+          title: "Build",
+          description: "Implement the features with clean, modular code.",
         },
         {
-          title: "Design & Build",
-          description:
-            "I bring the modern, responsive design and AI content to life.",
+          title: "Test",
+          description: "Cover the edge cases, iron out bugs, and refine.",
         },
         {
-          title: "Delivery & Closure",
-          description:
-            "Final files are delivered, the project concludes.",
+          title: "Ship",
+          description: "Deploy, document, and maintain the project.",
         },
       ],
-    },
-    testimonials: {
-      title: "Client Testimonials",
     },
     faq: {
       title: "Frequently Asked Questions",
       items: [
         {
-          question: "Do you do SEO?",
+          question: "Are your projects open source?",
           answer:
-            "No, I don't offer SEO services. However, I ensure basic SEO-friendly structure (title tags, meta descriptions, etc.).",
+            "Yes — most of my work is public on GitHub. The Projects section on this site is generated directly from my repositories.",
         },
         {
-          question: "Do you manage ads?",
+          question: "What technologies do you use?",
           answer:
-            "No, I don't manage Google Ads, Meta Ads, or other advertising platforms.",
+            "Mainly TypeScript and React/Next.js on the web, Python for tooling and automation, and C++ for systems work.",
         },
         {
-          question: "Is there monthly optimization?",
+          question: "Are you available for work?",
           answer:
-            "No, projects work as one-time deliveries. The project closes after delivery.",
+            "I'm open to internships, freelance projects, and collaboration. The best way to reach me is the contact page.",
         },
         {
-          question: "What do I need to get started?",
+          question: "Can I see the code behind a project?",
           answer:
-            "A clear project goal and willingness to communicate. We'll shape the details together.",
+            "Absolutely. Every project card links straight to its GitHub repository.",
         },
         {
-          question: "What's the delivery timeline?",
+          question: "Where are you based?",
           answer:
-            "Typically 2-4 weeks depending on the project scope.",
+            "I'm based in Ankara, Türkiye, and fully open to working remotely.",
         },
       ],
     },
     finalCta: {
-      text: "Tell me what you want to build — I'll suggest the right structure and give you a call.",
-      button: "Start a Project",
+      text: "Have an idea, or want to work together? Drop me a message.",
+      button: "Get in Contact",
     },
     form: {
-      title: "Start a Project",
+      title: "Get in Contact",
       subtitle:
-        "Fill out the form below for me to evaluate your project. I'll call you at your preferred time.",
-      contactInfo: "Contact Information",
-      projectNeeds: "Project Needs",
-      budgetInfo: "Budget & Terms",
-      callPreferences: "Call Preferences",
+        "A question, an opportunity, or just to say hi — fill out the form and I'll get back to you soon.",
       fullName: "Full Name",
       email: "Email",
-      phone: "Phone",
-      projectGoal: "Project Goal",
-      projectGoalPlaceholder: "Select...",
-      projectGoalOptions: [
-        "New website",
-        "Website redesign",
-        "Landing page",
-        "Personal brand site",
-        "Corporate site",
-        "Other",
-      ],
-      whatYouNeed: "What do you need?",
-      needOptions: [
-        "Website",
-        "Landing page",
-        "AI Development",
-        "Consultation",
-        "Copywriting",
-      ],
-      budgetRange: "Budget Range",
-      budgetPlaceholder: "Select...",
-      budgetOptions: [
-        "$500 - $1,500",
-        "$1,500 - $3,000",
-        "$3,000 - $6,000",
-        "$6,000+",
-      ],
-      confirmationCheckbox:
-        "I understand that SEO, ad management, and monthly optimization services are not offered.",
-      preferredDay: "Preferred Day to Be Called",
-      dayOptions: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-      ],
-      preferredTime: "Preferred Time Window",
-      timeOptions: [
-        "9:00 AM - 12:00 PM",
-        "12:00 PM - 3:00 PM",
-        "3:00 PM - 6:00 PM",
-      ],
-      additionalNotes: "Additional Notes",
-      additionalNotesPlaceholder:
-        "Any additional details about your project...",
-      submit: "Submit Application",
+      subject: "Subject",
+      subjectPlaceholder: "What's it about?",
+      message: "Message",
+      messagePlaceholder: "Write your message here...",
+      submit: "Send Message",
+      sending: "Sending...",
       successTitle: "Thank you!",
       successMessage:
-        "I'll review your application. I'll call you at your specified time.",
+        "Thanks for your message. I'll get back to you as soon as I can.",
+      orReachMe: "Or reach me directly:",
       errors: {
         required: "This field is required",
         email: "Please enter a valid email address",
-        phone: "Please enter a valid phone number",
-        confirmation: "You must check the confirmation box to continue",
       },
     },
     aboutPage: {
       title: "About Me",
       intro:
-        "I'm Ateş Altınkaynak. An Türkiye/Ankara based full-stack AI developer and web designer.",
+        "I'm Ateş Altınkaynak, a software developer based in Ankara, Türkiye.",
       story:
-        "For years, I've been helping brands strengthen their digital presence. I transform complex ideas into clear, persuasive, and memorable copy. On the design side, I build fast, modern websites that prioritize user experience.",
+        "I started programming out of a love for solving problems, and it grew into building complete products. I work across the stack — from React front-ends to Python tooling and C++ systems code. I care about writing code that is clean, readable, and built to last.",
       values: {
         title: "My Values",
         items: [
           {
             title: "Clarity",
             description:
-              "Not complex, but understandable. Every word should serve a purpose.",
+              "Understandable over clever. Good naming and clear structure.",
           },
           {
             title: "Quality",
             description:
-              "I care about details. Every project is delivered at its best.",
+              "I sweat the details — tested, robust solutions.",
           },
           {
-            title: "Honesty",
+            title: "Curiosity",
             description:
-              "I don't say what I can't do, and I do what I say.",
+              "I'm always learning new tech and pushing myself further.",
           },
         ],
       },
       principles: {
         title: "How I Think",
         items: [
-          "Good design should be invisible — it should guide the user to the goal.",
-          "Good content persuades but is never pushy.",
-          "Every project is unique; I don't offer template solutions.",
-          "The process should be transparent; surprises aren't pleasant.",
+          "Good code documents itself — but I document it anyway.",
+          "Make it work, then make it fast, then make it simple.",
+          "Every project is a chance to learn something new.",
+          "The simple solution is usually the right one.",
         ],
       },
-      boundaries: {
-        title: "Services I Don't Offer",
+      stack: {
+        title: "Tech Stack",
         items: [
-          "SEO optimization and consulting",
-          "Google Ads / Meta Ads management",
-          "Monthly maintenance and optimization packages",
-          "Social media management",
+          "TypeScript",
+          "React / Next.js",
+          "Python",
+          "C++",
+          "Node.js",
+          "Tailwind CSS",
+          "Git",
+          "SQL",
         ],
       },
     },
     processPage: {
-      title: "My Process",
+      title: "How I Work",
       intro:
-        "I run every project with a systematic and transparent process. Here's how we work step by step:",
-      whatYouNeed: {
-        title: "What I Need From You",
+        "I approach every project methodically and transparently. Here's the step-by-step process:",
+      collaboration: {
+        title: "Working Together",
         items: [
-          "A clear project goal and vision",
-          "Basic information about your target audience",
-          "Brand guidelines or existing materials if available",
-          "Available time slots for communication",
+          "Clear goals and open communication",
+          "Regular progress updates",
+          "Version control with a clean commit history",
+          "Documented, hand-off-ready code",
         ],
       },
-      revisions: {
-        title: "Revision Policy",
+      quality: {
+        title: "Code Quality",
         description:
-          "Each project includes 2 rounds of revisions. Additional revisions are charged separately.",
+          "I keep code readable, testable, and maintainable.",
       },
-      closure: {
-        title: "Project Closure",
+      openSource: {
+        title: "Open Source",
         description:
-          "The project closes after delivery. Ongoing optimization, maintenance, or monthly services are not offered. If needed, it can be evaluated as a new project.",
+          "Most of my projects are public on GitHub — feel free to dig into the code.",
       },
     },
     footer: {
       copyright: "All rights reserved.",
-      builtWith: "Built by Light AI",
+      role: "Software Developer",
+      builtWith: "Built with Next.js & Tailwind.",
     },
   },
 } as const

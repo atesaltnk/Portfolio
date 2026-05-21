@@ -12,35 +12,37 @@ const _playfair = Playfair_Display({ subsets: ["latin", "latin-ext"] })
 
 
 export const metadata: Metadata = {
-  title: "Ateş Altınkaynak | Web Designer & AI Developer",
+  title: "Ateş Altınkaynak | Software Developer",
   description:
-    "Copywriting + Web Tasarım. Net, ikna edici, modern. Web siteleri tasarlıyor ve ikna edici metinler yazıyorum.",
+    "Software developer building web apps, backends, and systems software. Most of my work is open source — explore my projects, synced live from GitHub.",
   icons: {
     icon: "/favicon.ico",
   },
   keywords: [
-    "copywriter",
-    "web designer",
+    "software developer",
+    "full-stack developer",
+    "TypeScript",
+    "Python",
+    "C++",
+    "Next.js",
     "Ankara",
-    "freelance",
-    "web tasarım",
-    "metin yazarı",
+    "open source",
   ],
   authors: [{ name: "Ateş Altınkaynak" }],
   openGraph: {
-    title: "Ateş Altınkaynak | Copywriter & Web Designer",
+    title: "Ateş Altınkaynak | Software Developer",
     description:
-      "Copywriting + Web Tasarım. Net, ikna edici, modern.",
+      "Software developer building web apps, backends, and systems software. Projects synced live from GitHub.",
     url: "https://atesaltinkaynak.com",
     siteName: "Ateş Altınkaynak",
-    locale: "tr_TR",
+    locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ateş Altınkaynak | Copywriter & Web Designer",
+    title: "Ateş Altınkaynak | Software Developer",
     description:
-      "Copywriting + Web Tasarım. Net, ikna edici, modern.",
+      "Software developer building web apps, backends, and systems software.",
   },
   robots: {
     index: true,

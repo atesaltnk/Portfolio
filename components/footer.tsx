@@ -1,7 +1,11 @@
 "use client"
 
 import Link from "next/link"
+import { Github, Mail } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { GITHUB_PROFILE_URL } from "@/lib/github"
+
+const CONTACT_EMAIL = "atesaltinkaynak@gmail.com"
 
 export function Footer() {
   const { t } = useLanguage()
@@ -17,9 +21,7 @@ export function Footer() {
             >
               Ateş Altınkaynak
             </Link>
-            <p className="text-sm text-muted-foreground">
-              AI Developer & Web Designer
-            </p>
+            <p className="text-sm text-muted-foreground">{t.footer.role}</p>
           </div>
 
           <div className="flex items-center gap-8 text-sm text-muted-foreground">
@@ -32,9 +34,28 @@ export function Footer() {
             <Link href="/process" className="hover:text-foreground transition-colors">
               {t.nav.process}
             </Link>
-            <Link href="/start-project" className="hover:text-primary transition-colors">
-              {t.nav.startProject}
+            <Link href="/contact" className="hover:text-primary transition-colors">
+              {t.nav.contact}
             </Link>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <a
+              href={GITHUB_PROFILE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/50 text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
+            >
+              <Github size={18} />
+            </a>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              aria-label="Email"
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/50 text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
+            >
+              <Mail size={18} />
+            </a>
           </div>
         </div>
 

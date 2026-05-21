@@ -31,7 +31,7 @@ export function FinalCTASection() {
                 className="inline-block mt-8"
               >
                 <Link
-                  href="/start-project"
+                  href="/contact"
                   className={cn(
                     "group inline-flex items-center gap-2 px-8 py-4",
                     "bg-primary text-primary-foreground font-medium rounded-xl",

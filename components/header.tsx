@@ -199,7 +199,7 @@ export function Header() {
           </div>
 
           {/* CTA Button */}
-          <CTAButton href="/start-project" label={t.nav.startProject} />
+          <CTAButton href="/contact" label={t.nav.contact} />
         </div>
 
         {/* Mobile Menu Button */}
@@ -306,11 +306,11 @@ export function Header() {
                 className="w-full max-w-xs"
               >
                 <Link
-                  href="/start-project"
+                  href="/contact"
                   onClick={() => setMobileMenuOpen(false)}
                   className="block w-full text-center px-6 py-4 bg-primary text-primary-foreground font-semibold rounded-xl text-lg shadow-lg shadow-primary/20"
                 >
-                  {t.nav.startProject}
+                  {t.nav.contact}
                 </Link>
               </motion.div>
             </nav>

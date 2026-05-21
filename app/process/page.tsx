@@ -3,13 +3,13 @@
 import Link from "next/link"
 import { motion, useReducedMotion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { ArrowRight, MessageSquare, FileText, Palette, Package, AlertCircle, CheckCircle } from "lucide-react"
+import { ArrowRight, ClipboardList, Code2, FlaskConical, Rocket, AlertCircle, CheckCircle } from "lucide-react"
 import { Footer } from "@/components/footer"
 
 import { useLanguage } from "@/lib/language-context"
 import { SectionWrapper } from "@/components/section-wrapper"
 
-const icons = [MessageSquare, FileText, Palette, Package]
+const icons = [ClipboardList, Code2, FlaskConical, Rocket]
 
 export default function ProcessPage() {
   const { t } = useLanguage()
@@ -93,15 +93,15 @@ export default function ProcessPage() {
             </div>
           </SectionWrapper>
 
-          {/* What I Need From You */}
+          {/* Working Together */}
           <SectionWrapper>
             <div className="p-8 rounded-2xl border border-border/50 bg-card/50">
               <h2 className="font-serif text-2xl font-bold text-foreground mb-6">
-                {t.processPage.whatYouNeed.title}
+                {t.processPage.collaboration.title}
               </h2>
 
               <ul className="space-y-4">
-                {t.processPage.whatYouNeed.items.map((item, index) => (
+                {t.processPage.collaboration.items.map((item, index) => (
                   <li key={index} className="flex items-start gap-3 text-muted-foreground">
                     <CheckCircle size={20} className="text-primary flex-shrink-0 mt-0.5" />
                     {item}
@@ -111,29 +111,29 @@ export default function ProcessPage() {
             </div>
           </SectionWrapper>
 
-          {/* Revision Policy */}
+          {/* Quality & Open Source */}
           <SectionWrapper className="py-12 md:py-16">
             <div className="grid md:grid-cols-2 gap-6">
-              {/* Revisions */}
+              {/* Code Quality */}
               <div className="p-6 rounded-xl border border-border/50 bg-card/50">
                 <h3 className="font-semibold text-foreground mb-3">
-                  {t.processPage.revisions.title}
+                  {t.processPage.quality.title}
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  {t.processPage.revisions.description}
+                  {t.processPage.quality.description}
                 </p>
               </div>
 
-              {/* Closure */}
+              {/* Open Source */}
               <div className="p-6 rounded-xl border border-primary/20 bg-primary/5">
                 <div className="flex items-start gap-3">
                   <AlertCircle size={20} className="text-primary flex-shrink-0 mt-0.5" />
                   <div>
                     <h3 className="font-semibold text-foreground mb-2">
-                      {t.processPage.closure.title}
+                      {t.processPage.openSource.title}
                     </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      {t.processPage.closure.description}
+                      {t.processPage.openSource.description}
                     </p>
                   </div>
                 </div>
@@ -147,7 +147,7 @@ export default function ProcessPage() {
               {t.finalCta.text}
             </p>
             <Link
-              href="/start-project"
+              href="/contact"
               className="group inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-medium rounded-xl hover:glow-green transition-all duration-300"
             >
               {t.finalCta.button}

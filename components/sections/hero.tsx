@@ -7,38 +7,20 @@ import { ArrowRight } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import { AnimatedBackgroundLayer } from "@/components/motion/animated-background-layer"
 import { CursorSpotlight } from "@/components/motion/cursor-spotlight"
+import type { Repo } from "@/lib/github"
 import { cn } from "@/lib/utils"
 
 function normalizeHeadlineSpacing(input: string) {
-  // Ensure readable spacing after punctuation and around "+".
-  // Example: "Copywriting+WebDesign. Clear,persuasive,modern."
-  // -> "Copywriting + WebDesign. Clear, persuasive, modern."
-  const plusLike = /[+\uFF0B]/g // + and fullwidth ＋
-  const punctuation = /[.,;:!?]/g
-
-  return (
-    input
-      // Normalize plus variants to " + "
-      .replace(plusLike, " + ")
-      // Ensure spacing between letters/numbers and punctuation both ways.
-      // "Clear,persuasive" -> "Clear, persuasive"
-      // "modern." -> "modern."
-      .replace(/([\p{L}\p{N}])([.,;:!?])/gu, "$1$2 ")
-      .replace(/([.,;:!?])([\p{L}\p{N}])/gu, "$1 $2")
-      // Collapse whitespace
-      .replace(/\s+/g, " ")
-      .trim()
-  )
+  const plusLike = /[+＋]/g
+  return input
+    .replace(plusLike, " + ")
+    .replace(/([\p{L}\p{N}])([.,;:!?])/gu, "$1$2 ")
+    .replace(/([.,;:!?])([\p{L}\p{N}])/gu, "$1 $2")
+    .replace(/\s+/g, " ")
+    .trim()
 }
 
-// Split text into words for staggered animation
-function SplitText({
-  text,
-  className,
-}: {
-  text: string
-  className?: string
-}) {
+function SplitText({ text, className }: { text: string; className?: string }) {
   const words = normalizeHeadlineSpacing(text).split(" ")
 
   return (
@@ -64,14 +46,97 @@ function SplitText({
               {word}
             </motion.span>
           </span>
-          {i < words.length - 1 && <span aria-hidden>{"\u00A0"}</span>}
+          {i < words.length - 1 && <span aria-hidden>{" "}</span>}
         </span>
       ))}
     </span>
   )
 }
 
-export function HeroSection() {
+// Decorative "editor window" so the hero reads as a developer space, not empty canvas.
+function CodeWindow({ repoCount, enableMotion }: { repoCount: number; enableMotion: boolean }) {
+  return (
+    <motion.div
+      aria-hidden
+      className="relative w-full max-w-md"
+      initial={false}
+      animate={
+        enableMotion
+          ? { y: [0, -8, 0] }
+          : undefined
+      }
+      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+    >
+      <div className="absolute -inset-4 rounded-3xl opacity-40 glow-green-subtle pointer-events-none" />
+      <div className="relative rounded-2xl border border-border/60 bg-card/80 backdrop-blur-sm shadow-2xl overflow-hidden">
+        {/* Title bar */}
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-background/40">
+          <span className="h-3 w-3 rounded-full bg-destructive/70" />
+          <span className="h-3 w-3 rounded-full bg-amber-400/70" />
+          <span className="h-3 w-3 rounded-full bg-primary/70" />
+          <span className="ml-3 text-xs text-muted-foreground font-mono">ates.ts</span>
+        </div>
+
+        {/* Code body */}
+        <div className="p-5 font-mono text-sm leading-relaxed">
+          <p>
+            <span className="text-primary">const</span>{" "}
+            <span className="text-foreground">ates</span>
+            <span className="text-muted-foreground">: </span>
+            <span className="text-amber-300/90">Developer</span>
+            <span className="text-muted-foreground"> = {"{"}</span>
+          </p>
+          <p className="pl-5">
+            <span className="text-sky-300/80">role</span>
+            <span className="text-muted-foreground">: </span>
+            <span className="text-emerald-300/80">&quot;Software Developer&quot;</span>
+            <span className="text-muted-foreground">,</span>
+          </p>
+          <p className="pl-5">
+            <span className="text-sky-300/80">location</span>
+            <span className="text-muted-foreground">: </span>
+            <span className="text-emerald-300/80">&quot;Ankara, TR&quot;</span>
+            <span className="text-muted-foreground">,</span>
+          </p>
+          <p className="pl-5">
+            <span className="text-sky-300/80">stack</span>
+            <span className="text-muted-foreground">: [</span>
+            <span className="text-emerald-300/80">&quot;TypeScript&quot;</span>
+            <span className="text-muted-foreground">, </span>
+            <span className="text-emerald-300/80">&quot;Python&quot;</span>
+            <span className="text-muted-foreground">, </span>
+            <span className="text-emerald-300/80">&quot;C++&quot;</span>
+            <span className="text-muted-foreground">],</span>
+          </p>
+          {repoCount > 0 && (
+            <p className="pl-5">
+              <span className="text-sky-300/80">projects</span>
+              <span className="text-muted-foreground">: </span>
+              <span className="text-orange-300/90">{repoCount}</span>
+              <span className="text-muted-foreground">,</span>
+            </p>
+          )}
+          <p className="pl-5">
+            <span className="text-sky-300/80">openToWork</span>
+            <span className="text-muted-foreground">: </span>
+            <span className="text-primary">true</span>
+            <span className="text-muted-foreground">,</span>
+          </p>
+          <p>
+            <span className="text-muted-foreground">{"}"}</span>
+            <motion.span
+              className="ml-1 inline-block w-2 h-4 align-middle bg-primary/80"
+              animate={enableMotion ? { opacity: [1, 0, 1] } : undefined}
+              transition={{ duration: 1.1, repeat: Infinity }}
+            />
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
+export function HeroSection({ repos = [] }: { repos?: Repo[] }) {
   const { t } = useLanguage()
   const shouldReduceMotion = useReducedMotion()
   const [mounted, setMounted] = useState(false)
@@ -87,27 +152,17 @@ export function HeroSection() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.3,
-      },
+      transition: { staggerChildren: 0.12, delayChildren: 0.3 },
     },
   }
 
   const itemVariants = {
-    hidden: {
-      opacity: 0,
-      y: 30,
-      filter: "blur(8px)",
-    },
+    hidden: { opacity: 0, y: 30, filter: "blur(8px)" },
     visible: {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94] as const,
-      },
+      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const },
     },
   }
 
@@ -120,7 +175,6 @@ export function HeroSection() {
         initial={enableMotion ? "hidden" : false}
         animate={enableMotion ? "visible" : undefined}
       >
-        {/* Animated background layer */}
         <AnimatedBackgroundLayer
           variant="hero"
           showGrid={false}
@@ -128,90 +182,87 @@ export function HeroSection() {
         />
 
         <div className="mx-auto max-w-6xl px-6 w-full relative z-10">
-          <div className="max-w-3xl">
-            {/* Animated headline with word split */}
-            <motion.h1
-              className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-balance text-foreground"
-              variants={itemVariants}
-              initial={false}
-            >
-              <SplitText text={t.hero.headline} />
-            </motion.h1>
-
-            {/* Subheadline */}
-            <motion.p
-              className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl"
-              variants={itemVariants}
-              initial={false}
-            >
-              {t.hero.subheadline}
-            </motion.p>
-
-            {/* CTAs with magnetic effect */}
-            <motion.div
-              className="mt-10 flex flex-col sm:flex-row gap-4"
-              variants={itemVariants}
-              initial={false}
-            >
-              <motion.div
-                whileHover={enableMotion ? { scale: 1.05 } : {}}
-                whileTap={enableMotion ? { scale: 0.98 } : {}}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+            {/* Left: copy */}
+            <div className="max-w-xl">
+              <motion.h1
+                className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-balance text-foreground"
+                variants={itemVariants}
                 initial={false}
               >
+                <SplitText text={t.hero.headline} />
+              </motion.h1>
+
+              <motion.p
+                className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed"
+                variants={itemVariants}
+                initial={false}
+              >
+                {t.hero.subheadline}
+              </motion.p>
+
+              <motion.div
+                className="mt-10 flex flex-col sm:flex-row gap-4"
+                variants={itemVariants}
+                initial={false}
+              >
+                <motion.div
+                  whileHover={enableMotion ? { scale: 1.05 } : {}}
+                  whileTap={enableMotion ? { scale: 0.98 } : {}}
+                  initial={false}
+                >
+                  <Link
+                    href="/contact"
+                    className={cn(
+                      "group relative inline-flex items-center justify-center gap-2 px-6 py-3",
+                      "bg-primary text-primary-foreground font-medium rounded-lg",
+                      "transition-all duration-300",
+                      "hover:shadow-[0_0_30px_oklch(0.45_0.12_155_/_0.4)]",
+                      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                    )}
+                  >
+                    <span className="relative z-10">{t.hero.primaryCta}</span>
+                    <ArrowRight
+                      size={18}
+                      className="relative z-10 transition-transform duration-300 group-hover:translate-x-1"
+                    />
+                  </Link>
+                </motion.div>
+
                 <Link
-                  href="/start-project"
+                  href="/work"
                   className={cn(
                     "group relative inline-flex items-center justify-center gap-2 px-6 py-3",
-                    "bg-primary text-primary-foreground font-medium rounded-lg",
-                    "transition-all duration-300",
-                    "hover:shadow-[0_0_30px_oklch(0.45_0.12_155_/_0.4)]",
+                    "bg-transparent border border-border text-foreground font-medium rounded-lg",
+                    "transition-all duration-300 hover:bg-secondary/50 hover:border-primary/30",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   )}
                 >
-                  <span className="relative z-10">{t.hero.primaryCta}</span>
-                  <ArrowRight
-                    size={18}
-                    className="relative z-10 transition-transform duration-300 group-hover:translate-x-1"
-                  />
-
-                  {/* Animated underline on hover */}
-                  <motion.span
-                    className="absolute bottom-0 left-0 h-[2px] bg-primary-foreground/30"
-                    initial={{ scaleX: 0 }}
-                    whileHover={enableMotion ? { scaleX: 1 } : {}}
-                    style={{ originX: 0, width: "100%" }}
-                    transition={{ duration: 0.3 }}
-                  />
+                  {t.hero.secondaryCta}
+                  <span className="absolute bottom-2 left-6 right-6 h-[1px] bg-primary/50 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                 </Link>
               </motion.div>
 
-              <Link
-                href="/work"
-                className={cn(
-                  "group relative inline-flex items-center justify-center gap-2 px-6 py-3",
-                  "bg-transparent border border-border text-foreground font-medium rounded-lg",
-                  "transition-all duration-300 hover:bg-secondary/50 hover:border-primary/30",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                )}
+              <motion.div
+                className="mt-10 inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full"
+                variants={itemVariants}
+                initial={false}
               >
-                {t.hero.secondaryCta}
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+                </span>
+                <span className="text-sm text-muted-foreground">{t.hero.statusLine}</span>
+              </motion.div>
+            </div>
 
-                {/* Sliding underline */}
-                <span className="absolute bottom-2 left-6 right-6 h-[1px] bg-primary/50 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              </Link>
-            </motion.div>
-
-            {/* Status badge */}
+            {/* Right: editor window visual */}
             <motion.div
-              className="mt-10 inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full"
+              className="hidden lg:flex justify-end"
               variants={itemVariants}
               initial={false}
             >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
-              </span>
-              <span className="text-sm text-muted-foreground">{t.hero.statusLine}</span>
+              <CodeWindow repoCount={repos.length} enableMotion={enableMotion} />
             </motion.div>
           </div>
         </div>

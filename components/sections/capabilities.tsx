@@ -1,12 +1,12 @@
 "use client"
 
 import { motion, useReducedMotion } from "framer-motion"
-import { FileText, Globe, User, PenTool, Layers } from "lucide-react"
+import { Globe, Server, Cpu, Wrench, Palette } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import { SectionWrapper, AnimatedItem } from "@/components/section-wrapper"
 import { cn } from "@/lib/utils"
 
-const icons = [FileText, Globe, User, PenTool, Layers]
+const icons = [Globe, Server, Cpu, Wrench, Palette]
 
 function CapabilityCard({
   item,
@@ -15,7 +15,7 @@ function CapabilityCard({
 }: {
   item: { title: string; description: string }
   index: number
-  Icon: typeof FileText
+  Icon: typeof Globe
 }) {
   const shouldReduceMotion = useReducedMotion()
 
@@ -100,8 +100,8 @@ export function CapabilitiesSection() {
         {/* Not included note */}
         <AnimatedItem className="mt-10 text-center">
           <p className="inline-flex items-center gap-2 px-4 py-2 text-sm text-muted-foreground bg-secondary/50 rounded-lg border border-border/30">
-            <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/50" />
-            {t.capabilities.notIncluded}
+            <span className="w-1.5 h-1.5 rounded-full bg-primary/60" />
+            {t.capabilities.techNote}
           </p>
         </AnimatedItem>
       </div>

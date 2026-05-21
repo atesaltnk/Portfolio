@@ -2,12 +2,12 @@
 
 import { motion, useReducedMotion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { MessageSquare, FileText, Palette, Package } from "lucide-react"
+import { ClipboardList, Code2, FlaskConical, Rocket } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import { SectionWrapper, AnimatedItem } from "@/components/section-wrapper"
 import { cn } from "@/lib/utils"
 
-const icons = [MessageSquare, FileText, Palette, Package]
+const icons = [ClipboardList, Code2, FlaskConical, Rocket]
 
 function ProcessStep({ 
   step, 
@@ -17,7 +17,7 @@ function ProcessStep({
 }: { 
   step: { title: string; description: string }
   index: number
-  Icon: typeof MessageSquare
+  Icon: typeof ClipboardList
   isInView: boolean
 }) {
   const shouldReduceMotion = useReducedMotion()
