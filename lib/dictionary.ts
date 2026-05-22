@@ -207,7 +207,7 @@ export const dictionary = {
       contact: "Contact",
     },
     hero: {
-      headline: "I build software, end to end.",
+      headline: "I build software,end to end.",
       subheadline:
         "I'm Ateş — a software developer working across web apps, backends, and systems programming. I turn ideas into clean, reliable code.",
       primaryCta: "Get in Contact",
