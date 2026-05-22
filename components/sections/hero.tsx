@@ -182,7 +182,12 @@ export function HeroSection({ repos = [] }: { repos?: Repo[] }) {
             {/* Left: copy */}
             <div className="max-w-xl">
               <motion.h1
-                className="font-sans text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-foreground"
+                className={cn(
+                  "font-sans font-bold leading-tight text-foreground",
+                  locale === "de"
+                    ? "text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
+                    : "text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
+                )}
                 variants={itemVariants}
                 initial={false}
               >
@@ -257,7 +262,7 @@ export function HeroSection({ repos = [] }: { repos?: Repo[] }) {
               data-testid="hero-code-window"
               className={cn(
                 "hidden lg:flex justify-end",
-                locale === "tr" && "lg:-mr-16 xl:-mr-20"
+                locale === "tr" && "lg:-mr-20 xl:-mr-28"
               )}
               variants={itemVariants}
               initial={false}
