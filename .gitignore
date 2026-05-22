@@ -5,6 +5,7 @@
 
 # next.js
 /.next/
+
 /out/
 
 # production
@@ -27,5 +28,8 @@ yarn-error.log*
 next-env.d.ts
 
 .next
+
+# claude
+.claude
 
 .things.txt
