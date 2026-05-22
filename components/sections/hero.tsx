@@ -254,9 +254,10 @@ export function HeroSection({ repos = [] }: { repos?: Repo[] }) {
 
             {/* Right: editor window visual */}
             <motion.div
+              data-testid="hero-code-window"
               className={cn(
                 "hidden lg:flex justify-end",
-                locale === "tr" && "translate-x-12"
+                locale === "tr" && "lg:-mr-16 xl:-mr-20"
               )}
               variants={itemVariants}
               initial={false}

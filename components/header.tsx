@@ -69,6 +69,11 @@ function CTAButton({ href, label }: { href: string; label: string }) {
 }
 
 const MORPH_SPRING = { type: "spring" as const, stiffness: 260, damping: 30, mass: 1 }
+const LANGUAGE_OPTIONS = [
+  { value: "tr", label: "TR" },
+  { value: "en", label: "EN" },
+  { value: "de", label: "DE" },
+] as const
 
 export function Header() {
   const { locale, setLocale, t } = useLanguage()
@@ -114,6 +119,10 @@ export function Header() {
     { href: "/about", label: t.nav.about },
     { href: "/process", label: t.nav.process },
   ]
+  const activeLanguageIndex = Math.max(
+    0,
+    LANGUAGE_OPTIONS.findIndex((option) => option.value === locale)
+  )
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full pointer-events-none">
@@ -161,50 +170,41 @@ export function Header() {
         {/* Right side: Language toggle + CTA */}
         <div className="hidden md:flex items-center gap-4">
           {/* Language Toggle with pill animation */}
-          <div className="relative flex items-center gap-1 bg-secondary/50 rounded-full p-1">
-            {/* Animated background pill */}
-            <motion.div
-              className="absolute top-1 bottom-1 bg-primary rounded-full"
-              layoutId="lang-toggle"
-              initial={false}
-              animate={{
-                left: locale === "tr" ? 4 : locale === "en" ? "calc(50% + 2px)" : "calc(100% - 54px)",
-                width: "calc(50% - 6px)",
-              }}
-              transition={{
-                type: "spring",
-                bounce: 0.2,
-                duration: shouldReduceMotion ? 0 : 0.4,
-              }}
-            />
+          <div className="overflow-hidden rounded-full bg-secondary/50 p-1" role="group" aria-label="Language selector">
+            <div className="relative grid grid-cols-3">
+              {/* Animated background pill */}
+              <motion.div
+                className="absolute inset-y-0 left-0 rounded-full bg-primary"
+                data-testid="language-toggle-indicator"
+                aria-hidden="true"
+                initial={false}
+                animate={{
+                  left: `${activeLanguageIndex * 33.333333}%`,
+                  width: "33.333333%",
+                }}
+                transition={{
+                  type: "spring",
+                  bounce: 0.2,
+                  duration: shouldReduceMotion ? 0 : 0.4,
+                }}
+              />
 
-            <button
-              onClick={() => setLocale("tr")}
-              className={cn(
-                "relative z-10 px-3 py-1 text-xs font-medium rounded-full transition-colors",
-                locale === "tr" ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              TR
-            </button>
-            <button
-              onClick={() => setLocale("en")}
-              className={cn(
-                "relative z-10 px-3 py-1 text-xs font-medium rounded-full transition-colors",
-                locale === "en" ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              EN
-            </button>
-            <button
-              onClick={() => setLocale("de")}
-              className={cn(
-                "relative z-10 px-3 py-1 text-xs font-medium rounded-full transition-colors",
-                locale === "de" ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              DE
-            </button>
+              {LANGUAGE_OPTIONS.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={() => setLocale(option.value)}
+                  aria-pressed={locale === option.value}
+                  className={cn(
+                    "relative z-10 h-6 min-w-10 px-3 text-xs font-medium rounded-full transition-colors",
+                    locale === option.value
+                      ? "text-primary-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* CTA Button */}
