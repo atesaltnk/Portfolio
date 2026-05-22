@@ -27,7 +27,7 @@ function SplitText({ text, className }: { text: string; className?: string }) {
     <span className={cn(className)}>
       {words.map((word, i) => (
         <span key={i} className="inline pl-0">
-          <span className="inline-block overflow-hidden">
+          <span className="inline-block overflow-hidden pb-[0.16em] -mb-[0.16em]">
             <motion.span
               className="inline-block"
               initial={false}
