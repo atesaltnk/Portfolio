@@ -25,7 +25,6 @@ export const MagneticButton = forwardRef<HTMLElement, MagneticButtonProps>(
     const isLink = Component === "a"
 
     const combinedRef = (node: HTMLElement | null) => {
-      // @ts-expect-error - ref types
       ref.current = node
       if (typeof forwardedRef === "function") {
         forwardedRef(node)

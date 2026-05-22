@@ -133,7 +133,7 @@ function CodeWindow({ repoCount, enableMotion }: { repoCount: number; enableMoti
 }
 
 export function HeroSection({ repos = [] }: { repos?: Repo[] }) {
-  const { t } = useLanguage()
+  const { t, locale } = useLanguage()
   const shouldReduceMotion = useReducedMotion()
   const [mounted, setMounted] = useState(false)
   const containerRef = useRef<HTMLElement>(null)
@@ -254,7 +254,10 @@ export function HeroSection({ repos = [] }: { repos?: Repo[] }) {
 
             {/* Right: editor window visual */}
             <motion.div
-              className="hidden lg:flex justify-end"
+              className={cn(
+                "hidden lg:flex justify-end",
+                locale === "tr" && "translate-x-12"
+              )}
               variants={itemVariants}
               initial={false}
             >

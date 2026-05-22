@@ -16,7 +16,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const saved = localStorage.getItem("locale") as Locale | null
-    if (saved && (saved === "tr" || saved === "en")) {
+    if (saved && (saved === "tr" || saved === "en" || saved === "de")) {
       setLocale(saved)
     }
   }, [])
@@ -26,7 +26,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("locale", newLocale)
   }
 
-  const t = dictionary[locale]
+  const t: Dictionary = dictionary[locale]
 
   return (
     <LanguageContext.Provider value={{ locale, setLocale: handleSetLocale, t }}>

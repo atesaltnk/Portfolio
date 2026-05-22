@@ -1,6 +1,8 @@
 // Motion variants and utilities for consistent animations across the site
 // All animations respect prefers-reduced-motion
 
+import type { Variants } from "framer-motion"
+
 export const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -286,7 +288,7 @@ export const borderGlowVariants = {
 }
 
 // Page transition variants
-export const pageTransitionVariants = {
+export const pageTransitionVariants: Variants = {
   initial: {
     opacity: 0,
     y: 8,
@@ -296,7 +298,7 @@ export const pageTransitionVariants = {
     y: 0,
     transition: {
       duration: 0.3,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
   exit: {

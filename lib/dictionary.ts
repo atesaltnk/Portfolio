@@ -1,4 +1,4 @@
-export type Locale = "tr" | "en"
+export type Locale = "tr" | "en" | "de"
 
 export const dictionary = {
   tr: {
@@ -391,6 +391,199 @@ export const dictionary = {
       builtWith: "Built with Next.js & Tailwind.",
     },
   },
+  de: {
+    nav: {
+      home: "Startseite",
+      work: "Projekte",
+      about: "Über mich",
+      process: "Prozess",
+      contact: "Kontakt",
+    },
+    hero: {
+      headline: "Ich baue Software von vorne bis hinten.",
+      subheadline:
+        "Ich bin Ateş — ein Softwareentwickler, der an Web-Apps, Backends und Systemprogrammierung arbeitet. Ich verwandle Ideen in sauberen, zuverlässigen Code.",
+      primaryCta: "Kontakt",
+      secondaryCta: "Meine Projekte",
+      statusLine: "Offen für Praktika und Zusammenarbeit.",
+    },
+    about: {
+      title: "Hallo, ich bin Ateş.",
+      paragraph1:
+        "Ich bin ein Softwareentwickler, der gerne komplexe Probleme in sauberen, wartbaren Code verwandelt — ob das eine Full-Stack-Web-App, ein Backend-Service oder ein Low-Level-Systemprojekt ist.",
+      paragraph2:
+        "Ich entwickle die meisten meiner Projekte offen. Jedes Repository auf meinem GitHub ist etwas, das ich von Anfang bis Ende selbst designed, gebaut und veröffentlicht habe.",
+      whatYouGet: "Woran ich arbeite",
+      bullets: [
+        "Full-Stack-Webentwicklung",
+        "Backends & APIs",
+        "Systeme & Tools",
+        "Sauberer, getesteter, dokumentierter Code",
+      ],
+    },
+    work: {
+      title: "Meine Projekte",
+      featuredTitle: "Ausgewählte Projekte",
+      subtitle:
+        "Meine Open-Source-Projekte, automatisch direkt von GitHub synchronisiert.",
+      viewOnGitHub: "Auf GitHub anschauen",
+      liveDemo: "Live",
+      updated: "Aktualisiert",
+      allFilter: "Alle",
+      noRepos:
+        "Projekte konnten nicht geladen werden. Schaue auf mein GitHub-Profil.",
+      viewProfile: "Mein GitHub-Profil",
+    },
+    capabilities: {
+      title: "Was ich mache",
+      techNote: "Ich arbeite hauptsächlich mit TypeScript, Python und C++.",
+      items: [
+        {
+          title: "Web-Anwendungen",
+          description:
+            "Moderne, schnelle und responsive Web-Apps mit Next.js und React.",
+        },
+        {
+          title: "Backends & APIs",
+          description:
+            "Skalierbare Backend-Services und gut gestaltete REST-APIs.",
+        },
+        {
+          title: "Systemprogrammierung",
+          description:
+            "Leistungsorientierte, Low-Level-Anwendungen und Tools in C++.",
+        },
+        {
+          title: "Automatisierung & Tools",
+          description:
+            "Skripte und Entwickler-Tools, die repetitive Arbeit automatisieren.",
+        },
+        {
+          title: "UI-Engineering",
+          description:
+            "Zugängliche, polierte Schnittstellen mit sanfter, zweckvoller Animation.",
+        },
+      ],
+    },
+    process: {
+      title: "Wie ich arbeite",
+      boundary: "Ich baue jedes Projekt offen, mit Dokumentation.",
+      steps: [
+        {
+          title: "Planen",
+          description:
+            "Klären Sie das Problem und die Anforderungen, dann entwerfen Sie die Architektur.",
+        },
+        {
+          title: "Bauen",
+          description: "Implementiere die Features mit sauberm, modularem Code.",
+        },
+        {
+          title: "Testen",
+          description: "Abdecken der Edge Cases, Beheben von Bugs und Verfeinerung.",
+        },
+        {
+          title: "Versand",
+          description: "Bereitstellen, dokumentieren und Wartung des Projekts.",
+        },
+      ],
+    },
+    faq: {
+      title: "Häufig gestellte Fragen",
+      items: [
+        {
+          question: "Sind deine Projekte Open Source?",
+          answer:
+            "Ja — die meisten meiner Arbeiten sind öffentlich auf GitHub. Der Bereich Projekte auf dieser Website wird direkt aus meinen Repositories generiert.",
+        },
+        {
+          question: "Welche Technologien verwendest du?",
+          answer:
+            "Hauptsächlich TypeScript und React/Next.js im Web, Python für Tools und Automatisierung, und C++ für Systemarbeiten.",
+        },
+        {
+          question: "Stehst du zur Verfügung?",
+          answer:
+            "Ich bin offen für Praktika, Freiberufler-Projekte und Zusammenarbeit. Der beste Weg, mich zu erreichen, ist die Kontaktseite.",
+        },
+        {
+          question: "Kann ich den Code hinter einem Projekt sehen?",
+          answer:
+            "Absolut. Jede Projektkarte verlinkt direkt auf sein GitHub-Repository.",
+        },
+        {
+          question: "Wo bist du basiert?",
+          answer:
+            "Ich bin in Ankara, Türkiye ansässig und vollständig offen für Fernarbeit.",
+        },
+      ],
+    },
+    finalCta: {
+      text: "Hast du eine Idee oder möchtest zusammenarbeiten? Schreib mir eine Nachricht.",
+      button: "Kontakt",
+    },
+    form: {
+      title: "Kontakt",
+      subtitle:
+        "Eine Frage, eine Gelegenheit oder einfach nur Hallo — fülle das Formular aus und ich antworte dir so bald wie möglich.",
+      fullName: "Vollständiger Name",
+      email: "E-Mail",
+      subject: "Betreff",
+      subjectPlaceholder: "Worum geht es?",
+      message: "Nachricht",
+      messagePlaceholder: "Schreibe deine Nachricht hier...",
+      submit: "Nachricht senden",
+      sending: "Wird gesendet...",
+      successTitle: "Danke!",
+      successMessage:
+        "Danke für deine Nachricht. Ich antworte dir so schnell wie möglich.",
+      orReachMe: "Oder kontaktiere mich direkt:",
+      errors: {
+        required: "Dieses Feld ist erforderlich",
+        email: "Bitte gib eine gültige E-Mail-Adresse ein",
+      },
+    },
+    aboutPage: {
+      title: "Über mich",
+      intro:
+        "Ich bin Ateş Altınkaynak, ein Softwareentwickler mit Sitz in Ankara, Türkiye.",
+      story:
+        "Ich bin aus Liebe zur Problemlösung mit dem Programmieren angefangen, und es ist zu vollständigen Produkten geworden. Ich arbeite über den ganzen Stack — von React-Frontend über Python-Tools bis zum C++-Systemcode. Mir ist wichtig, Code zu schreiben, der sauber, lesbar und langlebig ist.",
+      stack: {
+        title: "Tech Stack",
+        subtitle: "Die Sprachen, Frameworks und Tools, mit denen ich am meisten arbeite.",
+      },
+    },
+    processPage: {
+      title: "Wie ich arbeite",
+      intro:
+        "Ich gehe jedes Projekt methodisch und transparent an. Hier ist der Schritt-für-Schritt-Prozess:",
+      collaboration: {
+        title: "Zusammenarbeit",
+        items: [
+          "Klare Ziele und offene Kommunikation",
+          "Regelmäßige Fortschrittsupdates",
+          "Versionskontrolle mit sauberer Commit-Historie",
+          "Dokumentierter, übergabefertiger Code",
+        ],
+      },
+      quality: {
+        title: "Codequalität",
+        description:
+          "Ich halte den Code lesbar, testbar und wartbar.",
+      },
+      openSource: {
+        title: "Open Source",
+        description:
+          "Die meisten meiner Projekte sind öffentlich auf GitHub — schaue gerne in den Code.",
+      },
+    },
+    footer: {
+      copyright: "Alle Rechte vorbehalten.",
+      role: "Softwareentwickler",
+      builtWith: "Gebaut mit Next.js & Tailwind.",
+    },
+  },
 } as const
 
-export type Dictionary = (typeof dictionary)["tr"]
+export type Dictionary = (typeof dictionary)[Locale]

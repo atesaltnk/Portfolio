@@ -168,7 +168,7 @@ export function Header() {
               layoutId="lang-toggle"
               initial={false}
               animate={{
-                left: locale === "tr" ? 4 : "calc(50% + 2px)",
+                left: locale === "tr" ? 4 : locale === "en" ? "calc(50% + 2px)" : "calc(100% - 54px)",
                 width: "calc(50% - 6px)",
               }}
               transition={{
@@ -195,6 +195,15 @@ export function Header() {
               )}
             >
               EN
+            </button>
+            <button
+              onClick={() => setLocale("de")}
+              className={cn(
+                "relative z-10 px-3 py-1 text-xs font-medium rounded-full transition-colors",
+                locale === "de" ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              DE
             </button>
           </div>
 
@@ -296,6 +305,15 @@ export function Header() {
                   )}
                 >
                   English
+                </button>
+                <button
+                  onClick={() => setLocale("de")}
+                  className={cn(
+                    "px-4 py-2 text-sm font-medium rounded-full transition-all border",
+                    locale === "de" ? "bg-primary border-primary text-primary-foreground" : "border-border text-muted-foreground"
+                  )}
+                >
+                  Deutsch
                 </button>
               </motion.div>
 
