@@ -163,28 +163,9 @@ export const dictionary = {
         "Ben Ateş Altınkaynak. Ankara merkezli bir yazılım geliştiriciyim.",
       story:
         "Yazılıma problem çözme tutkusuyla başladım ve bu, eksiksiz ürünler geliştirmeye dönüştü. React arayüzlerinden Python araçlarına ve C++ sistem koduna kadar yığının her katmanında çalışıyorum. Temiz, okunabilir ve kalıcı kod yazmaya önem veririm.",
-      values: {
-        title: "Değerlerim",
-        items: [
-          {
-            title: "Netlik",
-            description:
-              "Zekice değil, anlaşılır kod. İyi isimlendirme ve net yapı.",
-          },
-          {
-            title: "Kalite",
-            description:
-              "Detaylara önem veririm; test edilmiş ve sağlam çözümler.",
-          },
-          {
-            title: "Merak",
-            description:
-              "Sürekli yeni teknolojiler öğrenir, kendimi geliştiririm.",
-          },
-        ],
-      },
       stack: {
         title: "Teknolojiler",
+        subtitle: "Projelerimde en sık kullandığım diller, çatılar ve araçlar.",
       },
     },
     processPage: {
@@ -375,28 +356,9 @@ export const dictionary = {
         "I'm Ateş Altınkaynak, a software developer based in Ankara, Türkiye.",
       story:
         "I started programming out of a love for solving problems, and it grew into building complete products. I work across the stack — from React front-ends to Python tooling and C++ systems code. I care about writing code that is clean, readable, and built to last.",
-      values: {
-        title: "My Values",
-        items: [
-          {
-            title: "Clarity",
-            description:
-              "Understandable over clever. Good naming and clear structure.",
-          },
-          {
-            title: "Quality",
-            description:
-              "I sweat the details — tested, robust solutions.",
-          },
-          {
-            title: "Curiosity",
-            description:
-              "I'm always learning new tech and pushing myself further.",
-          },
-        ],
-      },
       stack: {
         title: "Tech Stack",
+        subtitle: "The languages, frameworks, and tools I work with most.",
       },
     },
     processPage: {

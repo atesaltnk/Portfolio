@@ -1,7 +1,6 @@
 "use client"
 
-import { motion, useReducedMotion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { motion, useReducedMotion } from "framer-motion"
 import { ClipboardList, Code2, FlaskConical, Rocket } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import { SectionWrapper, AnimatedItem } from "@/components/section-wrapper"
@@ -9,16 +8,14 @@ import { cn } from "@/lib/utils"
 
 const icons = [ClipboardList, Code2, FlaskConical, Rocket]
 
-function ProcessStep({ 
-  step, 
-  index, 
-  Icon, 
-  isInView 
-}: { 
+function ProcessStep({
+  step,
+  index,
+  Icon
+}: {
   step: { title: string; description: string }
   index: number
   Icon: typeof ClipboardList
-  isInView: boolean
 }) {
   const shouldReduceMotion = useReducedMotion()
 
@@ -26,15 +23,10 @@ function ProcessStep({
     <motion.div
       className="relative flex flex-col items-center text-center"
       initial={shouldReduceMotion ? {} : { opacity: 0, y: 30 }}
-      animate={
-        shouldReduceMotion
-          ? {}
-          : isInView
-            ? { opacity: 1, y: 0 }
-            : { opacity: 0, y: 30 }
-      }
-      transition={{ 
-        duration: 0.5, 
+      whileInView={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{
+        duration: 0.5,
         delay: index * 0.15,
         ease: [0.25, 0.46, 0.45, 0.94],
       }}
@@ -55,15 +47,10 @@ function ProcessStep({
       <motion.div 
         className="hidden lg:flex absolute top-8 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-primary border-4 border-background"
         initial={shouldReduceMotion ? {} : { scale: 0, opacity: 0 }}
-        animate={
-          shouldReduceMotion
-            ? {}
-            : isInView
-              ? { scale: 1, opacity: 1 }
-              : { scale: 0, opacity: 0 }
-        }
-        transition={{ 
-          duration: 0.4, 
+        whileInView={shouldReduceMotion ? {} : { scale: 1, opacity: 1 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{
+          duration: 0.4,
           delay: 0.3 + index * 0.2,
           ease: [0.25, 0.46, 0.45, 0.94],
         }}
@@ -85,8 +72,6 @@ function ProcessStep({
 export function ProcessPreviewSection() {
   const { t } = useLanguage()
   const shouldReduceMotion = useReducedMotion()
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
     <SectionWrapper className="bg-card/30">
@@ -97,19 +82,20 @@ export function ProcessPreviewSection() {
           </h2>
         </AnimatedItem>
 
-        <div ref={ref} className="relative">
+        <div className="relative">
           {/* Background connection line */}
           <div className="hidden lg:block absolute top-8 left-0 right-0 h-px bg-border/50 z-0" />
-          
-          {/* Animated progress line with stroke-dashoffset style */}
+
+          {/* Animated progress line */}
           {!shouldReduceMotion && (
             <motion.div
-              className="hidden lg:block absolute top-8 left-0 h-px bg-primary z-0"
+              className="hidden lg:block absolute top-8 left-0 right-0 h-px bg-primary z-0"
               style={{ originX: 0 }}
               initial={{ scaleX: 0 }}
-              animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-              transition={{ 
-                duration: 1.2, 
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{
+                duration: 1.2,
                 ease: [0.25, 0.46, 0.45, 0.94],
                 delay: 0.3,
               }}
@@ -125,7 +111,6 @@ export function ProcessPreviewSection() {
                   step={step}
                   index={index}
                   Icon={Icon}
-                  isInView={isInView}
                 />
               )
             })}

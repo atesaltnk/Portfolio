@@ -1,7 +1,7 @@
 "use client"
 
-import { motion, useReducedMotion, useInView } from "framer-motion"
-import { useRef, type ReactNode } from "react"
+import { motion, useReducedMotion } from "framer-motion"
+import { type ReactNode } from "react"
 import { cn } from "@/lib/utils"
 import { containerVariants } from "@/lib/motion"
 
@@ -24,13 +24,11 @@ export function SectionWrapper({
   id,
   stagger = "normal" 
 }: SectionWrapperProps) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-80px" })
   const shouldReduceMotion = useReducedMotion()
 
   if (shouldReduceMotion) {
     return (
-      <section id={id} ref={ref} className={cn("py-20 md:py-28", className)}>
+      <section id={id} className={cn("py-20 md:py-28", className)}>
         {children}
       </section>
     )
@@ -39,7 +37,6 @@ export function SectionWrapper({
   return (
     <motion.section
       id={id}
-      ref={ref}
       className={cn("py-20 md:py-28", className)}
       variants={{
         ...containerVariants,
@@ -48,8 +45,8 @@ export function SectionWrapper({
           transition: staggerDelays[stagger],
         },
       }}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      initial={false}
+      animate="visible"
     >
       {children}
     </motion.section>

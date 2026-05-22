@@ -110,52 +110,31 @@ export default function AboutPage() {
             </div>
           </SectionWrapper>
 
-          {/* Values */}
-          <SectionWrapper>
-            <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-8">
-              {t.aboutPage.values.title}
-            </h2>
-
-            <div className="grid md:grid-cols-3 gap-6">
-              {t.aboutPage.values.items.map((value, index) => (
-                <motion.div
-                  key={index}
-                  className="p-6 rounded-xl border border-border/50 bg-card/50 hover:bg-card hover:border-primary/20 transition-all duration-500"
-                  whileHover={shouldReduceMotion ? {} : { y: -4 }}
-                >
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                    <span className="text-primary font-bold">{String(index + 1).padStart(2, "0")}</span>
-                  </div>
-                  <h3 className="font-semibold text-foreground mb-2">{value.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {value.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </SectionWrapper>
-
           {/* Tech Stack */}
           <SectionWrapper>
-            <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-8">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-3">
               {t.aboutPage.stack.title}
             </h2>
+            <p className="text-muted-foreground mb-10 max-w-xl">
+              {t.aboutPage.stack.subtitle}
+            </p>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5">
               {techStack.map(({ name, Icon, color }, index) => (
                 <motion.div
                   key={name}
-                  className="group flex items-center gap-3 rounded-xl border border-border/50 bg-card/50 px-4 py-3.5 transition-colors duration-300 hover:border-primary/30 hover:bg-card"
-                  initial={shouldReduceMotion ? {} : { opacity: 0, y: 12 }}
+                  className="group relative flex flex-col items-center justify-center gap-4 rounded-2xl border border-border/60 bg-card/60 p-6 sm:p-8 text-center transition-colors duration-300 hover:border-primary/40 hover:bg-card"
+                  initial={shouldReduceMotion ? {} : { opacity: 0, y: 14 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.35, delay: index * 0.05, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  whileHover={shouldReduceMotion ? {} : { y: -3 }}
+                  transition={{ duration: 0.4, delay: index * 0.05, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  whileHover={shouldReduceMotion ? {} : { y: -5 }}
                 >
-                  <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-border/40 bg-background/60 transition-transform duration-300 group-hover:scale-110">
-                    <Icon size={22} style={{ color }} aria-hidden />
+                  <span className="flex h-16 w-16 items-center justify-center rounded-2xl border border-border/50 bg-background/70 transition-transform duration-300 group-hover:scale-110">
+                    <Icon size={34} style={{ color }} aria-hidden />
                   </span>
-                  <span className="text-sm font-medium text-foreground">{name}</span>
+                  <span className="text-base font-semibold text-foreground">{name}</span>
+                  <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 glow-green-subtle" />
                 </motion.div>
               ))}
             </div>

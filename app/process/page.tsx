@@ -1,8 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { motion, useReducedMotion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { motion, useReducedMotion } from "framer-motion"
 import { ArrowRight, ClipboardList, Code2, FlaskConical, Rocket, AlertCircle, CheckCircle } from "lucide-react"
 import { Footer } from "@/components/footer"
 
@@ -14,8 +13,6 @@ const icons = [ClipboardList, Code2, FlaskConical, Rocket]
 export default function ProcessPage() {
   const { t } = useLanguage()
   const shouldReduceMotion = useReducedMotion()
-  const timelineRef = useRef(null)
-  const isTimelineInView = useInView(timelineRef, { once: true, margin: "-100px" })
 
   return (
     <>
@@ -41,7 +38,7 @@ export default function ProcessPage() {
 
           {/* Process Steps - Vertical Timeline */}
           <SectionWrapper className="py-12 md:py-16">
-            <div ref={timelineRef} className="relative">
+            <div className="relative">
               {/* Vertical line */}
               <div className="absolute left-6 md:left-8 top-0 bottom-0 w-px bg-border/50" />
 
@@ -50,7 +47,8 @@ export default function ProcessPage() {
                 <motion.div
                   className="absolute left-6 md:left-8 top-0 w-px bg-primary"
                   initial={{ height: "0%" }}
-                  animate={isTimelineInView ? { height: "100%" } : { height: "0%" }}
+                  whileInView={{ height: "100%" }}
+                  viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 2, ease: "easeOut" }}
                 />
               )}
