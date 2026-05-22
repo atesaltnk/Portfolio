@@ -24,9 +24,9 @@ function SplitText({ text, className }: { text: string; className?: string }) {
   const words = normalizeHeadlineSpacing(text).split(" ")
 
   return (
-    <span className={className}>
+    <span className={cn(className)}>
       {words.map((word, i) => (
-        <span key={i} className="inline">
+        <span key={i} className="inline pl-0">
           <span className="inline-block overflow-hidden">
             <motion.span
               className="inline-block"
@@ -182,7 +182,7 @@ export function HeroSection({ repos = [] }: { repos?: Repo[] }) {
             {/* Left: copy */}
             <div className="max-w-xl">
               <motion.h1
-                className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-balance text-foreground"
+                className="font-sans text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-right text-foreground"
                 variants={itemVariants}
                 initial={false}
               >
