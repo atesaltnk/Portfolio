@@ -1,13 +1,17 @@
 import React from "react"
 import type { Metadata, Viewport } from "next"
-import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google"
+import { Inter, Poppins, JetBrains_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { LanguageProvider } from "@/lib/language-context"
 import { ScrollToTop } from "@/components/system/ScrollToTop"
 import "./globals.css"
 
 const _inter = Inter({ subsets: ["latin", "latin-ext"] })
-const _playfair = Playfair_Display({ subsets: ["latin", "latin-ext"] })
+const poppins = Poppins({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
+})
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
@@ -71,7 +75,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${jetbrainsMono.variable} font-sans antialiased bg-background text-foreground relative`}
+        className={`${poppins.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-foreground relative`}
       >
         <LanguageProvider>
           <Header />

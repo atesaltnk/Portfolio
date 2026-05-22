@@ -182,7 +182,7 @@ export function HeroSection({ repos = [] }: { repos?: Repo[] }) {
             {/* Left: copy */}
             <div className="max-w-xl">
               <motion.h1
-                className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-balance text-foreground"
+                className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-balance text-foreground"
                 variants={itemVariants}
                 initial={false}
               >
