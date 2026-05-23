@@ -46,7 +46,7 @@ function SplitText({ text, className }: { text: string; className?: string }) {
               {word}
             </motion.span>
           </span>
-          {i < words.length - 1 && <span aria-hidden>{" "}</span>}
+          {i < words.length - 1 && " "}
         </span>
       ))}
     </span>
