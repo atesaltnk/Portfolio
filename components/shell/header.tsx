@@ -25,13 +25,16 @@ export function Header() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const [scheme, setScheme] = useState<"paper" | "ink">("paper")
+  const [atTop, setAtTop] = useState(true)
   const toggleRef = useRef<HTMLButtonElement>(null)
 
-  // Match the bar to whichever section is currently underneath it.
+  // Match the bar to whichever section is currently underneath it, and keep it
+  // bare (no fill, hairlines or ticker) until the page has actually scrolled.
   useEffect(() => {
     let raf = 0
     const probe = () => {
       raf = 0
+      setAtTop(window.scrollY < 12)
       const hits = document.elementsFromPoint(window.innerWidth / 2, 28)
       const host = hits
         .filter((el) => !el.closest("[data-header]"))
@@ -83,18 +86,20 @@ export function Header() {
       </a>
 
       <header
+        data-top={atTop}
         className={cn(
-          "h-[var(--header-h)] border-b border-line bg-bg/90 text-fg backdrop-blur-md transition-colors duration-500",
-          scheme === "ink" ? "scheme-ink" : "scheme-paper"
+          "group/bar h-[var(--header-h)] border-b text-fg transition-[background-color,border-color,color,backdrop-filter] duration-500",
+          scheme === "ink" ? "scheme-ink" : "scheme-paper",
+          atTop ? "bg-transparent! border-transparent" : "border-line bg-bg/90 backdrop-blur-md"
         )}
       >
-        <div className="frame grid h-full grid-cols-12">
-          <div className="col-span-6 flex items-center px-4 md:col-span-3 md:border-r md:border-line">
+        <div className="frame grid h-full grid-cols-12 transition-colors duration-500 group-data-[top=true]/bar:border-transparent">
+          <div className="col-span-6 flex items-center px-4 transition-colors duration-500 md:col-span-3 md:border-r md:border-line group-data-[top=true]/bar:border-transparent">
             <Link href="/" aria-label="Ateş Altınkaynak — home" data-cursor="Home">
               <Logo />
             </Link>
           </div>
-          <div className="col-span-6 hidden items-center overflow-hidden border-r border-line md:flex">
+          <div className="col-span-6 hidden items-center overflow-hidden border-r border-line transition-[opacity,border-color] duration-500 md:flex group-data-[top=true]/bar:border-transparent group-data-[top=true]/bar:opacity-0">
             <ClockTicker className="w-full" />
           </div>
           <div className="col-span-6 flex items-center justify-end gap-3 pr-16 md:col-span-3">

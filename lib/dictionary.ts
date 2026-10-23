@@ -23,7 +23,6 @@ const en = {
     label: "Igniting",
   },
   hero: {
-    index: "(00) Portfolio — Ed. 2026",
     roles: ["Software Developer", "Full-stack Web", "Systems & C++", "Open Source"],
     tagline: "I build software, end to end.",
     intro:
@@ -41,12 +40,15 @@ const en = {
       since: "First commit",
     },
   },
+  intro: {
+    label: "(01) Hello",
+  },
   manifesto: {
-    label: "(01) Manifesto",
+    label: "(02) Manifesto",
     text: "I build software {end to end} — from pixel-perfect interfaces to low-level C++. I care about {the parts most people skip}: the edge case, the extra millisecond, the name of a variable.",
   },
   work: {
-    label: "(02) Selected work",
+    label: "(03) Selected work",
     kicker: "Selected",
     word: "Work",
     chapter: "Chapter",
@@ -64,7 +66,7 @@ const en = {
     label: "Toolkit",
   },
   capabilities: {
-    label: "(03) Capabilities",
+    label: "(04) Capabilities",
     kicker: "What I",
     word: "Build",
     items: [
@@ -91,7 +93,7 @@ const en = {
     ],
   },
   index: {
-    label: "(04) Index",
+    label: "(05) Index",
     kicker: "Every",
     word: "Repository",
     colProject: "Project",
@@ -104,7 +106,7 @@ const en = {
     count: "repositories",
   },
   contact: {
-    label: "(05) Contact",
+    label: "(06) Contact",
     kicker: "Want to",
     word: "Talk?",
     text: "Internships, collaborations or a project you want built — my inbox is open.",
@@ -268,7 +270,6 @@ const tr: Dictionary = {
     label: "Ateşleniyor",
   },
   hero: {
-    index: "(00) Portfolyo — 2026 Baskısı",
     roles: ["Yazılım Geliştirici", "Full-stack Web", "Sistemler & C++", "Açık Kaynak"],
     tagline: "Uçtan uca yazılım geliştiriyorum.",
     intro:
@@ -286,12 +287,15 @@ const tr: Dictionary = {
       since: "İlk commit",
     },
   },
+  intro: {
+    label: "(01) Merhaba",
+  },
   manifesto: {
-    label: "(01) Manifesto",
+    label: "(02) Manifesto",
     text: "Yazılımı {uçtan uca} geliştiriyorum — piksel hassasiyetindeki arayüzlerden düşük seviyeli C++'a kadar. {Çoğu insanın atladığı kısımlar} benim için önemli: uç durum, fazladan milisaniye, bir değişkenin adı.",
   },
   work: {
-    label: "(02) Seçili işler",
+    label: "(03) Seçili işler",
     kicker: "Seçili",
     word: "İşler",
     chapter: "Bölüm",
@@ -309,7 +313,7 @@ const tr: Dictionary = {
     label: "Araç kutusu",
   },
   capabilities: {
-    label: "(03) Yetkinlikler",
+    label: "(04) Yetkinlikler",
     kicker: "Neler",
     word: "Üretiyorum",
     items: [
@@ -336,7 +340,7 @@ const tr: Dictionary = {
     ],
   },
   index: {
-    label: "(04) Dizin",
+    label: "(05) Dizin",
     kicker: "Bütün",
     word: "Repolar",
     colProject: "Proje",
@@ -349,7 +353,7 @@ const tr: Dictionary = {
     count: "repo",
   },
   contact: {
-    label: "(05) İletişim",
+    label: "(06) İletişim",
     kicker: "Hadi",
     word: "Konuşalım",
     text: "Staj, iş birliği ya da hayata geçirmek istediğin bir proje — gelen kutum açık.",
@@ -511,7 +515,6 @@ const de: Dictionary = {
     label: "Zündung",
   },
   hero: {
-    index: "(00) Portfolio — Ausgabe 2026",
     roles: ["Softwareentwickler", "Full-Stack-Web", "Systeme & C++", "Open Source"],
     tagline: "Ich baue Software – von Anfang bis Ende.",
     intro:
@@ -529,12 +532,15 @@ const de: Dictionary = {
       since: "Erster Commit",
     },
   },
+  intro: {
+    label: "(01) Hallo",
+  },
   manifesto: {
-    label: "(01) Manifest",
+    label: "(02) Manifest",
     text: "Ich baue Software {von Anfang bis Ende} — von pixelgenauen Interfaces bis zu Low-Level-C++. Mir sind {die Teile wichtig, die die meisten überspringen}: der Edge Case, die zusätzliche Millisekunde, der Name einer Variable.",
   },
   work: {
-    label: "(02) Ausgewählte Arbeiten",
+    label: "(03) Ausgewählte Arbeiten",
     kicker: "Ausgewählte",
     word: "Arbeiten",
     chapter: "Kapitel",
@@ -552,7 +558,7 @@ const de: Dictionary = {
     label: "Werkzeugkasten",
   },
   capabilities: {
-    label: "(03) Fähigkeiten",
+    label: "(04) Fähigkeiten",
     kicker: "Was ich",
     word: "Baue",
     items: [
@@ -579,7 +585,7 @@ const de: Dictionary = {
     ],
   },
   index: {
-    label: "(04) Verzeichnis",
+    label: "(05) Verzeichnis",
     kicker: "Jedes",
     word: "Repository",
     colProject: "Projekt",
@@ -592,7 +598,7 @@ const de: Dictionary = {
     count: "Repositories",
   },
   contact: {
-    label: "(05) Kontakt",
+    label: "(06) Kontakt",
     kicker: "Lass uns",
     word: "Reden",
     text: "Praktika, Kooperationen oder ein Projekt, das gebaut werden soll — mein Postfach ist offen.",

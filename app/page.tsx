@@ -1,6 +1,7 @@
 import { getRepos } from "@/lib/github"
 import { buildProjects, featuredProjects, projectStats } from "@/lib/projects"
 import { Hero } from "@/components/home/hero"
+import { Intro } from "@/components/home/intro"
 import { Manifesto } from "@/components/home/manifesto"
 import { PixelDivider } from "@/components/fx/pixel-divider"
 import { Chapters } from "@/components/home/chapters"
@@ -16,7 +17,8 @@ export default async function HomePage() {
 
   return (
     <main>
-      <Hero stats={projectStats(projects)} />
+      <Hero />
+      <Intro stats={projectStats(projects)} />
       <Manifesto />
       <PixelDivider />
       <Chapters projects={featuredProjects(projects)} />

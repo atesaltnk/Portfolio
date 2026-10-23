@@ -289,6 +289,9 @@ html.intro {
     animation-play-state: paused;
   }
 
+  .scroll-cue {
+    animation: scroll-cue 2.2s var(--ease-in-out-quart) infinite;
+  }
   .ember-dot {
     display: inline-block;
     width: 7px;
@@ -415,6 +418,15 @@ html.intro {
     transform: scaleX(1);
   }
 }
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(200%);
+  }
+}
 @keyframes pulse-dot {
   0% {
     box-shadow: 0 0 0 0 rgb(255 77 18 / 0.55);
@@ -464,7 +476,7 @@ html.intro {
 }
 
 /* Calm mode — set from the OS preference or the Motion toggle (see lib/motion-pref.ts). */
-html.reduce-motion :is(.intro-rise, .intro-fade, .intro-clip, .intro-line-x, .enter-fade, .enter-rise, .ember-dot, .marquee-track) {
+html.reduce-motion :is(.intro-rise, .intro-fade, .intro-clip, .intro-line-x, .enter-fade, .enter-rise, .ember-dot, .marquee-track, .scroll-cue) {
   animation: none !important;
 }
 html.reduce-motion .roll-c > span {
