@@ -8,14 +8,9 @@ import { FireWord } from "./fire-word"
 
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties
 
-/**
- * The landing screen: one idea, nothing competing with it. A full-height ink
- * stage, the name burning in its own letters, and four quiet annotations in
- * the corners. Everything else waits for the next section.
- */
-export function Hero() {
+/** Cycles the role label. Kept apart so each scramble tick re-renders only this. */
+function RoleTicker() {
   const { t } = useLanguage()
-  const ref = useRef<HTMLElement>(null)
   const roles = t.hero.roles
   const [roleIndex, setRoleIndex] = useState(0)
   const role = useScramble(roles[roleIndex % roles.length])
@@ -24,6 +19,18 @@ export function Hero() {
     const id = window.setInterval(() => setRoleIndex((i) => (i + 1) % roles.length), 3200)
     return () => window.clearInterval(id)
   }, [roles.length])
+
+  return <span>{role}</span>
+}
+
+/**
+ * The landing screen: one idea, nothing competing with it. A full-height ink
+ * stage, the name burning in its own letters, and four quiet annotations in
+ * the corners. Everything else waits for the next section.
+ */
+export function Hero() {
+  const { t } = useLanguage()
+  const ref = useRef<HTMLElement>(null)
 
   // As the hero leaves, the word drifts up and dims — depth without clutter.
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
@@ -42,7 +49,7 @@ export function Hero() {
       <div className="gutter relative z-20 flex items-start justify-between gap-6 pt-6 md:pt-8">
         <p className="t-label flex items-center gap-2.5 intro-fade" style={d(150)}>
           <span aria-hidden="true" className="size-2 shrink-0 bg-ember" />
-          <span>{role}</span>
+          <RoleTicker />
         </p>
         <p className="t-label flex items-center gap-2.5 text-right intro-fade" style={d(250)}>
           <span aria-hidden="true" className="ember-dot shrink-0" />

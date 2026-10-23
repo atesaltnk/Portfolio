@@ -26,19 +26,33 @@ export function useNow(intervalMs = 1000) {
   return now
 }
 
+// Building an Intl formatter is far slower than using one, and every ticker
+// redraws each second — so make them once per time zone.
+const formatters = new Map<string, { time: Intl.DateTimeFormat; offset: Intl.DateTimeFormat }>()
+
+function formattersFor(tz: string) {
+  let f = formatters.get(tz)
+  if (!f) {
+    f = {
+      time: new Intl.DateTimeFormat("en-GB", {
+        timeZone: tz,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+      }),
+      offset: new Intl.DateTimeFormat("en-US", { timeZone: tz, timeZoneName: "shortOffset" }),
+    }
+    formatters.set(tz, f)
+  }
+  return f
+}
+
 export function formatClock(now: Date | null, tz: string) {
   if (!now) return { time: "--:--:--", offset: "GMT" }
-  const time = new Intl.DateTimeFormat("en-GB", {
-    timeZone: tz,
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: false,
-  }).format(now)
-  const offset =
-    new Intl.DateTimeFormat("en-US", { timeZone: tz, timeZoneName: "shortOffset" })
-      .formatToParts(now)
-      .find((p) => p.type === "timeZoneName")?.value ?? "GMT"
+  const f = formattersFor(tz)
+  const time = f.time.format(now)
+  const offset = f.offset.formatToParts(now).find((p) => p.type === "timeZoneName")?.value ?? "GMT"
   return { time, offset }
 }
 

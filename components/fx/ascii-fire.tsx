@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react"
 import { cn } from "@/lib/utils"
 import { prefersReducedMotion } from "@/lib/motion-pref"
+import { createFireGL, supportsFireGL } from "./fire-gl"
 
 /**
  * Real-time ASCII fire — the classic "doom fire" cellular automaton.
@@ -10,8 +11,9 @@ import { prefersReducedMotion } from "@/lib/motion-pref"
  * Every cell holds a heat value (0–MAX). Each step, heat climbs one row with a
  * random sideways jitter and loses a little energy, so flames lick upwards and
  * die out. Heat maps to a glyph ramp and an ember palette; glyphs are drawn
- * from a pre-rendered atlas, which is far cheaper than fillText per cell.
- * The pointer acts as a torch.
+ * from a pre-rendered atlas, which is far cheaper than fillText per cell — and
+ * where WebGL is available a single shader samples that atlas for every cell
+ * at once (see fire-gl.ts). The pointer acts as a torch.
  */
 
 const MAX = 36
@@ -71,8 +73,17 @@ export function AsciiFire({
   useEffect(() => {
     const canvas = canvasRef.current
     const host = canvas?.parentElement
-    const ctx = canvas?.getContext("2d")
-    if (!canvas || !host || !ctx) return
+    if (!canvas || !host) return
+
+    // Draw on the GPU where possible; the per-cell 2D path is the fallback.
+    const gpu = supportsFireGL()
+      ? createFireGL(canvas, () => {
+          resize()
+          settle()
+        })
+      : null
+    const ctx = gpu ? null : canvas.getContext("2d")
+    if (!gpu && !ctx) return
 
     const reduceMotion = prefersReducedMotion()
     const family =
@@ -88,8 +99,11 @@ export function AsciiFire({
     let atlas: HTMLCanvasElement | null = null
     let raf = 0
     let last = 0
+    let onScreen = true
     let running = true
-    const pointer = { x: -1, y: -1, active: false }
+    // Raw client coordinates; resolved against the canvas once per step rather
+    // than on every pointer event, so moving the mouse never forces layout.
+    const pointer = { x: 0, y: 0, active: false }
 
     const buildAtlas = () => {
       const a = document.createElement("canvas")
@@ -116,11 +130,15 @@ export function AsciiFire({
       canvas.height = Math.max(1, Math.round(rect.height * dpr))
       canvas.style.width = `${rect.width}px`
       canvas.style.height = `${rect.height}px`
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+      ctx?.setTransform(dpr, 0, 0, dpr, 0, 0)
       cols = Math.max(1, Math.ceil(rect.width / cw))
       rows = Math.max(2, Math.ceil(rect.height / ch))
       heat = new Uint8Array(cols * rows)
       atlas = buildAtlas()
+      if (gpu) {
+        gpu.resize(cols, rows)
+        if (atlas) gpu.setAtlas(atlas, cw, ch, dpr)
+      }
     }
 
     const step = () => {
@@ -139,9 +157,12 @@ export function AsciiFire({
       }
 
       // Torch under the pointer.
-      if (pointer.active && litRef.current) {
-        const px = Math.floor(pointer.x / cw)
-        const py = Math.floor(pointer.y / ch)
+      const rect = pointer.active && litRef.current ? host.getBoundingClientRect() : null
+      const lx = rect ? pointer.x - rect.left : -1
+      const ly = rect ? pointer.y - rect.top : -1
+      if (rect && lx >= 0 && ly >= 0 && lx <= rect.width && ly <= rect.height) {
+        const px = Math.floor(lx / cw)
+        const py = Math.floor(ly / ch)
         for (let dy = -1; dy <= 2; dy++) {
           for (let dx = -2; dx <= 2; dx++) {
             const x = px + dx
@@ -172,6 +193,11 @@ export function AsciiFire({
     }
 
     const render = () => {
+      if (gpu) {
+        gpu.draw(heat)
+        return
+      }
+      if (!ctx) return
       const w = canvas.width / dpr
       const h = canvas.height / dpr
       ctx.clearRect(0, 0, w, h)
@@ -215,21 +241,19 @@ export function AsciiFire({
 
     // Only spend frames while the fire is on screen and the tab is visible.
     const io = new IntersectionObserver(([entry]) => {
-      running = entry.isIntersecting && !document.hidden
+      onScreen = entry.isIntersecting
+      running = onScreen && !document.hidden
     })
     io.observe(host)
     const onVisibility = () => {
-      running = !document.hidden
+      running = onScreen && !document.hidden
     }
     document.addEventListener("visibilitychange", onVisibility)
 
     const onPointer = (e: PointerEvent) => {
-      const rect = host.getBoundingClientRect()
-      const x = e.clientX - rect.left
-      const y = e.clientY - rect.top
-      pointer.active = x >= 0 && y >= 0 && x <= rect.width && y <= rect.height
-      pointer.x = x
-      pointer.y = y
+      pointer.active = true
+      pointer.x = e.clientX
+      pointer.y = e.clientY
     }
     const onLeave = () => {
       pointer.active = false

@@ -34,6 +34,7 @@ export function Cursor() {
     const onMove = (e: PointerEvent) => {
       x = e.clientX
       y = e.clientY
+      if (!raf) raf = requestAnimationFrame(loop)
       root.dataset.visible = "true"
       const host = (e.target as Element | null)?.closest?.("[data-cursor]")
       const next = host?.getAttribute("data-cursor") ?? ""
@@ -46,16 +47,21 @@ export function Cursor() {
     const onLeave = () => {
       root.dataset.visible = "false"
     }
+    // Ease towards the pointer, then park — no frames are spent while it rests.
     const loop = () => {
       cx += (x - cx) * 0.2
       cy += (y - cy) * 0.2
+      const settled = Math.abs(x - cx) < 0.1 && Math.abs(y - cy) < 0.1
+      if (settled) {
+        cx = x
+        cy = y
+      }
       root.style.transform = `translate3d(${cx}px, ${cy}px, 0)`
-      raf = requestAnimationFrame(loop)
+      raf = settled ? 0 : requestAnimationFrame(loop)
     }
 
     window.addEventListener("pointermove", onMove, { passive: true })
     document.addEventListener("pointerleave", onLeave)
-    raf = requestAnimationFrame(loop)
     return () => {
       cancelAnimationFrame(raf)
       window.removeEventListener("pointermove", onMove)

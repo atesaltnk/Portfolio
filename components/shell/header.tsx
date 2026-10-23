@@ -28,31 +28,48 @@ export function Header() {
   const [atTop, setAtTop] = useState(true)
   const toggleRef = useRef<HTMLButtonElement>(null)
 
-  // Match the bar to whichever section is currently underneath it, and keep it
-  // bare (no fill, hairlines or ticker) until the page has actually scrolled.
+  // Keep the bar bare (no fill, hairlines or ticker) until the page has
+  // actually scrolled.
   useEffect(() => {
-    let raf = 0
-    const probe = () => {
-      raf = 0
-      setAtTop(window.scrollY < 12)
-      const hits = document.elementsFromPoint(window.innerWidth / 2, 28)
-      const host = hits
-        .filter((el) => !el.closest("[data-header]"))
-        .map((el) => el.closest<HTMLElement>("[data-scheme]"))
-        .find(Boolean)
-      const next = host?.dataset.scheme === "ink" ? "ink" : "paper"
-      setScheme((prev) => (prev === next ? prev : next))
-    }
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(probe)
-    }
-    probe()
+    const onScroll = () => setAtTop(window.scrollY < 12)
+    onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
-    window.addEventListener("resize", onScroll)
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [pathname])
+
+  // Match the bar to whichever section is currently underneath it. A one-pixel
+  // observer strip on the bar's centre line does this without hit-testing the
+  // page on every scroll frame.
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>("[data-scheme]")).filter(
+      (el) => !el.closest("[data-header]")
+    )
+    const under = new Set<Element>()
+    let io: IntersectionObserver | null = null
+
+    const observe = () => {
+      io?.disconnect()
+      under.clear()
+      io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) under.add(entry.target)
+            else under.delete(entry.target)
+          }
+          const host = sections.filter((el) => under.has(el)).pop()
+          const next = host?.dataset.scheme === "ink" ? "ink" : "paper"
+          setScheme((prev) => (prev === next ? prev : next))
+        },
+        { rootMargin: `-28px 0px ${29 - window.innerHeight}px 0px` }
+      )
+      sections.forEach((el) => io?.observe(el))
+    }
+
+    observe()
+    window.addEventListener("resize", observe)
     return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener("scroll", onScroll)
-      window.removeEventListener("resize", onScroll)
+      io?.disconnect()
+      window.removeEventListener("resize", observe)
     }
   }, [pathname])
 
