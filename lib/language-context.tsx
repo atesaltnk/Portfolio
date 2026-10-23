@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, type ReactNode } from "react"
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
 import { dictionary, type Locale, type Dictionary } from "./dictionary"
 
 interface LanguageContextType {
@@ -13,6 +13,11 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [locale, setLocale] = useState<Locale>("en")
+
+  // CSS `text-transform: uppercase` follows the lang attribute (i → İ in Turkish).
+  useEffect(() => {
+    document.documentElement.lang = locale
+  }, [locale])
 
   const handleSetLocale = (newLocale: Locale) => {
     setLocale(newLocale)

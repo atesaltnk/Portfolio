@@ -1,6 +1,6 @@
 // GitHub data layer: fetches public repositories and exposes them as a clean
-// `Repo[]` for the Work section. Runs on the server with ISR caching so the
-// portfolio stays in sync with GitHub without a rebuild.
+// `Repo[]`. Runs on the server with ISR caching so the portfolio stays in sync
+// with GitHub without a rebuild.
 
 export const GITHUB_USERNAME =
   process.env.NEXT_PUBLIC_GITHUB_USERNAME?.trim() || "atesaltnk"
@@ -18,6 +18,7 @@ export interface Repo {
   stars: number
   forks: number
   topics: string[]
+  createdAt: string
   updatedAt: string
   isFork: boolean
 }
@@ -32,13 +33,14 @@ interface GitHubApiRepo {
   stargazers_count: number
   forks_count: number
   topics?: string[]
+  created_at: string
   pushed_at: string
   fork: boolean
   archived: boolean
   private: boolean
 }
 
-// Turn a repo slug like "friday-ai_assistant" into "Friday AI Assistant".
+// Turn a repo slug like "friday-ai_assistant" into "Friday Ai Assistant".
 function humanizeName(name: string): string {
   return name
     .replace(/[-_]+/g, " ")
@@ -48,9 +50,10 @@ function humanizeName(name: string): string {
 }
 
 /**
- * Fetch all public repositories for the configured user.
+ * Fetch all public repositories for the configured user, newest push first.
  * - Cached for 1 hour (ISR) so we stay within GitHub's unauthenticated rate limit.
  * - A `GITHUB_TOKEN` env var, if present, raises the rate limit but is optional.
+ * - Skips the special `<user>/<user>` profile-README repo — it isn't a project.
  * - Returns `[]` on any failure so the UI can degrade gracefully.
  */
 export async function getRepos(): Promise<Repo[]> {
@@ -64,7 +67,7 @@ export async function getRepos(): Promise<Repo[]> {
 
   try {
     const res = await fetch(
-      `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated&type=owner`,
+      `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=pushed&type=owner`,
       { headers, next: { revalidate: 3600 } }
     )
 
@@ -74,7 +77,12 @@ export async function getRepos(): Promise<Repo[]> {
     if (!Array.isArray(data)) return []
 
     return data
-      .filter((r) => !r.private && !r.archived)
+      .filter(
+        (r) =>
+          !r.private &&
+          !r.archived &&
+          r.name.toLowerCase() !== GITHUB_USERNAME.toLowerCase()
+      )
       .map(
         (r): Repo => ({
           id: r.id,
@@ -87,20 +95,18 @@ export async function getRepos(): Promise<Repo[]> {
           stars: r.stargazers_count,
           forks: r.forks_count,
           topics: r.topics ?? [],
+          createdAt: r.created_at,
           updatedAt: r.pushed_at,
           isFork: r.fork,
         })
       )
-      .sort((a, b) => {
-        if (b.stars !== a.stars) return b.stars - a.stars
-        return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
-      })
+      .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
   } catch {
     return []
   }
 }
 
-// Brand colors for the language dot on each card. Falls back to the accent.
+// GitHub linguist colours for the language marker on each row.
 const LANGUAGE_COLORS: Record<string, string> = {
   TypeScript: "#3178c6",
   JavaScript: "#f1e05a",
@@ -124,6 +130,6 @@ const LANGUAGE_COLORS: Record<string, string> = {
 }
 
 export function languageColor(language: string | null): string {
-  if (!language) return "oklch(0.45 0.12 155)"
-  return LANGUAGE_COLORS[language] ?? "oklch(0.45 0.12 155)"
+  if (!language) return "#ff4d12"
+  return LANGUAGE_COLORS[language] ?? "#ff4d12"
 }

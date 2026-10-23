@@ -1,68 +1,103 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
-/* Dark-first theme with Rolex-inspired deep green accent */
+/* ─────────────────────────────────────────────────────────────
+   Tokens — "ateş": paper, ink and one ember accent.
+   ───────────────────────────────────────────────────────────── */
 :root {
-  /* Deep charcoal / near-black backgrounds */
-  --background: oklch(0.12 0.005 260);
-  --foreground: oklch(0.92 0.01 90);
-  
-  /* Layered card surfaces */
-  --card: oklch(0.15 0.005 260);
-  --card-foreground: oklch(0.92 0.01 90);
-  
-  --popover: oklch(0.13 0.005 260);
-  --popover-foreground: oklch(0.92 0.01 90);
-  
-  /* Rolex-inspired deep green for primary actions */
-  --primary: oklch(0.45 0.12 155);
-  --primary-foreground: oklch(0.98 0.005 90);
-  
-  /* Muted charcoal for secondary elements */
-  --secondary: oklch(0.20 0.005 260);
-  --secondary-foreground: oklch(0.85 0.01 90);
-  
-  /* Warm gray muted tones */
-  --muted: oklch(0.18 0.005 260);
-  --muted-foreground: oklch(0.60 0.01 90);
-  
-  /* Subtle accent for hover states */
-  --accent: oklch(0.22 0.008 260);
-  --accent-foreground: oklch(0.92 0.01 90);
-  
-  --destructive: oklch(0.55 0.2 25);
-  --destructive-foreground: oklch(0.98 0.005 90);
-  
-  /* Low-opacity borders for subtle dividers */
-  --border: oklch(0.25 0.005 260);
-  --input: oklch(0.18 0.005 260);
-  --ring: oklch(0.45 0.12 155);
-  
-  /* Chart colors */
-  --chart-1: oklch(0.45 0.12 155);
-  --chart-2: oklch(0.55 0.1 200);
-  --chart-3: oklch(0.50 0.08 260);
-  --chart-4: oklch(0.65 0.15 90);
-  --chart-5: oklch(0.60 0.12 40);
-  
-  --radius: 0.625rem;
-  
-  --sidebar: oklch(0.10 0.005 260);
-  --sidebar-foreground: oklch(0.92 0.01 90);
-  --sidebar-primary: oklch(0.45 0.12 155);
-  --sidebar-primary-foreground: oklch(0.98 0.005 90);
-  --sidebar-accent: oklch(0.18 0.005 260);
-  --sidebar-accent-foreground: oklch(0.92 0.01 90);
-  --sidebar-border: oklch(0.22 0.005 260);
-  --sidebar-ring: oklch(0.45 0.12 155);
+  --paper: #edeae4;
+  --paper-2: #e2ded6;
+  --ink: #0e0d0b;
+  --ink-2: #1b1915;
+  --ember: #ff4d12;
+  --ember-deep: #d13a09;
+
+  --bg: var(--paper);
+  --fg: var(--ink);
+
+  --gutter: clamp(16px, 2.2vw, 32px);
+  --header-h: 56px;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --intro-delay: 0s;
+
+  /* shadcn/ui compatibility */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper-2);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--ember);
+  --primary-foreground: var(--ink);
+  --secondary: var(--paper-2);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-2);
+  --muted-foreground: #5d5a54;
+  --accent: var(--paper-2);
+  --accent-foreground: var(--ink);
+  --destructive: #c4250c;
+  --destructive-foreground: var(--paper);
+  --border: rgb(14 13 11 / 0.16);
+  --input: rgb(14 13 11 / 0.16);
+  --ring: var(--ember);
+  --radius: 0px;
+}
+
+/* Derived tokens are re-declared per scheme so they follow its --fg. */
+:root,
+.scheme-paper,
+.scheme-ink,
+.scheme-ember {
+  --line: color-mix(in oklab, var(--fg) 17%, transparent);
+  --line-strong: color-mix(in oklab, var(--fg) 34%, transparent);
+  --dim: color-mix(in oklab, var(--fg) 62%, transparent);
+  --faint: color-mix(in oklab, var(--fg) 38%, transparent);
+}
+
+.scheme-paper {
+  --bg: var(--paper);
+  --fg: var(--ink);
+  background-color: var(--bg);
+  color: var(--fg);
+}
+.scheme-ink {
+  --bg: var(--ink);
+  --fg: var(--paper);
+  background-color: var(--bg);
+  color: var(--fg);
+}
+.scheme-ember {
+  --bg: var(--ember);
+  --fg: var(--ink);
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+/* First visit: hero choreography waits for the preloader. */
+html.intro {
+  --intro-delay: 1.85s;
 }
 
 @theme inline {
-  --font-sans: 'Inter', 'Inter Fallback', system-ui, sans-serif;
-  --font-serif: var(--font-poppins), 'Poppins', system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "Cascadia Code", Menlo, Consolas, monospace;
+
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ember: var(--ember);
+  --color-ember-deep: var(--ember-deep);
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-dim: var(--dim);
+  --color-faint: var(--faint);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -82,60 +117,359 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-line;
+  }
+  html {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scrollbar-width: thin;
+    scrollbar-color: var(--ember) transparent;
   }
   body {
-    @apply bg-background text-foreground;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-variation-settings: "wdth" 100;
+  }
+  ::selection {
+    background: var(--ember);
+    color: var(--ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ember);
+    outline-offset: 3px;
+  }
+  img {
+    user-select: none;
+  }
+
+  /* Lenis */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
   }
 }
 
-/* Custom utilities for the dark premium aesthetic */
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* ─────────────────────────────────────────────────────────────
+   Type system — Archivo's width axis gives one family two voices.
+   ───────────────────────────────────────────────────────────── */
+@layer components {
+  .font-display {
+    font-family: var(--font-archivo), sans-serif;
+    font-variation-settings: "wdth" 62;
+    font-stretch: 62%;
+    font-weight: 820;
+    text-transform: uppercase;
+    line-height: 0.84;
+    letter-spacing: -0.012em;
   }
-  
-  .glass-panel {
-    background: linear-gradient(
-      135deg,
-      oklch(0.16 0.005 260 / 0.8),
-      oklch(0.12 0.005 260 / 0.6)
-    );
-    backdrop-filter: blur(12px);
-    border: 1px solid oklch(0.30 0.005 260 / 0.3);
+  .t-mega {
+    font-size: clamp(5.5rem, 25vw, 32rem);
+    line-height: 0.74;
+    font-weight: 900;
+    letter-spacing: -0.025em;
   }
-  
-  .glow-green {
-    box-shadow: 0 0 20px oklch(0.45 0.12 155 / 0.3),
-                0 0 40px oklch(0.45 0.12 155 / 0.1);
+  .t-display {
+    font-size: clamp(3.75rem, 12.5vw, 13rem);
+    line-height: 0.8;
   }
-  
-  .glow-green-subtle {
-    box-shadow: 0 0 15px oklch(0.45 0.12 155 / 0.2);
+  .t-h1 {
+    font-size: clamp(2.6rem, 6vw, 6rem);
+    line-height: 0.86;
   }
-  
-  .noise-bg {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  .t-h2 {
+    font-size: clamp(1.9rem, 3.4vw, 3.25rem);
+    line-height: 0.9;
   }
+  .t-h3 {
+    font-size: clamp(1.35rem, 1.9vw, 1.8rem);
+    line-height: 1;
+  }
+  .t-lead {
+    font-size: clamp(1.05rem, 1.2vw, 1.22rem);
+    line-height: 1.5;
+  }
+  .t-label {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+  .t-mono {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.01em;
+  }
+
+  .gutter {
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+  /* Reveal mask for display type, padded so diacritics (İ, Ü, Ş, Ğ) aren't clipped. */
+  .mask-y {
+    overflow: hidden;
+    padding-block: 0.16em 0.1em;
+    margin-block: -0.16em -0.1em;
+  }
+  /* The hairline frame every section sits in; its edges line up with the grid overlay. */
+  .frame {
+    margin-inline: var(--gutter);
+    border-inline: 1px solid var(--line);
+  }
+  .cell {
+    padding: clamp(14px, 1.35vw, 22px);
+  }
+
+  /* Per-letter roll on hover (adapted from motion-primitives' TextRoll, MIT). */
+  .roll {
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .roll-c {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    padding-block: 0.18em 0.12em;
+    margin-block: -0.18em -0.12em;
+  }
+  .roll-c > span {
+    display: block;
+    transition: transform 0.55s var(--ease-out-expo);
+    transition-delay: calc(var(--i) * 14ms);
+  }
+  .roll-c > span:last-child {
+    position: absolute;
+    inset: 0.18em 0 auto 0;
+    transform: translateY(110%);
+  }
+  :where(a, button, [data-roll]):is(:hover, :focus-visible) .roll-c > span:first-child {
+    transform: translateY(-110%);
+  }
+  :where(a, button, [data-roll]):is(:hover, :focus-visible) .roll-c > span:last-child {
+    transform: translateY(0);
+  }
+
+  /* Infinite marquee: two identical tracks, each slides one full width. */
+  .marquee {
+    display: flex;
+    overflow: hidden;
+    --marquee-duration: 40s;
+  }
+  .marquee-track {
+    display: flex;
+    flex-shrink: 0;
+    min-width: 100%;
+    animation: marquee var(--marquee-duration) linear infinite;
+  }
+  .marquee[data-pausable]:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .ember-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: var(--ember);
+    animation: pulse-dot 2.2s ease-out infinite;
+  }
+
+  /* Intro choreography — pure CSS so content never depends on JS to appear. */
+  .intro-rise {
+    animation: rise 1.15s var(--ease-out-expo) both;
+    animation-delay: calc(var(--intro-delay) + var(--d, 0ms));
+  }
+  .intro-fade {
+    animation: fade-up 0.9s var(--ease-out-expo) both;
+    animation-delay: calc(var(--intro-delay) + var(--d, 0ms));
+  }
+  .intro-clip {
+    animation: clip-in 1.1s var(--ease-in-out-quart) both;
+    animation-delay: calc(var(--intro-delay) + var(--d, 0ms));
+  }
+  .intro-line-x {
+    transform-origin: left center;
+    animation: draw-x 1.2s var(--ease-in-out-quart) both;
+    animation-delay: calc(var(--intro-delay) + var(--d, 0ms));
+  }
+  .enter-fade {
+    animation: fade-up 0.9s var(--ease-out-expo) both;
+    animation-delay: var(--d, 0ms);
+  }
+  .enter-rise {
+    animation: rise 1.05s var(--ease-out-expo) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  /* Column grid overlay — press G to inspect. */
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    padding-inline: var(--gutter);
+    pointer-events: none;
+    mix-blend-mode: difference;
+    opacity: 0.075;
+    transition: opacity 0.4s ease;
+  }
+  .grid-overlay > i {
+    border-left: 1px solid #fff;
+  }
+  .grid-overlay > i:last-child {
+    border-right: 1px solid #fff;
+  }
+  html.show-grid .grid-overlay {
+    opacity: 0.4;
+  }
+  @media (max-width: 767px) {
+    .grid-overlay {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .grid-overlay > i:nth-child(n + 5) {
+      display: none;
+    }
+    .grid-overlay > i:nth-child(4) {
+      border-right: 1px solid #fff;
+    }
+  }
+
+  /* Preloader: only on first visit (html.intro is set by an inline script).
+     Without JS it never shows; if JS stalls, CSS hides it anyway. */
+  .preloader {
+    display: none;
+  }
+  html.intro .preloader {
+    display: flex;
+    animation: preloader-failsafe 0.01s 4.5s forwards;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-100%);
+  }
+}
+@keyframes rise {
+  from {
+    transform: translateY(112%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes clip-in {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes draw-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes pulse-dot {
+  0% {
+    box-shadow: 0 0 0 0 rgb(255 77 18 / 0.55);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 7px rgb(255 77 18 / 0);
+  }
+}
+@keyframes preloader-failsafe {
+  to {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* Scroll-driven reveals (native CSS). Where unsupported, content is simply visible. */
+@supports (animation-timeline: view()) {
+  html:not(.reduce-motion) .sd-reveal {
+    view-timeline-name: --reveal;
+    view-timeline-axis: block;
+  }
+  html:not(.reduce-motion) .sd-reveal :is(.sd-rise, .sd-fade, .sd-clip, .sd-line) {
+    animation-duration: auto;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+    animation-timeline: --reveal;
+  }
+  html:not(.reduce-motion) .sd-reveal .sd-rise {
+    animation-name: rise;
+    animation-range: entry 0% cover 32%;
+  }
+  html:not(.reduce-motion) .sd-reveal .sd-fade {
+    animation-name: fade-up;
+    animation-range: entry 10% cover 30%;
+  }
+  html:not(.reduce-motion) .sd-reveal .sd-clip {
+    animation-name: clip-in;
+    animation-range: entry 0% cover 38%;
+  }
+  html:not(.reduce-motion) .sd-reveal .sd-line {
+    transform-origin: left center;
+    animation-name: draw-x;
+    animation-range: entry 0% cover 45%;
+  }
+}
+
+/* Calm mode — set from the OS preference or the Motion toggle (see lib/motion-pref.ts). */
+html.reduce-motion :is(.intro-rise, .intro-fade, .intro-clip, .intro-line-x, .enter-fade, .enter-rise, .ember-dot, .marquee-track) {
+  animation: none !important;
+}
+html.reduce-motion .roll-c > span {
+  transition: none;
+}
+html.reduce-motion .preloader {
+  display: none !important;
 }

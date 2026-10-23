@@ -1,589 +1,736 @@
 export type Locale = "tr" | "en" | "de"
 
-export const dictionary = {
-  tr: {
-    nav: {
-      home: "Ana Sayfa",
-      work: "Projeler",
-      about: "Hakkımda",
-      process: "Süreç",
-      contact: "İletişim",
-    },
-    hero: {
-      headline: "Uçtan uca yazılım geliştiriyorum.",
-      subheadline:
-        "Ben Ateş — web uygulamaları, arka uç sistemleri ve sistem programlama üzerine çalışan bir yazılım geliştiriciyim. Fikirleri temiz ve güvenilir koda dönüştürüyorum.",
-      primaryCta: "İletişime Geç",
-      secondaryCta: "Projelerimi Gör",
-      statusLine: "Staj ve iş birliklerine açığım.",
-    },
-    about: {
-      title: "Merhaba, ben Ateş.",
-      paragraph1:
-        "Karmaşık problemleri temiz ve sürdürülebilir koda dönüştürmeyi seven bir yazılım geliştiriciyim — ister full-stack bir web uygulaması, ister bir arka uç servisi, ister düşük seviye bir sistem projesi olsun.",
-      paragraph2:
-        "Projelerimin çoğunu açık kaynak olarak geliştiriyorum. GitHub'daki her repo, baştan sona tasarlayıp geliştirdiğim ve yayına aldığım bir iş.",
-      whatYouGet: "Ne Üzerine Çalışıyorum",
-      bullets: [
-        "Full-stack web geliştirme",
-        "Arka uç & API'ler",
-        "Sistemler & araçlar",
-        "Temiz, test edilmiş, belgelenmiş kod",
-      ],
-    },
-    work: {
-      title: "Projelerim",
-      featuredTitle: "Öne Çıkan Projeler",
-      subtitle:
-        "Açık kaynak projelerim, doğrudan GitHub'dan otomatik olarak güncelleniyor.",
-      viewOnGitHub: "GitHub'da Gör",
-      liveDemo: "Canlı",
-      updated: "Güncellendi",
-      allFilter: "Tümü",
-      noRepos:
-        "Projeler şu anda yüklenemedi. GitHub profilime göz atabilirsin.",
-      viewProfile: "GitHub profilim",
-    },
-    capabilities: {
-      title: "Neler Yapıyorum",
-      techNote: "Çoğunlukla TypeScript, Python ve C++ ile çalışıyorum.",
-      items: [
-        {
-          title: "Web Uygulamaları",
-          description:
-            "Next.js ve React ile modern, hızlı ve responsive web uygulamaları.",
-        },
-        {
-          title: "Arka Uç & API'ler",
-          description:
-            "Ölçeklenebilir arka uç servisleri ve iyi tasarlanmış REST API'ler.",
-        },
-        {
-          title: "Sistem Programlama",
-          description:
-            "C++ ile performans odaklı, düşük seviye uygulamalar ve araçlar.",
-        },
-        {
-          title: "Otomasyon & Araçlar",
-          description:
-            "Tekrarlayan işleri otomatikleştiren scriptler ve geliştirici araçları.",
-        },
-        {
-          title: "Arayüz Mühendisliği",
-          description:
-            "Erişilebilir, cilalı ve akıcı animasyonlara sahip kullanıcı arayüzleri.",
-        },
-      ],
-    },
-    process: {
-      title: "Nasıl Çalışıyorum",
-      boundary:
-        "Her projeyi açık kaynak olarak, belgeleyerek geliştiriyorum.",
-      steps: [
-        {
-          title: "Planla",
-          description:
-            "Problemi ve gereksinimleri netleştirir, mimariyi tasarlarım.",
-        },
-        {
-          title: "Geliştir",
-          description:
-            "Temiz, modüler kodla özellikleri hayata geçiririm.",
-        },
-        {
-          title: "Test Et",
-          description:
-            "Kenar durumları test eder, hataları ayıklar ve iyileştiririm.",
-        },
-        {
-          title: "Yayınla",
-          description:
-            "Yayına alır, belgeler ve projeyi sürdürürüm.",
-        },
-      ],
-    },
-    faq: {
-      title: "Sıkça Sorulan Sorular",
-      items: [
-        {
-          question: "Projelerin açık kaynak mı?",
-          answer:
-            "Evet, çalışmalarımın çoğu GitHub'da herkese açık. Bu sitedeki Projeler bölümü doğrudan repolarımdan otomatik olarak oluşturuluyor.",
-        },
-        {
-          question: "Hangi teknolojileri kullanıyorsun?",
-          answer:
-            "Web tarafında ağırlıklı olarak TypeScript ve React/Next.js, araç ve otomasyonlar için Python, sistem işleri için C++ kullanıyorum.",
-        },
-        {
-          question: "Çalışmaya müsait misin?",
-          answer:
-            "Staj, freelance projeler ve iş birliklerine açığım. Bana ulaşmanın en iyi yolu iletişim sayfası.",
-        },
-        {
-          question: "Bir projenin kodunu görebilir miyim?",
-          answer:
-            "Kesinlikle. Her proje kartı doğrudan ilgili GitHub reposuna bağlanıyor.",
-        },
-        {
-          question: "Nerede yaşıyorsun?",
-          answer:
-            "Ankara, Türkiye'de yaşıyorum ve uzaktan çalışmaya tamamen açığım.",
-        },
-      ],
-    },
-    finalCta: {
-      text: "Bir fikrin mi var, ya da birlikte çalışmak mı istiyorsun? Bana yaz.",
-      button: "İletişime Geç",
-    },
-    form: {
-      title: "İletişime Geç",
-      subtitle:
-        "Bir soru, bir fırsat ya da sadece merhaba demek için — formu doldur, en kısa sürede geri döneyim.",
-      fullName: "Ad Soyad",
-      email: "E-posta",
-      subject: "Konu",
-      subjectPlaceholder: "Ne hakkında?",
-      message: "Mesaj",
-      messagePlaceholder: "Mesajını buraya yaz...",
-      submit: "Mesaj Gönder",
-      sending: "Gönderiliyor...",
-      successTitle: "Teşekkürler!",
-      successMessage:
-        "Mesajın için teşekkürler. En kısa sürede sana geri döneceğim.",
-      orReachMe: "Ya da doğrudan ulaş:",
-      errors: {
-        required: "Bu alan zorunludur",
-        email: "Geçerli bir e-posta adresi giriniz",
-      },
-    },
-    aboutPage: {
-      title: "Hakkımda",
-      intro:
-        "Ben Ateş Altınkaynak. Ankara merkezli bir yazılım geliştiriciyim.",
-      story:
-        "Yazılıma problem çözme tutkusuyla başladım ve bu, eksiksiz ürünler geliştirmeye dönüştü. React arayüzlerinden Python araçlarına ve C++ sistem koduna kadar yığının her katmanında çalışıyorum. Temiz, okunabilir ve kalıcı kod yazmaya önem veririm.",
-      stack: {
-        title: "Teknolojiler",
-        subtitle: "Projelerimde en sık kullandığım diller, çatılar ve araçlar.",
-      },
-    },
-    processPage: {
-      title: "Nasıl Çalışıyorum",
-      intro:
-        "Her projeyi sistematik ve şeffaf bir şekilde geliştiriyorum. İşte adım adım süreç:",
-      collaboration: {
-        title: "Birlikte Çalışırken",
-        items: [
-          "Net hedefler ve açık iletişim",
-          "Düzenli ilerleme güncellemeleri",
-          "Sürüm kontrolü ve temiz commit geçmişi",
-          "Belgelenmiş, devredilebilir kod",
-        ],
-      },
-      quality: {
-        title: "Kod Kalitesi",
-        description:
-          "Kodun okunabilir, test edilebilir ve sürdürülebilir olmasına özen gösteririm.",
-      },
-      openSource: {
-        title: "Açık Kaynak",
-        description:
-          "Projelerimin çoğu GitHub'da herkese açık — kodu incelemekten çekinme.",
-      },
-    },
-    footer: {
-      copyright: "Tüm hakları saklıdır.",
-      role: "Yazılım Geliştirici",
-      builtWith: "Next.js & Tailwind ile geliştirildi.",
-    },
-  },
-  en: {
-    nav: {
-      home: "Home",
-      work: "Projects",
-      about: "About",
-      process: "Process",
-      contact: "Contact",
-    },
-    hero: {
-      headline: "I build software,end to end.",
-      subheadline:
-        "I'm Ateş — a software developer working across web apps, backends, and systems programming. I turn ideas into clean, reliable code.",
-      primaryCta: "Get in Contact",
-      secondaryCta: "View My Work",
-      statusLine: "Open to internships and collaboration.",
-    },
-    about: {
-      title: "Hi, I'm Ateş.",
-      paragraph1:
-        "I'm a software developer who enjoys turning complex problems into clean, maintainable code — whether that's a full-stack web app, a backend service, or a low-level systems project.",
-      paragraph2:
-        "I build most of my projects in the open. Every repository on my GitHub is something I designed, built, and shipped end to end.",
-      whatYouGet: "What I Work On",
-      bullets: [
-        "Full-stack web development",
-        "Backends & APIs",
-        "Systems & tooling",
-        "Clean, tested, documented code",
-      ],
-    },
-    work: {
-      title: "My Projects",
-      featuredTitle: "Featured Projects",
-      subtitle:
-        "My open-source projects, synced automatically straight from GitHub.",
-      viewOnGitHub: "View on GitHub",
-      liveDemo: "Live",
-      updated: "Updated",
-      allFilter: "All",
-      noRepos:
-        "Projects couldn't be loaded right now. You can check out my GitHub profile.",
-      viewProfile: "My GitHub profile",
-    },
-    capabilities: {
-      title: "What I Do",
-      techNote: "I mostly work with TypeScript, Python, and C++.",
-      items: [
-        {
-          title: "Web Applications",
-          description:
-            "Modern, fast, and responsive web apps built with Next.js and React.",
-        },
-        {
-          title: "Backends & APIs",
-          description:
-            "Scalable backend services and well-designed REST APIs.",
-        },
-        {
-          title: "Systems Programming",
-          description:
-            "Performance-focused, low-level applications and tools in C++.",
-        },
-        {
-          title: "Automation & Tools",
-          description:
-            "Scripts and developer tools that automate the repetitive work.",
-        },
-        {
-          title: "UI Engineering",
-          description:
-            "Accessible, polished interfaces with smooth, purposeful animation.",
-        },
-      ],
-    },
-    process: {
-      title: "How I Work",
-      boundary: "I build each project in the open, with documentation.",
-      steps: [
-        {
-          title: "Plan",
-          description:
-            "Clarify the problem and requirements, then design the architecture.",
-        },
-        {
-          title: "Build",
-          description: "Implement the features with clean, modular code.",
-        },
-        {
-          title: "Test",
-          description: "Cover the edge cases, iron out bugs, and refine.",
-        },
-        {
-          title: "Ship",
-          description: "Deploy, document, and maintain the project.",
-        },
-      ],
-    },
-    faq: {
-      title: "Frequently Asked Questions",
-      items: [
-        {
-          question: "Are your projects open source?",
-          answer:
-            "Yes — most of my work is public on GitHub. The Projects section on this site is generated directly from my repositories.",
-        },
-        {
-          question: "What technologies do you use?",
-          answer:
-            "Mainly TypeScript and React/Next.js on the web, Python for tooling and automation, and C++ for systems work.",
-        },
-        {
-          question: "Are you available for work?",
-          answer:
-            "I'm open to internships, freelance projects, and collaboration. The best way to reach me is the contact page.",
-        },
-        {
-          question: "Can I see the code behind a project?",
-          answer:
-            "Absolutely. Every project card links straight to its GitHub repository.",
-        },
-        {
-          question: "Where are you based?",
-          answer:
-            "I'm based in Ankara, Türkiye, and fully open to working remotely.",
-        },
-      ],
-    },
-    finalCta: {
-      text: "Have an idea, or want to work together? Drop me a message.",
-      button: "Get in Contact",
-    },
-    form: {
-      title: "Get in Contact",
-      subtitle:
-        "A question, an opportunity, or just to say hi — fill out the form and I'll get back to you soon.",
-      fullName: "Full Name",
-      email: "Email",
-      subject: "Subject",
-      subjectPlaceholder: "What's it about?",
-      message: "Message",
-      messagePlaceholder: "Write your message here...",
-      submit: "Send Message",
-      sending: "Sending...",
-      successTitle: "Thank you!",
-      successMessage:
-        "Thanks for your message. I'll get back to you as soon as I can.",
-      orReachMe: "Or reach me directly:",
-      errors: {
-        required: "This field is required",
-        email: "Please enter a valid email address",
-      },
-    },
-    aboutPage: {
-      title: "About Me",
-      intro:
-        "I'm Ateş Altınkaynak, a software developer based in Ankara, Türkiye.",
-      story:
-        "I started programming out of a love for solving problems, and it grew into building complete products. I work across the stack — from React front-ends to Python tooling and C++ systems code. I care about writing code that is clean, readable, and built to last.",
-      stack: {
-        title: "Tech Stack",
-        subtitle: "The languages, frameworks, and tools I work with most.",
-      },
-    },
-    processPage: {
-      title: "How I Work",
-      intro:
-        "I approach every project methodically and transparently. Here's the step-by-step process:",
-      collaboration: {
-        title: "Working Together",
-        items: [
-          "Clear goals and open communication",
-          "Regular progress updates",
-          "Version control with a clean commit history",
-          "Documented, hand-off-ready code",
-        ],
-      },
-      quality: {
-        title: "Code Quality",
-        description:
-          "I keep code readable, testable, and maintainable.",
-      },
-      openSource: {
-        title: "Open Source",
-        description:
-          "Most of my projects are public on GitHub — feel free to dig into the code.",
-      },
-    },
-    footer: {
-      copyright: "All rights reserved.",
-      role: "Software Developer",
-      builtWith: "Built with Next.js & Tailwind.",
-    },
-  },
-  de: {
-    nav: {
-      home: "Startseite",
-      work: "Projekte",
-      about: "Über mich",
-      process: "Prozess",
-      contact: "Kontakt",
-    },
-    hero: {
-      headline: "Ich baue Software von vorne bis hinten.",
-      subheadline:
-        "Ich bin Ateş — ein Softwareentwickler, der an Web-Apps, Backends und Systemprogrammierung arbeitet. Ich verwandle Ideen in sauberen, zuverlässigen Code.",
-      primaryCta: "Kontakt",
-      secondaryCta: "Meine Projekte",
-      statusLine: "Offen für Praktika und Zusammenarbeit.",
-    },
-    about: {
-      title: "Hallo, ich bin Ateş.",
-      paragraph1:
-        "Ich bin ein Softwareentwickler, der gerne komplexe Probleme in sauberen, wartbaren Code verwandelt — ob das eine Full-Stack-Web-App, ein Backend-Service oder ein Low-Level-Systemprojekt ist.",
-      paragraph2:
-        "Ich entwickle die meisten meiner Projekte offen. Jedes Repository auf meinem GitHub ist etwas, das ich von Anfang bis Ende selbst designed, gebaut und veröffentlicht habe.",
-      whatYouGet: "Woran ich arbeite",
-      bullets: [
-        "Full-Stack-Webentwicklung",
-        "Backends & APIs",
-        "Systeme & Tools",
-        "Sauberer, getesteter, dokumentierter Code",
-      ],
-    },
-    work: {
-      title: "Meine Projekte",
-      featuredTitle: "Ausgewählte Projekte",
-      subtitle:
-        "Meine Open-Source-Projekte, automatisch direkt von GitHub synchronisiert.",
-      viewOnGitHub: "Auf GitHub anschauen",
-      liveDemo: "Live",
-      updated: "Aktualisiert",
-      allFilter: "Alle",
-      noRepos:
-        "Projekte konnten nicht geladen werden. Schaue auf mein GitHub-Profil.",
-      viewProfile: "Mein GitHub-Profil",
-    },
-    capabilities: {
-      title: "Was ich mache",
-      techNote: "Ich arbeite hauptsächlich mit TypeScript, Python und C++.",
-      items: [
-        {
-          title: "Web-Anwendungen",
-          description:
-            "Moderne, schnelle und responsive Web-Apps mit Next.js und React.",
-        },
-        {
-          title: "Backends & APIs",
-          description:
-            "Skalierbare Backend-Services und gut gestaltete REST-APIs.",
-        },
-        {
-          title: "Systemprogrammierung",
-          description:
-            "Leistungsorientierte, Low-Level-Anwendungen und Tools in C++.",
-        },
-        {
-          title: "Automatisierung & Tools",
-          description:
-            "Skripte und Entwickler-Tools, die repetitive Arbeit automatisieren.",
-        },
-        {
-          title: "UI-Engineering",
-          description:
-            "Zugängliche, polierte Schnittstellen mit sanfter, zweckvoller Animation.",
-        },
-      ],
-    },
-    process: {
-      title: "Wie ich arbeite",
-      boundary: "Ich baue jedes Projekt offen, mit Dokumentation.",
-      steps: [
-        {
-          title: "Planen",
-          description:
-            "Klären Sie das Problem und die Anforderungen, dann entwerfen Sie die Architektur.",
-        },
-        {
-          title: "Bauen",
-          description: "Implementiere die Features mit sauberm, modularem Code.",
-        },
-        {
-          title: "Testen",
-          description: "Abdecken der Edge Cases, Beheben von Bugs und Verfeinerung.",
-        },
-        {
-          title: "Versand",
-          description: "Bereitstellen, dokumentieren und Wartung des Projekts.",
-        },
-      ],
-    },
-    faq: {
-      title: "Häufig gestellte Fragen",
-      items: [
-        {
-          question: "Sind deine Projekte Open Source?",
-          answer:
-            "Ja — die meisten meiner Arbeiten sind öffentlich auf GitHub. Der Bereich Projekte auf dieser Website wird direkt aus meinen Repositories generiert.",
-        },
-        {
-          question: "Welche Technologien verwendest du?",
-          answer:
-            "Hauptsächlich TypeScript und React/Next.js im Web, Python für Tools und Automatisierung, und C++ für Systemarbeiten.",
-        },
-        {
-          question: "Stehst du zur Verfügung?",
-          answer:
-            "Ich bin offen für Praktika, Freiberufler-Projekte und Zusammenarbeit. Der beste Weg, mich zu erreichen, ist die Kontaktseite.",
-        },
-        {
-          question: "Kann ich den Code hinter einem Projekt sehen?",
-          answer:
-            "Absolut. Jede Projektkarte verlinkt direkt auf sein GitHub-Repository.",
-        },
-        {
-          question: "Wo bist du basiert?",
-          answer:
-            "Ich bin in Ankara, Türkiye ansässig und vollständig offen für Fernarbeit.",
-        },
-      ],
-    },
-    finalCta: {
-      text: "Hast du eine Idee oder möchtest zusammenarbeiten? Schreib mir eine Nachricht.",
-      button: "Kontakt",
-    },
-    form: {
-      title: "Kontakt",
-      subtitle:
-        "Eine Frage, eine Gelegenheit oder einfach nur Hallo — fülle das Formular aus und ich antworte dir so bald wie möglich.",
-      fullName: "Vollständiger Name",
-      email: "E-Mail",
-      subject: "Betreff",
-      subjectPlaceholder: "Worum geht es?",
-      message: "Nachricht",
-      messagePlaceholder: "Schreibe deine Nachricht hier...",
-      submit: "Nachricht senden",
-      sending: "Wird gesendet...",
-      successTitle: "Danke!",
-      successMessage:
-        "Danke für deine Nachricht. Ich antworte dir so schnell wie möglich.",
-      orReachMe: "Oder kontaktiere mich direkt:",
-      errors: {
-        required: "Dieses Feld ist erforderlich",
-        email: "Bitte gib eine gültige E-Mail-Adresse ein",
-      },
-    },
-    aboutPage: {
-      title: "Über mich",
-      intro:
-        "Ich bin Ateş Altınkaynak, ein Softwareentwickler mit Sitz in Ankara, Türkiye.",
-      story:
-        "Ich bin aus Liebe zur Problemlösung mit dem Programmieren angefangen, und es ist zu vollständigen Produkten geworden. Ich arbeite über den ganzen Stack — von React-Frontend über Python-Tools bis zum C++-Systemcode. Mir ist wichtig, Code zu schreiben, der sauber, lesbar und langlebig ist.",
-      stack: {
-        title: "Tech Stack",
-        subtitle: "Die Sprachen, Frameworks und Tools, mit denen ich am meisten arbeite.",
-      },
-    },
-    processPage: {
-      title: "Wie ich arbeite",
-      intro:
-        "Ich gehe jedes Projekt methodisch und transparent an. Hier ist der Schritt-für-Schritt-Prozess:",
-      collaboration: {
-        title: "Zusammenarbeit",
-        items: [
-          "Klare Ziele und offene Kommunikation",
-          "Regelmäßige Fortschrittsupdates",
-          "Versionskontrolle mit sauberer Commit-Historie",
-          "Dokumentierter, übergabefertiger Code",
-        ],
-      },
-      quality: {
-        title: "Codequalität",
-        description:
-          "Ich halte den Code lesbar, testbar und wartbar.",
-      },
-      openSource: {
-        title: "Open Source",
-        description:
-          "Die meisten meiner Projekte sind öffentlich auf GitHub — schaue gerne in den Code.",
-      },
-    },
-    footer: {
-      copyright: "Alle Rechte vorbehalten.",
-      role: "Softwareentwickler",
-      builtWith: "Gebaut mit Next.js & Tailwind.",
-    },
-  },
-} as const
+export const LOCALES: readonly Locale[] = ["tr", "en", "de"]
 
-export type Dictionary = (typeof dictionary)[Locale]
+const en = {
+  meta: {
+    role: "Software Developer",
+    location: "Ankara, TR",
+    coords: "39.93°N 32.86°E",
+    available: "Open to internships & collaboration",
+  },
+  nav: {
+    home: "Home",
+    work: "Work",
+    about: "About",
+    process: "Process",
+    contact: "Contact",
+    menu: "Menu",
+    close: "Close",
+    skip: "Skip to content",
+  },
+  preloader: {
+    label: "Igniting",
+  },
+  hero: {
+    index: "(00) Portfolio — Ed. 2026",
+    roles: ["Software Developer", "Full-stack Web", "Systems & C++", "Open Source"],
+    tagline: "I build software, end to end.",
+    intro:
+      "Interfaces in TypeScript, services on Node and Postgres, systems in C++. Most of it is open source — and this page rebuilds itself from my GitHub every hour.",
+    primaryCta: "Get in contact",
+    secondaryCta: "Selected work",
+    figure: "Fig. 01 — Ankara",
+    wordNote: "ateş /a·teʃ/ — Turkish for “fire”.",
+    fireNote: "Doom-fire algorithm · ASCII · real time",
+    scroll: "Scroll",
+    stats: {
+      repos: "Public repos",
+      languages: "Languages",
+      live: "Live deployments",
+      since: "First commit",
+    },
+  },
+  manifesto: {
+    label: "(01) Manifesto",
+    text: "I build software {end to end} — from pixel-perfect interfaces to low-level C++. I care about {the parts most people skip}: the edge case, the extra millisecond, the name of a variable.",
+  },
+  work: {
+    label: "(02) Selected work",
+    kicker: "Selected",
+    word: "Work",
+    chapter: "Chapter",
+    skip: "Skip",
+    year: "Year",
+    stack: "Stack",
+    status: "Status",
+    live: "Live",
+    openSource: "Open source",
+    viewLive: "Live site",
+    source: "Source",
+    allWork: "All work",
+  },
+  toolkit: {
+    label: "Toolkit",
+  },
+  capabilities: {
+    label: "(03) Capabilities",
+    kicker: "What I",
+    word: "Build",
+    items: [
+      {
+        title: "Web applications",
+        tags: ["Next.js", "React", "TypeScript", "Tailwind", "Motion"],
+        blurb: "Fast, accessible interfaces with motion that means something.",
+      },
+      {
+        title: "Backends & data",
+        tags: ["Node.js", "PostgreSQL", "Drizzle", "Prisma", "SSE"],
+        blurb: "APIs, schemas and real-time pipelines that stay boring in production.",
+      },
+      {
+        title: "Systems & C++",
+        tags: ["C++", "Data structures", "Networking", "Performance"],
+        blurb: "Low-level code where memory, threads and latency matter.",
+      },
+      {
+        title: "Tooling & automation",
+        tags: ["Python", "CLI", "Scripting", "CI/CD"],
+        blurb: "Scripts and tools that remove the repetitive parts of the job.",
+      },
+    ],
+  },
+  index: {
+    label: "(04) Index",
+    kicker: "Every",
+    word: "Repository",
+    colProject: "Project",
+    colStack: "Language",
+    colUpdated: "Updated",
+    viewAll: "All work",
+    github: "GitHub profile",
+    empty: "GitHub didn't answer just now — the full list lives on my profile.",
+    filterAll: "All",
+    count: "repositories",
+  },
+  contact: {
+    label: "(05) Contact",
+    kicker: "Want to",
+    word: "Talk?",
+    text: "Internships, collaborations or a project you want built — my inbox is open.",
+    cta: "Get in contact",
+    emailLabel: "Write directly",
+    copy: "Copy",
+    copied: "Copied",
+  },
+  footer: {
+    tagline: "Software developer — Ankara, TR",
+    elsewhere: "Elsewhere",
+    colophon: "Colophon",
+    colophonText:
+      "Set in Archivo & JetBrains Mono. Built with Next.js, Framer Motion and Lenis. The fire is the classic doom-fire algorithm, rendered as ASCII in real time.",
+    localTime: "Local time",
+    rights: "All rights reserved.",
+    backToTop: "Back to top",
+    gridHint: "Press G for the grid",
+    motion: "Motion",
+    motionFull: "Full",
+    motionCalm: "Calm",
+  },
+  menu: {
+    language: "Language",
+    elsewhere: "Elsewhere",
+  },
+  workPage: {
+    label: "(Index) All work",
+    kicker: "All",
+    word: "Work",
+    intro:
+      "Every public repository, pulled straight from GitHub and refreshed hourly. Filter by language — hover a row for a preview.",
+  },
+  aboutPage: {
+    label: "(About)",
+    kicker: "Hi, I'm",
+    word: "Ateş",
+    p1: "I'm Ateş Altınkaynak, a software developer based in Ankara. I started programming out of a love for solving problems, and it grew into building complete products — from client websites to a drone relay network written in C++.",
+    p2: "I like working across the whole stack: interfaces in React, data in Postgres, and the low-level parts where every byte counts. I build in the open, so nearly everything I make lives on GitHub.",
+    focusTitle: "What I work on",
+    focus: [
+      "Full-stack web applications",
+      "Backends, APIs & data",
+      "Systems programming in C++",
+      "Clean, tested, documented code",
+    ],
+    nowTitle: "Currently",
+    nowText: "Latest push",
+    statsTitle: "Telemetry — live from GitHub",
+    stackTitle: "Toolkit",
+    stackSubtitle: "The languages, frameworks and tools I reach for most.",
+  },
+  processPage: {
+    label: "(Process)",
+    kicker: "How I",
+    word: "Work",
+    intro: "Every project gets the same four passes. Boring on purpose — so the results aren't.",
+    steps: [
+      {
+        title: "Plan",
+        description:
+          "I clarify the problem, the constraints and what “done” means — then sketch the architecture before writing code.",
+      },
+      {
+        title: "Build",
+        description: "Small, reviewable increments with typed interfaces and clear module boundaries.",
+      },
+      {
+        title: "Test",
+        description: "Edge cases first. I break my own code on purpose before anyone else can.",
+      },
+      {
+        title: "Ship",
+        description: "Deploy, document and keep it running — a README is part of the product.",
+      },
+    ],
+    collaborationTitle: "Working together",
+    collaboration: [
+      "Clear goals and open communication",
+      "Regular progress updates",
+      "Version control with a clean commit history",
+      "Documented, hand-off-ready code",
+    ],
+    quality: {
+      title: "Code quality",
+      description: "Readable, testable and maintainable — code is read far more often than it is written.",
+    },
+    openSource: {
+      title: "Open source",
+      description: "Most of my projects are public on GitHub. Read the code — and feel free to open an issue.",
+    },
+  },
+  contactPage: {
+    label: "(Contact)",
+    kicker: "Let's",
+    word: "Talk",
+    intro: "A question, an opportunity or just to say hi — write to me and I'll reply as soon as I can.",
+    direct: "Or reach me directly",
+    faqTitle: "Questions",
+    faq: [
+      {
+        q: "Are your projects open source?",
+        a: "Yes — most of my work is public on GitHub. The index on this site is generated directly from my repositories and refreshes every hour.",
+      },
+      {
+        q: "What technologies do you use?",
+        a: "TypeScript with React and Next.js on the web, Node.js and PostgreSQL on the backend, Python for tooling and automation, and C++ for systems work.",
+      },
+      {
+        q: "Are you available for work?",
+        a: "I'm open to internships, freelance projects and collaboration. The fastest way to reach me is email.",
+      },
+      {
+        q: "Can I see the code behind a project?",
+        a: "Absolutely. Every project links straight to its GitHub repository — and to a live demo where one exists.",
+      },
+      {
+        q: "Where are you based?",
+        a: "In Ankara, Türkiye (GMT+3) — and comfortable working remotely across time zones.",
+      },
+    ],
+  },
+  form: {
+    fullName: "Full name",
+    email: "Email",
+    subject: "Subject",
+    subjectPlaceholder: "What's it about?",
+    message: "Message",
+    messagePlaceholder: "Write your message here…",
+    submit: "Send message",
+    successTitle: "Thank you!",
+    successMessage: "Your mail app should have opened with the message ready. I'll get back to you as soon as I can.",
+    again: "Write another",
+    errors: {
+      required: "This field is required",
+      email: "Please enter a valid email address",
+    },
+  },
+}
+
+export type Dictionary = typeof en
+
+const tr: Dictionary = {
+  meta: {
+    role: "Yazılım Geliştirici",
+    location: "Ankara, TR",
+    coords: "39.93°K 32.86°D",
+    available: "Staj ve iş birliklerine açık",
+  },
+  nav: {
+    home: "Ana Sayfa",
+    work: "İşler",
+    about: "Hakkımda",
+    process: "Süreç",
+    contact: "İletişim",
+    menu: "Menü",
+    close: "Kapat",
+    skip: "İçeriğe geç",
+  },
+  preloader: {
+    label: "Ateşleniyor",
+  },
+  hero: {
+    index: "(00) Portfolyo — 2026 Baskısı",
+    roles: ["Yazılım Geliştirici", "Full-stack Web", "Sistemler & C++", "Açık Kaynak"],
+    tagline: "Uçtan uca yazılım geliştiriyorum.",
+    intro:
+      "Arayüzler TypeScript ile, servisler Node ve Postgres üzerinde, sistemler C++ ile. Çoğu açık kaynak — ve bu sayfa her saat kendini GitHub hesabımdan yeniden oluşturuyor.",
+    primaryCta: "İletişime geç",
+    secondaryCta: "Seçili işler",
+    figure: "Şekil 01 — Ankara",
+    wordNote: "ateş /a·teʃ/ — hem ad, hem bu sayfanın yakıtı.",
+    fireNote: "Doom-fire algoritması · ASCII · gerçek zamanlı",
+    scroll: "Kaydır",
+    stats: {
+      repos: "Açık repo",
+      languages: "Dil",
+      live: "Canlı yayında",
+      since: "İlk commit",
+    },
+  },
+  manifesto: {
+    label: "(01) Manifesto",
+    text: "Yazılımı {uçtan uca} geliştiriyorum — piksel hassasiyetindeki arayüzlerden düşük seviyeli C++'a kadar. {Çoğu insanın atladığı kısımlar} benim için önemli: uç durum, fazladan milisaniye, bir değişkenin adı.",
+  },
+  work: {
+    label: "(02) Seçili işler",
+    kicker: "Seçili",
+    word: "İşler",
+    chapter: "Bölüm",
+    skip: "Atla",
+    year: "Yıl",
+    stack: "Teknoloji",
+    status: "Durum",
+    live: "Canlı",
+    openSource: "Açık kaynak",
+    viewLive: "Canlı site",
+    source: "Kaynak kod",
+    allWork: "Tüm işler",
+  },
+  toolkit: {
+    label: "Araç kutusu",
+  },
+  capabilities: {
+    label: "(03) Yetkinlikler",
+    kicker: "Neler",
+    word: "Üretiyorum",
+    items: [
+      {
+        title: "Web uygulamaları",
+        tags: ["Next.js", "React", "TypeScript", "Tailwind", "Motion"],
+        blurb: "Anlamlı hareketlere sahip, hızlı ve erişilebilir arayüzler.",
+      },
+      {
+        title: "Backend & veri",
+        tags: ["Node.js", "PostgreSQL", "Drizzle", "Prisma", "SSE"],
+        blurb: "Üretimde sorunsuz çalışan API'ler, şemalar ve gerçek zamanlı veri akışları.",
+      },
+      {
+        title: "Sistemler & C++",
+        tags: ["C++", "Veri yapıları", "Ağ", "Performans"],
+        blurb: "Belleğin, iş parçacıklarının ve gecikmenin önemli olduğu düşük seviye kod.",
+      },
+      {
+        title: "Araçlar & otomasyon",
+        tags: ["Python", "CLI", "Script", "CI/CD"],
+        blurb: "İşin tekrar eden kısımlarını ortadan kaldıran script ve araçlar.",
+      },
+    ],
+  },
+  index: {
+    label: "(04) Dizin",
+    kicker: "Bütün",
+    word: "Repolar",
+    colProject: "Proje",
+    colStack: "Dil",
+    colUpdated: "Güncellendi",
+    viewAll: "Tüm işler",
+    github: "GitHub profili",
+    empty: "GitHub şu an yanıt vermedi — tam liste profilimde.",
+    filterAll: "Tümü",
+    count: "repo",
+  },
+  contact: {
+    label: "(05) İletişim",
+    kicker: "Hadi",
+    word: "Konuşalım",
+    text: "Staj, iş birliği ya da hayata geçirmek istediğin bir proje — gelen kutum açık.",
+    cta: "İletişime geç",
+    emailLabel: "Doğrudan yaz",
+    copy: "Kopyala",
+    copied: "Kopyalandı",
+  },
+  footer: {
+    tagline: "Yazılım geliştirici — Ankara, TR",
+    elsewhere: "Başka yerlerde",
+    colophon: "Künye",
+    colophonText:
+      "Archivo ve JetBrains Mono ile dizildi. Next.js, Framer Motion ve Lenis ile geliştirildi. Ateş, klasik doom-fire algoritması; gerçek zamanlı ASCII olarak çiziliyor.",
+    localTime: "Yerel saat",
+    rights: "Tüm hakları saklıdır.",
+    backToTop: "Başa dön",
+    gridHint: "Izgara için G'ye bas",
+    motion: "Hareket",
+    motionFull: "Tam",
+    motionCalm: "Sakin",
+  },
+  menu: {
+    language: "Dil",
+    elsewhere: "Başka yerlerde",
+  },
+  workPage: {
+    label: "(Dizin) Tüm işler",
+    kicker: "Tüm",
+    word: "İşler",
+    intro:
+      "Her açık repo, doğrudan GitHub'dan çekiliyor ve saatte bir yenileniyor. Dile göre filtrele — önizleme için bir satırın üzerine gel.",
+  },
+  aboutPage: {
+    label: "(Hakkımda)",
+    kicker: "Merhaba, ben",
+    word: "Ateş",
+    p1: "Ben Ateş Altınkaynak, Ankara'da yaşayan bir yazılım geliştiriciyim. Programlamaya problem çözme sevgisiyle başladım; bu zamanla eksiksiz ürünler geliştirmeye dönüştü — müşteri sitelerinden C++ ile yazılmış bir dron röle ağına kadar.",
+    p2: "Yığının tamamında çalışmayı seviyorum: React'te arayüzler, Postgres'te veriler ve her baytın önemli olduğu düşük seviye kısımlar. Açık geliştiriyorum; yaptığım neredeyse her şey GitHub'da.",
+    focusTitle: "Ne üzerine çalışıyorum",
+    focus: [
+      "Full-stack web uygulamaları",
+      "Backend, API ve veri",
+      "C++ ile sistem programlama",
+      "Temiz, test edilmiş, belgelenmiş kod",
+    ],
+    nowTitle: "Şu sıralar",
+    nowText: "Son push",
+    statsTitle: "Telemetri — GitHub'dan canlı",
+    stackTitle: "Araç kutusu",
+    stackSubtitle: "En sık başvurduğum diller, çatılar ve araçlar.",
+  },
+  processPage: {
+    label: "(Süreç)",
+    kicker: "Nasıl",
+    word: "Çalışırım",
+    intro: "Her proje aynı dört aşamadan geçer. Bilerek sıkıcı — sonuçlar sıkıcı olmasın diye.",
+    steps: [
+      {
+        title: "Planla",
+        description:
+          "Problemi, kısıtları ve “bitti”nin ne demek olduğunu netleştiriyor, kod yazmadan önce mimariyi çiziyorum.",
+      },
+      {
+        title: "Geliştir",
+        description: "Tipli arayüzler ve net modül sınırlarıyla küçük, gözden geçirilebilir adımlar.",
+      },
+      {
+        title: "Test et",
+        description: "Önce uç durumlar. Kodumu başkasından önce bilerek ben bozarım.",
+      },
+      {
+        title: "Yayınla",
+        description: "Yayına al, belgele ve çalışır tut — README de ürünün bir parçası.",
+      },
+    ],
+    collaborationTitle: "Birlikte çalışırken",
+    collaboration: [
+      "Net hedefler ve açık iletişim",
+      "Düzenli ilerleme güncellemeleri",
+      "Sürüm kontrolü ve temiz commit geçmişi",
+      "Belgelenmiş, devredilebilir kod",
+    ],
+    quality: {
+      title: "Kod kalitesi",
+      description: "Okunabilir, test edilebilir ve sürdürülebilir — kod yazıldığından çok daha fazla okunur.",
+    },
+    openSource: {
+      title: "Açık kaynak",
+      description: "Projelerimin çoğu GitHub'da herkese açık. Kodu incele — issue açmaktan da çekinme.",
+    },
+  },
+  contactPage: {
+    label: "(İletişim)",
+    kicker: "Hadi",
+    word: "Konuşalım",
+    intro: "Bir soru, bir fırsat ya da sadece merhaba — yaz, en kısa sürede dönerim.",
+    direct: "Ya da doğrudan ulaş",
+    faqTitle: "Sorular",
+    faq: [
+      {
+        q: "Projelerin açık kaynak mı?",
+        a: "Evet — çalışmalarımın çoğu GitHub'da herkese açık. Bu sitedeki dizin doğrudan repolarımdan oluşturuluyor ve saatte bir yenileniyor.",
+      },
+      {
+        q: "Hangi teknolojileri kullanıyorsun?",
+        a: "Web'de React ve Next.js ile TypeScript, backend'de Node.js ve PostgreSQL, araç ve otomasyon için Python, sistem işleri için C++.",
+      },
+      {
+        q: "Çalışmaya müsait misin?",
+        a: "Staj, freelance projeler ve iş birliklerine açığım. Bana ulaşmanın en hızlı yolu e-posta.",
+      },
+      {
+        q: "Bir projenin kodunu görebilir miyim?",
+        a: "Kesinlikle. Her proje doğrudan GitHub reposuna — varsa canlı demosuna da — bağlanıyor.",
+      },
+      {
+        q: "Nerede yaşıyorsun?",
+        a: "Ankara, Türkiye'de (GMT+3) — farklı saat dilimlerinde uzaktan çalışmaya da alışığım.",
+      },
+    ],
+  },
+  form: {
+    fullName: "Ad soyad",
+    email: "E-posta",
+    subject: "Konu",
+    subjectPlaceholder: "Ne hakkında?",
+    message: "Mesaj",
+    messagePlaceholder: "Mesajını buraya yaz…",
+    submit: "Mesajı gönder",
+    successTitle: "Teşekkürler!",
+    successMessage: "E-posta uygulaman mesaj hazır şekilde açılmış olmalı. En kısa sürede dönüş yapacağım.",
+    again: "Yeni mesaj yaz",
+    errors: {
+      required: "Bu alan zorunludur",
+      email: "Geçerli bir e-posta adresi gir",
+    },
+  },
+}
+
+const de: Dictionary = {
+  meta: {
+    role: "Softwareentwickler",
+    location: "Ankara, TR",
+    coords: "39.93°N 32.86°O",
+    available: "Offen für Praktika & Zusammenarbeit",
+  },
+  nav: {
+    home: "Start",
+    work: "Arbeiten",
+    about: "Über mich",
+    process: "Prozess",
+    contact: "Kontakt",
+    menu: "Menü",
+    close: "Schließen",
+    skip: "Zum Inhalt springen",
+  },
+  preloader: {
+    label: "Zündung",
+  },
+  hero: {
+    index: "(00) Portfolio — Ausgabe 2026",
+    roles: ["Softwareentwickler", "Full-Stack-Web", "Systeme & C++", "Open Source"],
+    tagline: "Ich baue Software – von Anfang bis Ende.",
+    intro:
+      "Interfaces in TypeScript, Services auf Node und Postgres, Systeme in C++. Das meiste ist Open Source – und diese Seite baut sich jede Stunde neu aus meinem GitHub.",
+    primaryCta: "Kontakt aufnehmen",
+    secondaryCta: "Ausgewählte Arbeiten",
+    figure: "Abb. 01 — Ankara",
+    wordNote: "ateş /a·teʃ/ — Türkisch für „Feuer“.",
+    fireNote: "Doom-Fire-Algorithmus · ASCII · Echtzeit",
+    scroll: "Scrollen",
+    stats: {
+      repos: "Öffentliche Repos",
+      languages: "Sprachen",
+      live: "Live-Deployments",
+      since: "Erster Commit",
+    },
+  },
+  manifesto: {
+    label: "(01) Manifest",
+    text: "Ich baue Software {von Anfang bis Ende} — von pixelgenauen Interfaces bis zu Low-Level-C++. Mir sind {die Teile wichtig, die die meisten überspringen}: der Edge Case, die zusätzliche Millisekunde, der Name einer Variable.",
+  },
+  work: {
+    label: "(02) Ausgewählte Arbeiten",
+    kicker: "Ausgewählte",
+    word: "Arbeiten",
+    chapter: "Kapitel",
+    skip: "Überspringen",
+    year: "Jahr",
+    stack: "Stack",
+    status: "Status",
+    live: "Live",
+    openSource: "Open Source",
+    viewLive: "Live-Seite",
+    source: "Quellcode",
+    allWork: "Alle Arbeiten",
+  },
+  toolkit: {
+    label: "Werkzeugkasten",
+  },
+  capabilities: {
+    label: "(03) Fähigkeiten",
+    kicker: "Was ich",
+    word: "Baue",
+    items: [
+      {
+        title: "Web-Anwendungen",
+        tags: ["Next.js", "React", "TypeScript", "Tailwind", "Motion"],
+        blurb: "Schnelle, barrierearme Interfaces mit Bewegung, die etwas bedeutet.",
+      },
+      {
+        title: "Backends & Daten",
+        tags: ["Node.js", "PostgreSQL", "Drizzle", "Prisma", "SSE"],
+        blurb: "APIs, Schemas und Echtzeit-Pipelines, die im Betrieb unspektakulär bleiben.",
+      },
+      {
+        title: "Systeme & C++",
+        tags: ["C++", "Datenstrukturen", "Netzwerke", "Performance"],
+        blurb: "Low-Level-Code, bei dem Speicher, Threads und Latenz zählen.",
+      },
+      {
+        title: "Tools & Automatisierung",
+        tags: ["Python", "CLI", "Skripte", "CI/CD"],
+        blurb: "Skripte und Tools, die die repetitiven Teile der Arbeit erledigen.",
+      },
+    ],
+  },
+  index: {
+    label: "(04) Verzeichnis",
+    kicker: "Jedes",
+    word: "Repository",
+    colProject: "Projekt",
+    colStack: "Sprache",
+    colUpdated: "Aktualisiert",
+    viewAll: "Alle Arbeiten",
+    github: "GitHub-Profil",
+    empty: "GitHub hat gerade nicht geantwortet — die vollständige Liste steht auf meinem Profil.",
+    filterAll: "Alle",
+    count: "Repositories",
+  },
+  contact: {
+    label: "(05) Kontakt",
+    kicker: "Lass uns",
+    word: "Reden",
+    text: "Praktika, Kooperationen oder ein Projekt, das gebaut werden soll — mein Postfach ist offen.",
+    cta: "Kontakt aufnehmen",
+    emailLabel: "Direkt schreiben",
+    copy: "Kopieren",
+    copied: "Kopiert",
+  },
+  footer: {
+    tagline: "Softwareentwickler — Ankara, TR",
+    elsewhere: "Anderswo",
+    colophon: "Kolophon",
+    colophonText:
+      "Gesetzt in Archivo & JetBrains Mono. Gebaut mit Next.js, Framer Motion und Lenis. Das Feuer ist der klassische Doom-Fire-Algorithmus, in Echtzeit als ASCII gerendert.",
+    localTime: "Ortszeit",
+    rights: "Alle Rechte vorbehalten.",
+    backToTop: "Nach oben",
+    gridHint: "G drücken für das Raster",
+    motion: "Bewegung",
+    motionFull: "Voll",
+    motionCalm: "Ruhig",
+  },
+  menu: {
+    language: "Sprache",
+    elsewhere: "Anderswo",
+  },
+  workPage: {
+    label: "(Verzeichnis) Alle Arbeiten",
+    kicker: "Alle",
+    word: "Arbeiten",
+    intro:
+      "Jedes öffentliche Repository, direkt von GitHub geladen und stündlich aktualisiert. Nach Sprache filtern — für eine Vorschau über eine Zeile fahren.",
+  },
+  aboutPage: {
+    label: "(Über mich)",
+    kicker: "Hallo, ich bin",
+    word: "Ateş",
+    p1: "Ich bin Ateş Altınkaynak, Softwareentwickler aus Ankara. Ich habe aus Freude am Problemlösen mit dem Programmieren angefangen, und daraus sind komplette Produkte geworden — von Kunden-Websites bis zu einem Drohnen-Relaisnetz in C++.",
+    p2: "Ich arbeite gern über den ganzen Stack: Interfaces in React, Daten in Postgres und die Low-Level-Teile, bei denen jedes Byte zählt. Ich entwickle offen, deshalb liegt fast alles, was ich baue, auf GitHub.",
+    focusTitle: "Woran ich arbeite",
+    focus: [
+      "Full-Stack-Webanwendungen",
+      "Backends, APIs & Daten",
+      "Systemprogrammierung in C++",
+      "Sauberer, getesteter, dokumentierter Code",
+    ],
+    nowTitle: "Aktuell",
+    nowText: "Letzter Push",
+    statsTitle: "Telemetrie — live von GitHub",
+    stackTitle: "Werkzeugkasten",
+    stackSubtitle: "Die Sprachen, Frameworks und Tools, zu denen ich am häufigsten greife.",
+  },
+  processPage: {
+    label: "(Prozess)",
+    kicker: "Wie ich",
+    word: "Arbeite",
+    intro: "Jedes Projekt durchläuft dieselben vier Phasen. Bewusst unspektakulär — damit es die Ergebnisse nicht sind.",
+    steps: [
+      {
+        title: "Planen",
+        description:
+          "Ich kläre das Problem, die Rahmenbedingungen und was „fertig“ bedeutet — und skizziere die Architektur, bevor ich Code schreibe.",
+      },
+      {
+        title: "Bauen",
+        description: "Kleine, überprüfbare Schritte mit typisierten Schnittstellen und klaren Modulgrenzen.",
+      },
+      {
+        title: "Testen",
+        description: "Edge Cases zuerst. Ich mache meinen Code absichtlich kaputt, bevor es jemand anderes tut.",
+      },
+      {
+        title: "Ausliefern",
+        description: "Deployen, dokumentieren und am Laufen halten — eine README gehört zum Produkt.",
+      },
+    ],
+    collaborationTitle: "Zusammenarbeit",
+    collaboration: [
+      "Klare Ziele und offene Kommunikation",
+      "Regelmäßige Fortschrittsupdates",
+      "Versionskontrolle mit sauberer Commit-Historie",
+      "Dokumentierter, übergabefertiger Code",
+    ],
+    quality: {
+      title: "Codequalität",
+      description: "Lesbar, testbar und wartbar — Code wird viel öfter gelesen als geschrieben.",
+    },
+    openSource: {
+      title: "Open Source",
+      description: "Die meisten meiner Projekte sind öffentlich auf GitHub. Lies den Code — und eröffne gern ein Issue.",
+    },
+  },
+  contactPage: {
+    label: "(Kontakt)",
+    kicker: "Lass uns",
+    word: "Reden",
+    intro: "Eine Frage, eine Gelegenheit oder einfach Hallo — schreib mir, ich antworte so schnell wie möglich.",
+    direct: "Oder direkt erreichen",
+    faqTitle: "Fragen",
+    faq: [
+      {
+        q: "Sind deine Projekte Open Source?",
+        a: "Ja — die meisten meiner Arbeiten sind öffentlich auf GitHub. Das Verzeichnis auf dieser Seite wird direkt aus meinen Repositories erzeugt und stündlich aktualisiert.",
+      },
+      {
+        q: "Welche Technologien verwendest du?",
+        a: "TypeScript mit React und Next.js im Web, Node.js und PostgreSQL im Backend, Python für Tools und Automatisierung und C++ für Systemarbeit.",
+      },
+      {
+        q: "Bist du verfügbar?",
+        a: "Ich bin offen für Praktika, Freelance-Projekte und Zusammenarbeit. Am schnellsten erreichst du mich per E-Mail.",
+      },
+      {
+        q: "Kann ich den Code hinter einem Projekt sehen?",
+        a: "Auf jeden Fall. Jedes Projekt verlinkt direkt auf sein GitHub-Repository — und auf eine Live-Demo, wo es eine gibt.",
+      },
+      {
+        q: "Wo bist du ansässig?",
+        a: "In Ankara, Türkei (GMT+3) — und ich arbeite problemlos remote über Zeitzonen hinweg.",
+      },
+    ],
+  },
+  form: {
+    fullName: "Vollständiger Name",
+    email: "E-Mail",
+    subject: "Betreff",
+    subjectPlaceholder: "Worum geht es?",
+    message: "Nachricht",
+    messagePlaceholder: "Schreib deine Nachricht hier…",
+    submit: "Nachricht senden",
+    successTitle: "Danke!",
+    successMessage: "Dein Mailprogramm sollte sich mit der fertigen Nachricht geöffnet haben. Ich melde mich so schnell wie möglich.",
+    again: "Neue Nachricht",
+    errors: {
+      required: "Dieses Feld ist erforderlich",
+      email: "Bitte gib eine gültige E-Mail-Adresse ein",
+    },
+  },
+}
+
+export const dictionary: Record<Locale, Dictionary> = { tr, en, de }

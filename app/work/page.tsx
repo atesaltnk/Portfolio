@@ -1,22 +1,16 @@
-import { Footer } from "@/components/footer"
-import { WorkGallery } from "@/components/sections/work-gallery"
-import { WorkHeader } from "@/components/sections/work-header"
+import type { Metadata } from "next"
 import { getRepos } from "@/lib/github"
+import { buildProjects } from "@/lib/projects"
+import { WorkView } from "@/components/pages/work-view"
 
 export const revalidate = 3600
 
-export default async function WorkPage() {
-  const repos = await getRepos()
+export const metadata: Metadata = {
+  title: "Work — Ateş Altınkaynak",
+  description: "Every public repository by Ateş Altınkaynak, synced live from GitHub.",
+}
 
-  return (
-    <>
-      <main className="relative pt-32 pb-20">
-        <div className="mx-auto max-w-6xl px-6 relative z-10">
-          <WorkHeader />
-          <WorkGallery repos={repos} />
-        </div>
-      </main>
-      <Footer />
-    </>
-  )
+export default async function WorkPage() {
+  const projects = buildProjects(await getRepos())
+  return <WorkView projects={projects} />
 }

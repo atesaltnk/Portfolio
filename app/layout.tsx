@@ -1,89 +1,92 @@
-import React from "react"
+import type { ReactNode } from "react"
 import type { Metadata, Viewport } from "next"
-import { Inter, Poppins, JetBrains_Mono } from "next/font/google"
+import { Archivo, JetBrains_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { LanguageProvider } from "@/lib/language-context"
-import { ScrollToTop } from "@/components/system/ScrollToTop"
+import { SITE_URL } from "@/lib/site"
+import { MOTION_SCRIPT } from "@/lib/motion-pref"
+import { SmoothScroll } from "@/components/shell/smooth-scroll"
+import { Preloader } from "@/components/shell/preloader"
+import { Header } from "@/components/shell/header"
+import { Footer } from "@/components/shell/footer"
+import { GridOverlay } from "@/components/shell/grid-overlay"
+import { Cursor } from "@/components/shell/cursor"
 import "./globals.css"
 
-const _inter = Inter({ subsets: ["latin", "latin-ext"] })
-const poppins = Poppins({
+// One variable family, two voices: width 62 for display, 100 for reading.
+const archivo = Archivo({
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",
-})
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
+  axes: ["wdth"],
+  variable: "--font-archivo",
+  display: "swap",
 })
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+})
 
 
 export const metadata: Metadata = {
-  title: "Ateş Altınkaynak | Software Developer",
+  metadataBase: new URL(SITE_URL),
+  title: "Ateş Altınkaynak — Software Developer",
   description:
-    "Software developer building web apps, backends, and systems software. Most of my work is open source — explore my projects, synced live from GitHub.",
-  icons: {
-    icon: "/favicon.ico",
-  },
+    "Software developer in Ankara building web apps, backends and systems software in TypeScript, Python and C++. Projects synced live from GitHub.",
+  icons: { icon: "/favicon.ico" },
   keywords: [
+    "Ateş Altınkaynak",
     "software developer",
     "full-stack developer",
     "TypeScript",
+    "Next.js",
     "Python",
     "C++",
-    "Next.js",
     "Ankara",
     "open source",
   ],
   authors: [{ name: "Ateş Altınkaynak" }],
   openGraph: {
-    title: "Ateş Altınkaynak | Software Developer",
+    title: "Ateş Altınkaynak — Software Developer",
     description:
-      "Software developer building web apps, backends, and systems software. Projects synced live from GitHub.",
-    url: "https://atesaltinkaynak.com",
+      "Web apps, backends and systems software in TypeScript, Python and C++. Projects synced live from GitHub.",
+    url: SITE_URL,
     siteName: "Ateş Altınkaynak",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ateş Altınkaynak | Software Developer",
-    description:
-      "Software developer building web apps, backends, and systems software.",
+    title: "Ateş Altınkaynak — Software Developer",
+    description: "Web apps, backends and systems software in TypeScript, Python and C++.",
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 }
 
 export const viewport: Viewport = {
-  themeColor: "#126B4A",
+  themeColor: "#0e0d0b",
   width: "device-width",
   initialScale: 1,
 }
 
-import { Header } from "@/components/header"
-import { GlobalAtmosphericBackground } from "@/components/motion/global-atmospheric-background"
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en" className="dark">
-      <body
-        className={`${poppins.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-foreground relative`}
-      >
+    <html lang="en" suppressHydrationWarning className={`${archivo.variable} ${jetbrainsMono.variable}`}>
+      <head>
+        {/* Resolves motion mode + first-visit intro before first paint. */}
+        <script dangerouslySetInnerHTML={{ __html: MOTION_SCRIPT }} />
+      </head>
+      <body className="scheme-paper antialiased">
         <LanguageProvider>
+          <SmoothScroll />
+          <Preloader />
           <Header />
-          <ScrollToTop />
-          <GlobalAtmosphericBackground />
-          <div className="relative z-10 transition-colors duration-1000">
+          <div id="main" tabIndex={-1} className="outline-none">
             {children}
           </div>
+          <Footer />
+          <GridOverlay />
+          <Cursor />
         </LanguageProvider>
         <Analytics />
       </body>

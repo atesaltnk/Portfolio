@@ -1,280 +1,232 @@
 "use client"
 
-import React, { useState } from "react"
-import { motion, useReducedMotion, AnimatePresence } from "framer-motion"
-import { CheckCircle, AlertCircle, Github, Mail } from "lucide-react"
-import { Footer } from "@/components/footer"
-import { AnimatedBackgroundLayer } from "@/components/motion/animated-background-layer"
+import { useState, type FormEvent, type ReactNode } from "react"
 import { useLanguage } from "@/lib/language-context"
 import { GITHUB_PROFILE_URL } from "@/lib/github"
+import { CONTACT_EMAIL } from "@/lib/site"
+import { RollText } from "@/components/fx/roll-text"
+import { PageHead } from "@/components/site/page-head"
+import { formatClock, HOME_TZ, useNow } from "@/components/shell/clocks"
 import { cn } from "@/lib/utils"
 
-const CONTACT_EMAIL = "atesaltinkaynak@gmail.com"
-
-interface FormData {
+interface Fields {
   fullName: string
   email: string
   subject: string
   message: string
 }
 
-interface FormErrors {
-  fullName?: string
-  email?: string
-  message?: string
-}
+type Errors = Partial<Record<keyof Fields, string>>
 
-function ValidationMessage({ message }: { message: string }) {
-  return (
-    <motion.p
-      initial={{ opacity: 0, y: -8, height: 0 }}
-      animate={{ opacity: 1, y: 0, height: "auto" }}
-      exit={{ opacity: 0, y: -8, height: 0 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
-      className="mt-1 flex items-center gap-1 text-sm text-destructive"
-    >
-      <AlertCircle size={14} />
-      {message}
-    </motion.p>
-  )
-}
+const EMPTY: Fields = { fullName: "", email: "", subject: "", message: "" }
 
-function DirectLinks({ label }: { label: string }) {
+function Field({
+  id,
+  label,
+  error,
+  children,
+}: {
+  id: string
+  label: string
+  error?: string
+  children: ReactNode
+}) {
   return (
-    <div className="mt-10 pt-8 border-t border-border/30">
-      <p className="text-sm text-muted-foreground mb-4">{label}</p>
-      <div className="flex flex-wrap gap-3">
-        <a
-          href={`mailto:${CONTACT_EMAIL}`}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border/50 bg-card/50 text-sm text-foreground transition-colors hover:border-primary/30 hover:text-primary"
-        >
-          <Mail size={16} />
-          {CONTACT_EMAIL}
-        </a>
-        <a
-          href={GITHUB_PROFILE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border/50 bg-card/50 text-sm text-foreground transition-colors hover:border-primary/30 hover:text-primary"
-        >
-          <Github size={16} />
-          GitHub
-        </a>
-      </div>
+    <div className="border-b border-line cell">
+      <label htmlFor={id} className="t-label mb-3 flex justify-between text-dim">
+        {label}
+        {error && (
+          <span id={`${id}-error`} className="text-ember">
+            {error}
+          </span>
+        )}
+      </label>
+      {children}
     </div>
   )
 }
 
-function SuccessState({ t }: { t: ReturnType<typeof useLanguage>["t"] }) {
-  const shouldReduceMotion = useReducedMotion()
-
-  return (
-    <>
-      <main className="relative pt-32 pb-20 min-h-screen flex items-center">
-        <div className="absolute inset-x-0 top-0 h-[400px] overflow-hidden">
-          <AnimatedBackgroundLayer variant="minimal" />
-        </div>
-
-        <div className="mx-auto max-w-xl px-6 text-center relative z-10">
-          <motion.div
-            initial={shouldReduceMotion ? {} : { scale: 0, rotate: -45 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.1 }}
-            className="w-20 h-20 mx-auto mb-8 rounded-full bg-primary/10 flex items-center justify-center"
-          >
-            <CheckCircle size={40} className="text-primary" />
-          </motion.div>
-
-          <motion.h1
-            initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.4 }}
-            className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4"
-          >
-            {t.form.successTitle}
-          </motion.h1>
-
-          <motion.p
-            initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.4 }}
-            className="text-lg text-muted-foreground leading-relaxed"
-          >
-            {t.form.successMessage}
-          </motion.p>
-
-          <div className="mx-auto max-w-md text-left">
-            <DirectLinks label={t.form.orReachMe} />
-          </div>
-        </div>
-      </main>
-      <Footer />
-    </>
-  )
-}
+const inputClass =
+  "w-full bg-transparent text-[clamp(1.2rem,1.8vw,1.6rem)] leading-snug tracking-tight placeholder:text-faint focus:outline-none"
 
 export default function ContactPage() {
   const { t } = useLanguage()
-  const shouldReduceMotion = useReducedMotion()
+  const f = t.form
+  const c = t.contactPage
+  const [fields, setFields] = useState<Fields>(EMPTY)
+  const [errors, setErrors] = useState<Errors>({})
+  const [sent, setSent] = useState(false)
+  const now = useNow()
+  const { time, offset } = formatClock(now, HOME_TZ)
 
-  const [formData, setFormData] = useState<FormData>({
-    fullName: "",
-    email: "",
-    subject: "",
-    message: "",
-  })
-  const [errors, setErrors] = useState<FormErrors>({})
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const set = (key: keyof Fields) => (e: { target: { value: string } }) =>
+    setFields((prev) => ({ ...prev, [key]: e.target.value }))
 
-  const validateForm = (): boolean => {
-    const newErrors: FormErrors = {}
-
-    if (!formData.fullName.trim()) newErrors.fullName = t.form.errors.required
-    if (!formData.email.trim()) {
-      newErrors.email = t.form.errors.required
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = t.form.errors.email
-    }
-    if (!formData.message.trim()) newErrors.message = t.form.errors.required
-
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const submit = (e: FormEvent) => {
     e.preventDefault()
-    if (!validateForm()) return
+    const next: Errors = {}
+    if (!fields.fullName.trim()) next.fullName = f.errors.required
+    if (!fields.email.trim()) next.email = f.errors.required
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) next.email = f.errors.email
+    if (!fields.message.trim()) next.message = f.errors.required
+    setErrors(next)
+    if (Object.keys(next).length) return
 
-    const subject = formData.subject.trim() || `Portfolio — ${formData.fullName}`
-    const body = `${formData.message}\n\n— ${formData.fullName} (${formData.email})`
-    const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`
-
-    window.location.href = mailto
-    setIsSubmitted(true)
+    const subject = fields.subject.trim() || `Portfolio — ${fields.fullName.trim()}`
+    const body = `${fields.message.trim()}\n\n— ${fields.fullName.trim()} (${fields.email.trim()})`
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    setSent(true)
   }
-
-  if (isSubmitted) return <SuccessState t={t} />
-
-  const inputClass = (hasError?: boolean) =>
-    cn(
-      "w-full px-4 py-3 bg-card border rounded-lg text-foreground placeholder:text-muted-foreground/50",
-      "focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300",
-      hasError ? "border-destructive" : "border-border/50"
-    )
 
   return (
-    <>
-      <main className="relative pt-32 pb-20">
-        <div className="absolute inset-x-0 top-0 h-[400px] overflow-hidden">
-          <AnimatedBackgroundLayer variant="minimal" />
+    <main>
+      <PageHead label={c.label} kicker={c.kicker} word={c.word} intro={c.intro} />
+
+      <section data-scheme="paper" className="scheme-paper">
+        <div className="frame grid grid-cols-12 border-b border-line">
+          <div className="col-span-12 border-b border-line md:col-span-7 md:border-b-0 md:border-r">
+            {sent ? (
+              <div className="flex min-h-[28rem] flex-col justify-between gap-10 cell py-10" aria-live="polite">
+                <div className="space-y-4">
+                  <span className="ember-dot" />
+                  <h2 className="font-display t-h1">{f.successTitle}</h2>
+                  <p className="t-lead max-w-md text-dim">{f.successMessage}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFields(EMPTY)
+                    setSent(false)
+                  }}
+                  className="t-label self-start border border-line-strong px-4 py-3 hover:border-fg"
+                >
+                  <RollText>{f.again}</RollText>
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={submit} noValidate>
+                <div className="grid sm:grid-cols-2">
+                  <div className="sm:border-r sm:border-line">
+                    <Field id="fullName" label={f.fullName} error={errors.fullName}>
+                      <input
+                        id="fullName"
+                        autoComplete="name"
+                        value={fields.fullName}
+                        onChange={set("fullName")}
+                        aria-invalid={Boolean(errors.fullName)}
+                        aria-describedby={errors.fullName ? "fullName-error" : undefined}
+                        className={inputClass}
+                      />
+                    </Field>
+                  </div>
+                  <Field id="email" label={f.email} error={errors.email}>
+                    <input
+                      id="email"
+                      type="email"
+                      autoComplete="email"
+                      value={fields.email}
+                      onChange={set("email")}
+                      aria-invalid={Boolean(errors.email)}
+                      aria-describedby={errors.email ? "email-error" : undefined}
+                      className={inputClass}
+                    />
+                  </Field>
+                </div>
+                <Field id="subject" label={f.subject}>
+                  <input
+                    id="subject"
+                    value={fields.subject}
+                    onChange={set("subject")}
+                    placeholder={f.subjectPlaceholder}
+                    className={inputClass}
+                  />
+                </Field>
+                <Field id="message" label={f.message} error={errors.message}>
+                  <textarea
+                    id="message"
+                    rows={6}
+                    value={fields.message}
+                    onChange={set("message")}
+                    placeholder={f.messagePlaceholder}
+                    aria-invalid={Boolean(errors.message)}
+                    aria-describedby={errors.message ? "message-error" : undefined}
+                    className={cn(inputClass, "resize-none")}
+                  />
+                </Field>
+                <div className="cell">
+                  <button
+                    type="submit"
+                    className="group t-label flex w-full items-center justify-between bg-ember px-5 py-4 !text-[11.5px] text-ink transition-colors hover:bg-ink hover:text-paper"
+                  >
+                    <RollText>{f.submit}</RollText>
+                    <span className="transition-transform duration-500 group-hover:translate-x-1">→</span>
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+
+          <aside className="col-span-12 flex flex-col md:col-span-5">
+            <div className="cell border-b border-line md:py-8">
+              <p className="t-label mb-4 text-dim">{c.direct}</p>
+              <a href={`mailto:${CONTACT_EMAIL}`} className="block break-all text-[clamp(1.25rem,2vw,1.9rem)] font-semibold tracking-tight hover:text-ember">
+                <RollText>{CONTACT_EMAIL}</RollText>
+              </a>
+              <a
+                href={GITHUB_PROFILE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-display t-h3 mt-3 block hover:text-ember"
+              >
+                <RollText>GitHub ↗</RollText>
+              </a>
+            </div>
+            <div className="grid grid-cols-2 border-b border-line">
+              <div className="cell border-r border-line">
+                <p className="t-label mb-3 text-dim">{t.footer.localTime}</p>
+                <p className="font-display t-h3 tabular-nums" suppressHydrationWarning>
+                  {time}
+                </p>
+                <p className="t-label mt-1 text-dim">Ankara · {offset}</p>
+              </div>
+              <div className="cell">
+                <p className="t-label mb-3 text-dim">{t.work.status}</p>
+                <p className="t-label flex items-start gap-2">
+                  <span className="ember-dot mt-1 shrink-0" />
+                  {t.meta.available}
+                </p>
+              </div>
+            </div>
+          </aside>
         </div>
+      </section>
 
-        <div className="mx-auto max-w-2xl px-6 relative z-10">
-          <motion.div
-            initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="mb-12"
-          >
-            <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">
-              {t.form.title}
-            </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              {t.form.subtitle}
-            </p>
-          </motion.div>
-
-          <motion.form
-            onSubmit={handleSubmit}
-            initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="space-y-6"
-            noValidate
-          >
-            <div>
-              <label htmlFor="fullName" className="block text-sm font-medium text-foreground mb-2">
-                {t.form.fullName} *
-              </label>
-              <input
-                type="text"
-                id="fullName"
-                value={formData.fullName}
-                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                className={inputClass(!!errors.fullName)}
-              />
-              <AnimatePresence>
-                {errors.fullName && <ValidationMessage message={errors.fullName} />}
-              </AnimatePresence>
-            </div>
-
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                {t.form.email} *
-              </label>
-              <input
-                type="email"
-                id="email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className={inputClass(!!errors.email)}
-              />
-              <AnimatePresence>
-                {errors.email && <ValidationMessage message={errors.email} />}
-              </AnimatePresence>
-            </div>
-
-            <div>
-              <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
-                {t.form.subject}
-              </label>
-              <input
-                type="text"
-                id="subject"
-                value={formData.subject}
-                placeholder={t.form.subjectPlaceholder}
-                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                className={inputClass(false)}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                {t.form.message} *
-              </label>
-              <textarea
-                id="message"
-                value={formData.message}
-                rows={6}
-                placeholder={t.form.messagePlaceholder}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className={cn(inputClass(!!errors.message), "resize-none")}
-              />
-              <AnimatePresence>
-                {errors.message && <ValidationMessage message={errors.message} />}
-              </AnimatePresence>
-            </div>
-
-            <motion.button
-              type="submit"
-              className={cn(
-                "w-full flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-medium rounded-xl transition-all duration-300",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-                "hover:shadow-[0_0_30px_oklch(0.45_0.12_155_/_0.4)]"
-              )}
-              whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
-              whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
-            >
-              {t.form.submit}
-            </motion.button>
-          </motion.form>
-
-          <DirectLinks label={t.form.orReachMe} />
+      <section data-scheme="ink" className="scheme-ink">
+        <div className="frame grid grid-cols-12 border-b border-line">
+          <div className="col-span-12 cell border-b border-line md:col-span-3 md:border-b-0 md:border-r">
+            <span className="t-label">{c.faqTitle}</span>
+          </div>
+          <div className="col-span-12 md:col-span-9">
+            {c.faq.map((item, i) => (
+              <details key={item.q} className="group border-b border-line last:border-b-0">
+                <summary className="flex cursor-pointer list-none items-center gap-5 cell py-6 [&::-webkit-details-marker]:hidden">
+                  <span className="t-label text-ember">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-display t-h2 flex-1">{item.q}</span>
+                  <span
+                    aria-hidden="true"
+                    className="font-display text-3xl transition-transform duration-300 group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="t-lead max-w-2xl px-[clamp(14px,1.35vw,22px)] pb-8 pl-[calc(clamp(14px,1.35vw,22px)+2.6rem)] text-dim">
+                  {item.a}
+                </p>
+              </details>
+            ))}
+          </div>
         </div>
-      </main>
-      <Footer />
-    </>
+      </section>
+    </main>
   )
 }
