@@ -1,17 +1,22 @@
 "use client"
 
+import { useRef, useState } from "react"
 import Link from "next/link"
 import { useLanguage } from "@/lib/language-context"
 import { GITHUB_PROFILE_URL } from "@/lib/github"
 import { CONTACT_EMAIL } from "@/lib/site"
 import { scrollToTarget } from "@/lib/scroll"
+import { cn } from "@/lib/utils"
 import { AsciiFire } from "@/components/fx/ascii-fire"
+import { FireSketch } from "@/components/fx/fire-sketch"
 import { RollText } from "@/components/fx/roll-text"
 import { formatClock, HOME_TZ, useNow } from "./clocks"
 import { MotionToggle } from "./motion-toggle"
 
 export function Footer() {
   const { t } = useLanguage()
+  const [drawing, setDrawing] = useState(false)
+  const sparks = useRef<Array<[number, number]>>([])
   const now = useNow()
   const { time, offset } = formatClock(now, HOME_TZ)
 
@@ -88,20 +93,29 @@ export function Footer() {
       </div>
 
       <div className="relative h-[clamp(15rem,34vw,32rem)] overflow-hidden">
-        <AsciiFire reach={0.78} fontSize={12} />
+        <AsciiFire reach={0.78} fontSize={12} interactive={!drawing} sparks={sparks} />
         <div className="frame relative flex h-full items-end justify-between gap-6 border-x-0 md:border-x">
           <p
             aria-hidden="true"
-            className="font-display t-mega -mb-[0.06em] select-none leading-[0.74] text-paper"
+            className="font-mark t-mega -mb-[0.06em] select-none pr-[0.08em] leading-[0.74] text-paper"
           >
             Ateş
           </p>
-          <div className="relative mb-6 hidden max-w-[16rem] space-y-2 pr-4 text-right md:block">
+          {/* Up at the band's ceiling, clear of the flames. */}
+          <div className="relative mt-6 hidden max-w-[17rem] space-y-2 self-start pr-4 text-right md:block">
             <p className="t-label normal-case text-paper/80">{t.hero.wordNote}</p>
             <p className="t-label text-paper/50">© {new Date().getFullYear()} Ateş Altınkaynak</p>
-            <p className="t-label text-paper/50">{t.footer.gridHint}</p>
+            <p
+              className={cn(
+                "t-label transition-colors duration-300 in-[.reduce-motion]:transition-none",
+                drawing ? "text-ember" : "text-paper/50"
+              )}
+            >
+              {drawing ? t.footer.drawActive : t.footer.drawHint}
+            </p>
           </div>
         </div>
+        <FireSketch sparks={sparks} onModeChange={setDrawing} />
       </div>
     </footer>
   )

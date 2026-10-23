@@ -4,9 +4,32 @@ import { useEffect, useRef, useState, type CSSProperties } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useLanguage } from "@/lib/language-context"
 import { useScramble } from "@/components/fx/scramble"
+import { cn } from "@/lib/utils"
 import { FireWord } from "./fire-word"
 
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties
+
+/** Printer's crop marks at the word's corners — it's set like a proof, not typed. */
+function CropMarks() {
+  const corners = [
+    "-left-4 -top-4 border-l border-t",
+    "-right-4 -top-4 border-r border-t",
+    "-bottom-4 -left-4 border-b border-l",
+    "-bottom-4 -right-4 border-b border-r",
+  ]
+  return (
+    <>
+      {corners.map((c, i) => (
+        <span
+          key={c}
+          aria-hidden="true"
+          className={cn("absolute z-10 hidden size-4 border-ember intro-fade sm:block", c)}
+          style={d(800 + i * 60)}
+        />
+      ))}
+    </>
+  )
+}
 
 /** Cycles the role label. Kept apart so each scramble tick re-renders only this. */
 function RoleTicker() {
@@ -43,7 +66,10 @@ export function Hero() {
     <section
       ref={ref}
       data-scheme="ink"
-      className="scheme-ink relative flex min-h-[92svh] flex-col overflow-hidden pt-[var(--header-h)] md:min-h-[100svh]"
+      // Phones: the ink runs to the very bottom of the screen, under the
+      // browser's toolbar too (lvh), while the content stops where the
+      // toolbar begins (svh) — so the name is never hidden behind it.
+      className="scheme-ink relative flex min-h-[100lvh] flex-col overflow-hidden pb-[calc(100lvh_-_100svh)] pt-[var(--header-h)] sm:min-h-[100svh] sm:pb-0"
     >
       {/* Top annotations */}
       <div className="gutter relative z-20 flex items-start justify-between gap-6 pt-6 md:pt-8">
@@ -75,15 +101,32 @@ export function Hero() {
             </span>
           </a>
         </div>
-        <motion.div className="w-full" style={{ y: wordY, opacity: wordOpacity }}>
+        <motion.div className="w-full will-change-transform" style={{ y: wordY, opacity: wordOpacity }}>
           <h1 className="sr-only">
             Ateş Altınkaynak — {t.meta.role}. {tagline}
           </h1>
-          <FireWord
-            word="Ateş"
-            delay={120}
-            className="w-full [font-size:49vw] sm:[font-size:min(48vw,calc(100svh_-_19rem))]"
-          />
+          <div className="relative mx-auto sm:w-fit">
+            <div className="relative">
+              <CropMarks />
+              <FireWord
+                word="Ateş"
+                delay={120}
+                className="[font-size:41.5vw] sm:[font-size:min(43vw,calc(100svh_-_23rem))]"
+              />
+            </div>
+            {/* What the word means, and whose it is — the line that turns a word into a name. */}
+            <div className="mt-1 flex items-end justify-end gap-10 sm:mt-4 sm:justify-between">
+              <p className="t-label hidden normal-case text-dim intro-fade sm:block" style={d(950)}>
+                {t.hero.wordNote}
+              </p>
+              <p
+                className="font-mark pr-[0.1em] text-[clamp(1.35rem,2.5vw,2.75rem)] leading-none tracking-[0.03em] intro-fade"
+                style={d(1050)}
+              >
+                Altınkaynak
+              </p>
+            </div>
+          </div>
         </motion.div>
       </div>
 

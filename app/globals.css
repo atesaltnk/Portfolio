@@ -184,6 +184,18 @@ html.intro {
     line-height: 0.84;
     letter-spacing: -0.012em;
   }
+  /* The wordmark (hero, logo, footer): Anybody's heavy italic leans forward
+     like a flame, setting the name apart from the upright display type. */
+  .font-mark {
+    font-family: var(--font-anybody), var(--font-archivo), sans-serif;
+    font-style: italic;
+    font-variation-settings: "wdth" 72;
+    font-stretch: 72%;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.84;
+    letter-spacing: -0.02em;
+  }
   .t-mega {
     font-size: clamp(5.5rem, 25vw, 32rem);
     line-height: 0.74;
@@ -339,7 +351,7 @@ html.intro {
     animation-delay: var(--d, 0ms);
   }
 
-  /* Column grid overlay — press G to inspect. */
+  /* Column grid overlay. */
   .grid-overlay {
     position: fixed;
     inset: 0;
@@ -350,16 +362,12 @@ html.intro {
     pointer-events: none;
     mix-blend-mode: difference;
     opacity: 0.075;
-    transition: opacity 0.4s ease;
   }
   .grid-overlay > i {
     border-left: 1px solid #fff;
   }
   .grid-overlay > i:last-child {
     border-right: 1px solid #fff;
-  }
-  html.show-grid .grid-overlay {
-    opacity: 0.4;
   }
   @media (max-width: 767px) {
     .grid-overlay {

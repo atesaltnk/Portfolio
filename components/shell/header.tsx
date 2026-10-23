@@ -13,7 +13,7 @@ import { MenuOverlay } from "./menu-overlay"
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <span className={cn("font-display flex items-end gap-1 text-[26px] leading-none", className)}>
+    <span className={cn("font-mark flex items-end gap-1 text-[26px] leading-none", className)}>
       Ateş
       <span aria-hidden="true" className="mb-[3px] inline-block h-[0.6em] w-[0.34em] animate-pulse bg-ember in-[.reduce-motion]:animate-none" />
     </span>

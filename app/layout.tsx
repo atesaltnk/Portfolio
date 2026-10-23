@@ -1,6 +1,6 @@
 import type { ReactNode } from "react"
 import type { Metadata, Viewport } from "next"
-import { Archivo, JetBrains_Mono } from "next/font/google"
+import { Anybody, Archivo, JetBrains_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { LanguageProvider } from "@/lib/language-context"
 import { SITE_URL } from "@/lib/site"
@@ -18,6 +18,15 @@ const archivo = Archivo({
   subsets: ["latin", "latin-ext"],
   axes: ["wdth"],
   variable: "--font-archivo",
+  display: "swap",
+})
+
+// The wordmark only: a heavy, forward-leaning italic that reads like flame.
+const anybody = Anybody({
+  subsets: ["latin", "latin-ext"],
+  style: ["italic"],
+  axes: ["wdth"],
+  variable: "--font-anybody",
   display: "swap",
 })
 
@@ -71,7 +80,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${archivo.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${archivo.variable} ${anybody.variable} ${jetbrainsMono.variable}`}>
       <head>
         {/* Resolves motion mode + first-visit intro before first paint. */}
         <script dangerouslySetInnerHTML={{ __html: MOTION_SCRIPT }} />

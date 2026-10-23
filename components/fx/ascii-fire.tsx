@@ -56,6 +56,11 @@ interface AsciiFireProps {
   /** Set to false to cut the fuel and let the flames die out. */
   lit?: boolean
   fps?: number
+  /**
+   * Extra heat: points in canvas-local CSS pixels that flare up on the next
+   * step. The list is emptied as it's read, so callers can keep pushing.
+   */
+  sparks?: { current: Array<[number, number]> }
 }
 
 export function AsciiFire({
@@ -65,10 +70,14 @@ export function AsciiFire({
   interactive = true,
   lit = true,
   fps = 30,
+  sparks,
 }: AsciiFireProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const litRef = useRef(lit)
   litRef.current = lit
+  // Read live so toggling the torch never restarts the simulation.
+  const interactiveRef = useRef(interactive)
+  interactiveRef.current = interactive
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -157,7 +166,7 @@ export function AsciiFire({
       }
 
       // Torch under the pointer.
-      const rect = pointer.active && litRef.current ? host.getBoundingClientRect() : null
+      const rect = pointer.active && interactiveRef.current && litRef.current ? host.getBoundingClientRect() : null
       const lx = rect ? pointer.x - rect.left : -1
       const ly = rect ? pointer.y - rect.top : -1
       if (rect && lx >= 0 && ly >= 0 && lx <= rect.width && ly <= rect.height) {
@@ -171,6 +180,21 @@ export function AsciiFire({
             if (Math.random() < 0.7) heat[y * cols + x] = MAX - ((Math.random() * 4) | 0)
           }
         }
+      }
+
+      // Outside heat (e.g. a sketch burning in the flames).
+      const points = sparks?.current
+      if (points?.length) {
+        for (const [sx, sy] of points) {
+          const px = Math.floor(sx / cw)
+          const py = Math.floor(sy / ch)
+          for (let dx = -1; dx <= 1; dx++) {
+            const x = px + dx
+            if (x < 0 || x >= cols || py < 1 || py >= rows) continue
+            heat[py * cols + x] = MAX - ((Math.random() * 6) | 0)
+          }
+        }
+        points.length = 0
       }
 
       // Propagate upward with jitter and decay.
@@ -258,7 +282,7 @@ export function AsciiFire({
     const onLeave = () => {
       pointer.active = false
     }
-    if (interactive && !reduceMotion) {
+    if (!reduceMotion) {
       window.addEventListener("pointermove", onPointer, { passive: true })
       document.addEventListener("pointerleave", onLeave)
     }
@@ -273,7 +297,7 @@ export function AsciiFire({
       window.removeEventListener("pointermove", onPointer)
       document.removeEventListener("pointerleave", onLeave)
     }
-  }, [fontSize, fps, interactive, reach])
+  }, [fontSize, fps, reach, sparks])
 
   return (
     <canvas
