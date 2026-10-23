@@ -1,6 +1,6 @@
 "use client"
 
-import { Fragment, type CSSProperties } from "react"
+import type { CSSProperties } from "react"
 import { AsciiFire } from "@/components/fx/ascii-fire"
 import { cn } from "@/lib/utils"
 
@@ -19,14 +19,11 @@ export function FireWord({
   className,
   style,
   delay = 0,
-  breakAt,
 }: {
   word: string
   className?: string
   style?: CSSProperties
   delay?: number
-  /** On narrow screens, wrap onto a second line before this letter index. */
-  breakAt?: number
 }) {
   return (
     <div aria-hidden="true" className={cn("relative isolate select-none overflow-hidden", className)} style={style}>
@@ -37,14 +34,11 @@ export function FireWord({
       <AsciiFire reach={1.2} fontSize={13} />
       <p className="font-display relative whitespace-nowrap bg-ink pb-[0.14em] pt-[0.07em] text-center leading-[0.8] text-white mix-blend-darken">
         {Array.from(word).map((ch, i) => (
-          <Fragment key={i}>
-            {i === breakAt && <br className="sm:hidden" />}
-            <span className="-my-[0.2em] inline-block overflow-hidden py-[0.2em] align-bottom">
-              <span className="inline-block intro-rise" style={{ "--d": `${delay + i * 80}ms` } as CSSProperties}>
-                {ch}
-              </span>
+          <span key={i} className="-my-[0.2em] inline-block overflow-hidden py-[0.2em] align-bottom">
+            <span className="inline-block intro-rise" style={{ "--d": `${delay + i * 80}ms` } as CSSProperties}>
+              {ch}
             </span>
-          </Fragment>
+          </span>
         ))}
       </p>
     </div>

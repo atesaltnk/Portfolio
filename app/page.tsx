@@ -24,7 +24,7 @@ export default async function HomePage() {
       <Chapters projects={featuredProjects(projects)} />
       <ToolkitStrip />
       <Capabilities />
-      <RepoIndex projects={projects} />
+      <RepoIndex projects={projects} limit={5} />
       <ContactCta />
     </main>
   )

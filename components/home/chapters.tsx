@@ -60,31 +60,41 @@ function Meta({ project }: { project: Project }) {
   )
 }
 
-/** Desktop: a pinned, scroll-driven chapter reel (nickho's history section). */
-function PinnedChapters({ projects }: { projects: Project[] }) {
-  const { t, locale } = useLanguage()
+/** Scroll progress through a pinned reel, the active chapter, and jumps. */
+function useChapterReel(n: number) {
   const ref = useRef<HTMLDivElement>(null)
-  const n = projects.length
   const [active, setActive] = useState(0)
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] })
-  const stripY = useTransform(scrollYProgress, [0, 1], ["0%", `${-((n - 1) / n) * 100}%`])
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     const i = Math.min(n - 1, Math.max(0, Math.floor(v * n)))
     setActive((prev) => (prev === i ? prev : i))
   })
 
+  // Page offset of the reel (offsetTop would be relative to the section).
+  const top = (el: HTMLElement) => el.getBoundingClientRect().top + window.scrollY
+
   const goTo = (i: number) => {
     const el = ref.current
     if (!el) return
     const travel = el.offsetHeight - window.innerHeight
     // Cover i sits centred at progress i / (n - 1).
-    scrollToTarget(el.offsetTop + (n > 1 ? i / (n - 1) : 0) * travel)
+    scrollToTarget(top(el) + (n > 1 ? i / (n - 1) : 0) * travel)
   }
   const skip = () => {
     const el = ref.current
-    if (el) scrollToTarget(el.offsetTop + el.offsetHeight)
+    if (el) scrollToTarget(top(el) + el.offsetHeight)
   }
+
+  return { ref, active, scrollYProgress, goTo, skip }
+}
+
+/** Desktop: a pinned, scroll-driven chapter reel (nickho's history section). */
+function PinnedChapters({ projects }: { projects: Project[] }) {
+  const { t, locale } = useLanguage()
+  const n = projects.length
+  const { ref, active, scrollYProgress, goTo, skip } = useChapterReel(n)
+  const stripY = useTransform(scrollYProgress, [0, 1], ["0%", `${-((n - 1) / n) * 100}%`])
 
   const project = projects[active]
 
@@ -197,28 +207,124 @@ function PinnedChapters({ projects }: { projects: Project[] }) {
   )
 }
 
-/** Mobile/tablet: the same chapters as a plain, readable stack. */
-function StackedChapters({ projects }: { projects: Project[] }) {
-  const { locale } = useLanguage()
+/**
+ * Phones and tablets: the same pinned reel, re-cut for a narrow screen. The
+ * page scrolls down while the covers slide sideways; title, copy and counter
+ * change with the active chapter just like on desktop.
+ */
+function ReelChapters({ projects }: { projects: Project[] }) {
+  const { t, locale } = useLanguage()
+  const n = projects.length
+  const { ref, active, scrollYProgress, goTo, skip } = useChapterReel(n)
+  const stripX = useTransform(scrollYProgress, [0, 1], ["0%", `${-((n - 1) / n) * 100}%`])
+
+  const project = projects[active]
+
   return (
-    <div className="lg:hidden">
-      {projects.map((p, i) => (
-        <article key={p.key} className="frame border-b border-line sd-reveal">
-          <div className="flex items-center justify-between cell border-b border-line">
-            <span className="font-display t-h2 text-ember">{String(i + 1).padStart(2, "0")}</span>
-            <span className="t-label text-dim">{p.year}</span>
+    <div ref={ref} className="relative lg:hidden" style={{ height: `${n * 100}svh` }}>
+      <div className="sticky top-0 flex h-[100svh] flex-col pt-[var(--header-h)]">
+        <div className="frame flex shrink-0 items-center justify-between gap-4 border-b border-line cell py-3">
+          <span className="t-label flex items-center gap-2">
+            <span className="text-dim">{t.work.chapter}</span>
+            <span>
+              <RollingNumber value={active + 1} pad={2} /> / {String(n).padStart(2, "0")}
+            </span>
+          </span>
+          <span className="flex items-center gap-1.5">
+            {projects.map((p, i) => (
+              <button
+                key={p.key}
+                type="button"
+                onClick={() => goTo(i)}
+                aria-label={`${t.work.chapter} ${i + 1}: ${p.title}`}
+                className={cn(
+                  "size-2.5 transition-colors duration-300",
+                  i <= active ? "bg-ember" : "bg-line-strong"
+                )}
+              />
+            ))}
+          </span>
+          <button type="button" onClick={skip} className="t-label flex items-center gap-2 bg-ember px-2.5 py-1.5 text-ink">
+            <RollText>{t.work.skip}</RollText> »
+          </button>
+        </div>
+
+        {/* Title — a fixed-height band, so long and short names never resize the reel. */}
+        <div className="frame flex h-[calc(min(15vw,4.5rem)*0.9+2.5rem)] shrink-0 items-end justify-between gap-4 cell pb-3 pt-0">
+          <div className="mask-y relative min-w-0 flex-1">
+            <AnimatePresence mode="popLayout" initial={false}>
+              <motion.h3
+                key={project.key}
+                className="font-display whitespace-nowrap leading-[0.86]"
+                style={{ fontSize: `min(15vw, ${(88 / ((project.title.length + 3) * 0.47)).toFixed(2)}vw, 4.5rem)` }}
+                initial={{ y: "105%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "-105%" }}
+                transition={{ duration: 0.75, ease: EASE }}
+              >
+                {project.title}
+              </motion.h3>
+            </AnimatePresence>
           </div>
-          <div className="aspect-[16/10] cell border-b border-line">
-            <ProjectCover project={p} />
-          </div>
-          <div className="space-y-5 cell pb-8">
-            <h3 className="font-display t-h1 sd-fade">{p.title}</h3>
-            <p className="t-lead text-dim">{p.blurb?.[locale] ?? p.description}</p>
-            <Meta project={p} />
-            <Links project={p} />
-          </div>
-        </article>
-      ))}
+          <RollingNumber
+            value={active + 1}
+            pad={2}
+            className="font-display shrink-0 text-[min(9vw,3rem)] leading-[0.86] text-ember"
+          />
+        </div>
+
+        {/* Cover reel: covers fill the free height (up to square) and slide sideways. */}
+        <div className="frame relative min-h-0 flex-1 overflow-hidden border-y border-line">
+          <motion.div className="flex h-full will-change-transform" style={{ x: stripX, width: `${n * 100}%` }}>
+            {projects.map((p, i) => (
+              <button
+                key={p.key}
+                type="button"
+                onClick={() => goTo(i)}
+                tabIndex={-1}
+                aria-hidden={i !== active}
+                className="flex h-full items-center justify-center px-[clamp(16px,4vw,32px)] py-4 [container-type:size]"
+                style={{ width: `${100 / n}%` }}
+              >
+                <ProjectCover
+                  project={p}
+                  priority={i === 0}
+                  className={cn(
+                    "h-[min(100cqh,100cqw)] w-full transition-[filter,opacity,transform] duration-700 ease-[var(--ease-out-expo)]",
+                    i === active ? "scale-100 opacity-100 grayscale-0" : "scale-[0.94] opacity-35 grayscale"
+                  )}
+                />
+              </button>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Details */}
+        <div className="frame shrink-0 space-y-4 cell pb-6 pt-5">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.p
+              key={project.key}
+              className="t-lead line-clamp-3 min-h-[3lh] text-dim"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.45, ease: EASE }}
+            >
+              {project.blurb?.[locale] ?? project.description}
+            </motion.p>
+          </AnimatePresence>
+          <p className="t-label flex gap-3 border-t border-line pt-3 text-dim">
+            <span>{project.year}</span>
+            <span aria-hidden="true">·</span>
+            <span className="truncate">{project.stack.join(" · ")}</span>
+          </p>
+          <Links project={project} />
+        </div>
+
+        <div className="frame shrink-0 border-t border-line">
+          <motion.div style={{ scaleX: scrollYProgress }} className="h-[3px] origin-left bg-ember" />
+        </div>
+      </div>
     </div>
   )
 }
@@ -231,7 +337,7 @@ export function Chapters({ projects }: { projects: Project[] }) {
     <section id="work" data-scheme="paper" className="scheme-paper relative">
       <SectionHead label={t.work.label} kicker={t.work.kicker} word={t.work.word} />
       <PinnedChapters projects={projects} />
-      <StackedChapters projects={projects} />
+      <ReelChapters projects={projects} />
     </section>
   )
 }

@@ -1,7 +1,9 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useId, useMemo, useRef, useState, type CSSProperties } from "react"
+import { flushSync } from "react-dom"
 import { useLanguage } from "@/lib/language-context"
+import { scrollToTarget } from "@/lib/scroll"
 import { GITHUB_PROFILE_URL, languageColor } from "@/lib/github"
 import { projectSummary, type Project } from "@/lib/projects"
 import { FollowPreview } from "@/components/fx/follow-preview"
@@ -27,14 +29,20 @@ export function RepoIndex({
   projects,
   withFilter = false,
   headless = false,
+  limit,
 }: {
   projects: Project[]
   withFilter?: boolean
   headless?: boolean
+  /** Show only the first `limit` rows until "Show more" is pressed. */
+  limit?: number
 }) {
   const { t, locale } = useLanguage()
   const [hovered, setHovered] = useState<Project | null>(null)
   const [filter, setFilter] = useState<string>("all")
+  const [expanded, setExpanded] = useState(false)
+  const toggleRef = useRef<HTMLButtonElement>(null)
+  const listId = useId()
 
   const languages = useMemo(() => {
     const counts = new Map<string, number>()
@@ -42,7 +50,19 @@ export function RepoIndex({
     return [...counts.entries()].sort((a, b) => b[1] - a[1])
   }, [projects])
 
-  const visible = filter === "all" ? projects : projects.filter((p) => p.language === filter)
+  const matching = filter === "all" ? projects : projects.filter((p) => p.language === filter)
+  const collapsible = limit !== undefined && matching.length > limit
+  const visible = collapsible && !expanded ? matching.slice(0, limit) : matching
+
+  // Collapsing removes rows above the button; keep the button where the
+  // reader's eye is instead of letting the page jump past it.
+  const toggle = () => {
+    const before = toggleRef.current?.getBoundingClientRect().top ?? 0
+    flushSync(() => setExpanded((v) => !v))
+    if (!expanded) return
+    const after = toggleRef.current?.getBoundingClientRect().top ?? before
+    if (after !== before) scrollToTarget(window.scrollY + after - before, { immediate: true })
+  }
 
   return (
     <section data-scheme="ink" className="scheme-ink relative overflow-hidden">
@@ -104,12 +124,16 @@ export function RepoIndex({
           <p className="t-lead text-dim">{t.index.empty}</p>
         </div>
       ) : (
-        <ol onPointerLeave={() => setHovered(null)}>
+        <ol id={listId} onPointerLeave={() => setHovered(null)}>
           {visible.map((p, i) => (
             <li
               key={p.key}
               onPointerEnter={() => setHovered(p)}
-              className="group frame relative grid grid-cols-12 items-center border-b border-line transition-colors duration-300 hover:bg-paper/[0.04] sd-reveal"
+              className={cn(
+                "group frame relative grid grid-cols-12 items-center border-b border-line transition-colors duration-300 hover:bg-paper/[0.04] sd-reveal",
+                limit !== undefined && i >= limit && "enter-fade"
+              )}
+              style={limit !== undefined && i >= limit ? ({ "--d": `${(i - limit) * 70}ms` } as CSSProperties) : undefined}
             >
               <a
                 href={p.url}
@@ -150,6 +174,36 @@ export function RepoIndex({
             </li>
           ))}
         </ol>
+      )}
+
+      {collapsible && (
+        <div className="frame border-b border-line">
+          <button
+            ref={toggleRef}
+            type="button"
+            onClick={toggle}
+            aria-expanded={expanded}
+            aria-controls={listId}
+            className="group flex w-full items-center justify-between gap-6 cell text-left transition-colors duration-300 hover:bg-paper/[0.04]"
+          >
+            <span className="flex items-center gap-4">
+              <span
+                aria-hidden="true"
+                className="t-label flex size-8 shrink-0 items-center justify-center border border-line-strong transition-colors duration-300 group-hover:border-ember group-hover:bg-ember group-hover:text-ink"
+              >
+                {expanded ? "−" : "+"}
+              </span>
+              <span className="font-display t-h3 transition-colors duration-300 group-hover:text-ember">
+                <RollText>{expanded ? t.index.showLess : t.index.showMore}</RollText>
+              </span>
+            </span>
+            <span className="t-label tabular-nums text-dim">
+              {expanded
+                ? `${String(matching.length).padStart(2, "0")} / ${String(matching.length).padStart(2, "0")}`
+                : `+${String(matching.length - visible.length).padStart(2, "0")}`}
+            </span>
+          </button>
+        </div>
       )}
 
       {!withFilter && (

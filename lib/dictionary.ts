@@ -104,6 +104,8 @@ const en = {
     empty: "GitHub didn't answer just now — the full list lives on my profile.",
     filterAll: "All",
     count: "repositories",
+    showMore: "Show more",
+    showLess: "Show less",
   },
   contact: {
     label: "(06) Contact",
@@ -351,6 +353,8 @@ const tr: Dictionary = {
     empty: "GitHub şu an yanıt vermedi — tam liste profilimde.",
     filterAll: "Tümü",
     count: "repo",
+    showMore: "Daha fazla gör",
+    showLess: "Daha az göster",
   },
   contact: {
     label: "(06) İletişim",
@@ -596,6 +600,8 @@ const de: Dictionary = {
     empty: "GitHub hat gerade nicht geantwortet — die vollständige Liste steht auf meinem Profil.",
     filterAll: "Alle",
     count: "Repositories",
+    showMore: "Mehr anzeigen",
+    showLess: "Weniger anzeigen",
   },
   contact: {
     label: "(06) Kontakt",
