@@ -86,8 +86,7 @@ export function Hero() {
       </div>
 
       {/* The word. On phones it becomes the poster's signature: full width,
-          anchored to the bottom edge, set in Anybody's narrowest cut so it
-          stands tall — and its flames climb into the space above it. */}
+          anchored to the bottom edge, set in a narrower cut so it stands tall. */}
       <div className="relative z-0 order-last mt-auto gutter pb-[clamp(12px,4vw,20px)] pt-5 sm:order-none sm:mt-0 sm:flex sm:flex-1 sm:items-center sm:py-8">
         <motion.div className="w-full will-change-transform" style={{ y: wordY, opacity: wordOpacity }}>
           <h1 className="sr-only">
@@ -99,8 +98,6 @@ export function Hero() {
               <FireWord
                 word="Ateş"
                 delay={120}
-                field
-                fieldClassName="-top-[34svh] sm:-top-[16svh]"
                 className="[--mark-tracking:0.045em] [--mark-wdth:56] [font-size:49vw] sm:[--mark-tracking:-0.02em] sm:[--mark-wdth:72] sm:[font-size:min(43vw,calc(100svh_-_23rem))]"
               />
             </div>
@@ -120,8 +117,8 @@ export function Hero() {
       />
 
       {/* Bottom annotations — on phones the headline moves up under the meta
-          row with availability beneath it, leaving the name and its flames
-          the rest of the screen. */}
+          row with availability beneath it, leaving the name alone at the
+          bottom edge. */}
       <div className="gutter relative z-20 flex flex-col gap-6 pt-8 sm:flex-row sm:items-end sm:justify-between sm:gap-8 sm:pb-7 sm:pt-0 md:pb-9">
         <div className="mask-y">
           <p
