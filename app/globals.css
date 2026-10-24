@@ -189,18 +189,26 @@ html.intro {
   .font-mark {
     font-family: var(--font-anybody), var(--font-archivo), sans-serif;
     font-style: italic;
-    font-variation-settings: "wdth" 72;
-    font-stretch: 72%;
+    /* Width and tracking are inheritable through --mark-wdth / --mark-tracking
+       (e.g. a narrower, airier cut on phones). */
+    font-variation-settings: "wdth" var(--mark-wdth, 72);
+    font-stretch: calc(var(--mark-wdth, 72) * 1%);
     font-weight: 900;
     text-transform: uppercase;
     line-height: 0.84;
-    letter-spacing: -0.02em;
+    letter-spacing: var(--mark-tracking, -0.02em);
   }
   .t-mega {
     font-size: clamp(5.5rem, 25vw, 32rem);
     line-height: 0.74;
     font-weight: 900;
     letter-spacing: -0.025em;
+  }
+  /* Trim the line box to cap height and baseline, so glyphs sit exactly on
+     the element's bottom edge. */
+  .flush-base {
+    line-height: 1;
+    text-box: trim-both cap alphabetic;
   }
   .t-display {
     font-size: clamp(3.75rem, 12.5vw, 13rem);

@@ -122,7 +122,7 @@ const en = {
     elsewhere: "Elsewhere",
     colophon: "Colophon",
     colophonText:
-      "Set in Archivo & JetBrains Mono. Built with Next.js, Framer Motion and Lenis. The fire is the classic doom-fire algorithm, rendered as ASCII in real time.",
+      "Set in Archivo, Anybody & JetBrains Mono. Built with Next.js, Framer Motion and Lenis. The fire is the classic doom-fire algorithm, rendered as ASCII in real time.",
     localTime: "Local time",
     rights: "All rights reserved.",
     backToTop: "Back to top",
@@ -372,7 +372,7 @@ const tr: Dictionary = {
     elsewhere: "Başka yerlerde",
     colophon: "Künye",
     colophonText:
-      "Archivo ve JetBrains Mono ile dizildi. Next.js, Framer Motion ve Lenis ile geliştirildi. Ateş, klasik doom-fire algoritması; gerçek zamanlı ASCII olarak çiziliyor.",
+      "Archivo, Anybody ve JetBrains Mono ile dizildi. Next.js, Framer Motion ve Lenis ile geliştirildi. Ateş, klasik doom-fire algoritması; gerçek zamanlı ASCII olarak çiziliyor.",
     localTime: "Yerel saat",
     rights: "Tüm hakları saklıdır.",
     backToTop: "Başa dön",
@@ -620,7 +620,7 @@ const de: Dictionary = {
     elsewhere: "Anderswo",
     colophon: "Kolophon",
     colophonText:
-      "Gesetzt in Archivo & JetBrains Mono. Gebaut mit Next.js, Framer Motion und Lenis. Das Feuer ist der klassische Doom-Fire-Algorithmus, in Echtzeit als ASCII gerendert.",
+      "Gesetzt in Archivo, Anybody & JetBrains Mono. Gebaut mit Next.js, Framer Motion und Lenis. Das Feuer ist der klassische Doom-Fire-Algorithmus, in Echtzeit als ASCII gerendert.",
     localTime: "Ortszeit",
     rights: "Alle Rechte vorbehalten.",
     backToTop: "Nach oben",

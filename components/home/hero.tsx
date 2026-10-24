@@ -86,21 +86,9 @@ export function Hero() {
       </div>
 
       {/* The word. On phones it becomes the poster's signature: full width,
-          anchored to the bottom edge so the flames rise out of the screen. */}
+          anchored to the bottom edge, set in Anybody's narrowest cut so it
+          stands tall — and its flames climb into the space above it. */}
       <div className="relative z-0 order-last mt-auto gutter pb-[clamp(12px,4vw,20px)] pt-5 sm:order-none sm:mt-0 sm:flex sm:flex-1 sm:items-center sm:py-8">
-        {/* Phones: availability and the scroll cue sit on the name's shoulder. */}
-        <div className="mb-4 flex items-end justify-between gap-6 sm:hidden">
-          <p className="t-label flex items-center gap-2.5 intro-fade" style={d(350)}>
-            <span aria-hidden="true" className="ember-dot shrink-0" />
-            {t.meta.available}
-          </p>
-          <a href="#intro" className="t-label flex shrink-0 items-center gap-2.5 text-dim intro-fade" style={d(700)}>
-            {t.hero.scroll}
-            <span aria-hidden="true" className="relative block h-6 w-px overflow-hidden bg-line-strong">
-              <span className="scroll-cue absolute inset-x-0 top-0 h-1/2 bg-ember" />
-            </span>
-          </a>
-        </div>
         <motion.div className="w-full will-change-transform" style={{ y: wordY, opacity: wordOpacity }}>
           <h1 className="sr-only">
             Ateş Altınkaynak — {t.meta.role}. {tagline}
@@ -111,21 +99,15 @@ export function Hero() {
               <FireWord
                 word="Ateş"
                 delay={120}
-                className="[font-size:41.5vw] sm:[font-size:min(43vw,calc(100svh_-_23rem))]"
+                field
+                fieldClassName="-top-[34svh] sm:-top-[16svh]"
+                className="[--mark-tracking:0.045em] [--mark-wdth:56] [font-size:49vw] sm:[--mark-tracking:-0.02em] sm:[--mark-wdth:72] sm:[font-size:min(43vw,calc(100svh_-_23rem))]"
               />
             </div>
-            {/* What the word means, and whose it is — the line that turns a word into a name. */}
-            <div className="mt-1 flex items-end justify-end gap-10 sm:mt-4 sm:justify-between">
-              <p className="t-label hidden normal-case text-dim intro-fade sm:block" style={d(950)}>
-                {t.hero.wordNote}
-              </p>
-              <p
-                className="font-mark pr-[0.1em] text-[clamp(1.35rem,2.5vw,2.75rem)] leading-none tracking-[0.03em] intro-fade"
-                style={d(1050)}
-              >
-                Altınkaynak
-              </p>
-            </div>
+            {/* What the word means — why there is fire inside it. */}
+            <p className="t-label mt-4 hidden normal-case text-dim intro-fade sm:block" style={d(950)}>
+              {t.hero.wordNote}
+            </p>
           </div>
         </motion.div>
       </div>
@@ -137,10 +119,10 @@ export function Hero() {
         style={{ background: "radial-gradient(70% 50% at 50% 92%, rgba(255,77,18,0.16), transparent 70%)" }}
       />
 
-      {/* Bottom annotations */}
       {/* Bottom annotations — on phones the headline moves up under the meta
-          row, leaving the name alone at the bottom edge. */}
-      <div className="gutter relative z-20 flex items-end justify-between gap-8 pt-8 sm:pb-7 sm:pt-0 md:pb-9">
+          row with availability beneath it, leaving the name and its flames
+          the rest of the screen. */}
+      <div className="gutter relative z-20 flex flex-col gap-6 pt-8 sm:flex-row sm:items-end sm:justify-between sm:gap-8 sm:pb-7 sm:pt-0 md:pb-9">
         <div className="mask-y">
           <p
             className="font-display max-w-[16ch] text-balance text-[clamp(2.4rem,14.2vw,3.9rem)] leading-[0.9] intro-rise sm:text-wrap sm:text-[clamp(1.6rem,2.6vw,2.7rem)]"
@@ -149,6 +131,18 @@ export function Hero() {
             {tagline.slice(0, -1)}
             <span className="text-ember">{tagline.slice(-1)}</span>
           </p>
+        </div>
+        <div className="flex items-center justify-between gap-6 sm:hidden">
+          <p className="t-label flex items-center gap-2.5 intro-fade" style={d(650)}>
+            <span aria-hidden="true" className="ember-dot shrink-0" />
+            {t.meta.available}
+          </p>
+          <a href="#intro" className="t-label flex shrink-0 items-center gap-2.5 text-dim intro-fade" style={d(750)}>
+            {t.hero.scroll}
+            <span aria-hidden="true" className="relative block h-6 w-px overflow-hidden bg-line-strong">
+              <span className="scroll-cue absolute inset-x-0 top-0 h-1/2 bg-ember" />
+            </span>
+          </a>
         </div>
         <a
           href="#intro"

@@ -95,11 +95,10 @@ export function Footer() {
       <div className="relative h-[clamp(15rem,34vw,32rem)] overflow-hidden">
         <AsciiFire reach={0.78} fontSize={12} interactive={!drawing} sparks={sparks} />
         <div className="frame relative flex h-full items-end justify-between gap-6 border-x-0 md:border-x">
-          <p
-            aria-hidden="true"
-            className="font-mark t-mega -mb-[0.06em] select-none pr-[0.08em] leading-[0.74] text-paper"
-          >
-            Ateş
+          {/* Plain S, so nothing hangs below the baseline: the letters stand
+              exactly on the bottom edge. */}
+          <p aria-hidden="true" className="font-mark t-mega flush-base select-none pr-[0.08em] text-paper">
+            Ates
           </p>
           {/* Up at the band's ceiling, clear of the flames. */}
           <div className="relative mt-6 hidden max-w-[17rem] space-y-2 self-start pr-4 text-right md:block">
